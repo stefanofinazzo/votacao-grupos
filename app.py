@@ -1,3 +1,5 @@
+from time import sleep
+
 import streamlit as st
 
 n_grupos = 7
