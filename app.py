@@ -5,6 +5,9 @@ import streamlit as st
 n_grupos = 7
 
 #para testes, obviamente
+#necessário lógica para obter os tokens de um db qualquer aqui
+#para os fins do aplicativo (para jogos corporativos simples, não
+#é necessário implementar ferramentas de autenticação/autorização/etc.
 DICT_VOTANTES = {'ABCDEF': 1, 
                   'BACBAC': 2,
                  }
@@ -34,7 +37,9 @@ else:
     grupos_a_votar.remove(st.session_state['grupo_votante'])
     
     grupo_escolhido = st.selectbox('Escolha o seu grupo', grupos_a_votar)
-
-    if grupo_escolhido:
+    
+    if st.button('Votar'):
         st.write('Você escolheu o grupo ' + str(grupo_escolhido))
+        #lógica para transferir o voto para db aqui
+        #lógica para remover voto da lista aqui
     
