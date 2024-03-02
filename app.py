@@ -19,7 +19,7 @@ if not st.session_state['em_votacao']:
         st.session_state['em_votacao'] = False
         st.session_state['grupo_votante'] = DICT_VOTANTES[votante_atual]
 
-    else:
+    elif votante_atual is not None:
         st.error('Votante não localizado')
 
 else:
