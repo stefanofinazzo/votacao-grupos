@@ -2,6 +2,12 @@ from time import sleep
 
 import streamlit as st
 
+st.set_page_config(page_title='Sistema de Votação', 
+                   page_icon=None, 
+                   layout="centered", 
+                   initial_sidebar_state="collapsed", 
+                   menu_items=None)
+
 n_grupos = 7
 
 #para testes, obviamente
