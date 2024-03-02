@@ -7,7 +7,7 @@ DICT_VOTANTES = {'ABCDEF': 1,
                   'BACBAC': 2,
                  }
 
-if not em_votacao in st.session_state:
+if not 'em_votacao' in st.session_state:
     st.session_state['em_votacao'] = False
     
 st.title('Sistema de votação')
@@ -15,9 +15,12 @@ st.title('Sistema de votação')
 if not st.session_state['em_votacao']: 
     votante_atual = st.text_input('Coloque seu token de votação')
     
-    if votante_atual in lista_votantes:
+    if votante_atual in list(DICT_VOTANTES.keys()):
         st.session_state['em_votacao'] = False
         st.session_state['grupo_votante'] = DICT_VOTANTES[votante_atual]
+
+    else:
+        st.error('Votante não localizado')
 
 else:
     #em votação
