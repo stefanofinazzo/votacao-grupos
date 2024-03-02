@@ -21,6 +21,7 @@ if not st.session_state['em_votacao']:
         st.session_state['em_votacao'] = True
         st.session_state['grupo_votante'] = DICT_VOTANTES[votante_atual]
         st.success('Bem-vindo!')
+        sleep(2)
         st.rerun()
 
     elif votante_atual is not None:
