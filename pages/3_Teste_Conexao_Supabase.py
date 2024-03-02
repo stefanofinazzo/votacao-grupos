@@ -9,4 +9,4 @@ rows = conn.query("*", table="votantes", ttl="10m").execute()
 
 # Print results.
 for row in rows.data:
-    st.write(rows)
+    st.write(row)
