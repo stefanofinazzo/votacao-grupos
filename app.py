@@ -18,6 +18,7 @@ if not st.session_state['em_votacao']:
     if votante_atual in list(DICT_VOTANTES.keys()):
         st.session_state['em_votacao'] = False
         st.session_state['grupo_votante'] = DICT_VOTANTES[votante_atual]
+        st.rerun()
 
     elif votante_atual is not None:
         st.error('Votante não localizado')
