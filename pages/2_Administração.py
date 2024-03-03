@@ -9,7 +9,7 @@ TOKEN = 'admin'
 st.title('Página de Gerenciamento da Votação')
 
 with st.form("my_form"):
-   st.write("Inclusão de novos votantes)
+   st.write("Inclusão de novos votantes")
    nome = st.text_input('Nome')
    email = st.text_input('E-mail')
    grupo = st.slider('Grupo', 1, 1, 7)
