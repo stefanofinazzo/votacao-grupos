@@ -12,6 +12,7 @@ def create_token(digits: int = 4):
   return token
 
 def connect_supabase():
+  
   conn = st.connection("supabase",type=SupabaseConnection)
 
 return conn
