@@ -9,7 +9,7 @@ TOKEN = 'admin'
 st.title('Página de Gerenciamento da Votação')
 
 with st.form("my_form"):
-   st.write("Inside the form")
+   st.write("Inclusão de novos votantes)
    nome = st.text_input('Nome')
    email = st.text_input('E-mail')
    grupo = st.slider('Grupo', 1, 1, 7)
@@ -18,3 +18,4 @@ with st.form("my_form"):
    if submitted:
       conn = db_utils.connect_supabase()
       db_utils.insert_votante(conn, nome, email, grupo)
+      st.success('Votante incluído com sucesso!')
