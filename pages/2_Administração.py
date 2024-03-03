@@ -26,6 +26,8 @@ def widget_autenticacao_admin():
             st.success('Bem-vindo!')
             sleep(2.5)
             st.rerun()
+         else:
+            st.error('Senha inválida')
 
 def widget_incluir_votante():
    with st.form("incluir_votante"):
