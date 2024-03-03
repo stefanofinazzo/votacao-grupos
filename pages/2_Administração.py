@@ -1,14 +1,18 @@
+############# PACOTES ##################
+
+from time import sleep
+
 import streamlit as st
 from utils import db_utils
+
+############# VARIÁVEIS GLOBAIS ########
 
 #token de admin, se necessário implementar sistema de autenticação e autorização
 #para fins de jogos corporativos, não é necessário, e um token hardcoded
 #é suficiente
+
 ADMIN_PASSWORD = 'admin'
 
-st.title('Página de Gerenciamento da Votação')
-
-funcoes_tab = st.tabs(['Inclusão', 'Exclusão'])
 
 ############# WIDGETS ##################
 
@@ -45,7 +49,8 @@ def widget_incluir_votante():
 ############# PÁGINA PRINCIPAL #########
 
 def mainpage():
-   
+   st.title('Página de Gerenciamento da Votação')
+
    if 'admin_user' not in st.session_state or not st.session_state['admin_user']:
       widget_autenticacao_admin()
                
