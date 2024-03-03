@@ -7,7 +7,7 @@ from st_supabase_connection import SupabaseConnection
 
 def create_token(digits: int = 4):
   
-  token = ''.join(secrets.choice(alphabet) for i in range(digits)).upper()
+  token = ''.join(secrets.choice(ALPHABET) for i in range(digits)).upper()
    
   return token
 
