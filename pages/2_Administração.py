@@ -55,7 +55,7 @@ def mainpage():
       widget_autenticacao_admin()
                
    else:
-      funcoes_tab = ['Inclusão', 'Exclusão', 'Reiniciar']
+      funcoes_tab = st.tabs(['Inclusão', 'Exclusão', 'Reiniciar'])
       
       with funcoes_tab[0]:
          widget_incluir_votante()
