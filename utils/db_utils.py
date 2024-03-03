@@ -23,5 +23,6 @@ def insert_votante(nome: str, email: str):
   _, _ = supabase.table('votantes')
     .insert({"nome": nome, 
              "email": email,
-             "token": })
+             "token": token,
+             "votou": False})
     .execute()
