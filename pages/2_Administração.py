@@ -16,4 +16,5 @@ with st.form("my_form"):
    
    submitted = st.form_submit_button("Cadastrar votante")
    if submitted:
-       db_utils.insert_votante(nome, email, grupo)
+      conn = db_utils.
+      db_utils.insert_votante(conn, nome, email, grupo)
