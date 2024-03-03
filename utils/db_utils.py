@@ -15,7 +15,7 @@ def connect_supabase():
   
   conn = st.connection("supabase",type=SupabaseConnection)
 
-return conn
+  return conn
 
 def insert_votante(nome: str, email: str, grupo: int): 
 
