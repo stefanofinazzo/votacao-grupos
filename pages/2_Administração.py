@@ -42,7 +42,7 @@ def widget_incluir_votante():
             
 ############# PÁGINA PRINCIPAL #########
 
-def main():
+def mainpage():
    
    if 'admin_user' not in st.session_state or not st.session_state['admin_user']:
       widget_autenticacao_admin()
