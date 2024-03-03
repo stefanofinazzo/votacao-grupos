@@ -15,6 +15,4 @@ with st.form("my_form"):
    
    submitted = st.form_submit_button("Cadastrar votante")
    if submitted:
-       db_utils.connect_supabase()
-       db_utils.insert_user()
-
+       db_utils.insert_votante(nome: str, email: str)
