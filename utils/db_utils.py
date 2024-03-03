@@ -16,13 +16,14 @@ def connect_supabase():
 
 return conn
 
-def insert_votante(nome: str, email: str): 
+def insert_votante(nome: str, email: str, grupo: int): 
 
   token = create_token()
   
   _, _ = supabase.table('votantes')
     .insert({"nome": nome, 
              "email": email,
+             "grupo": grupo,
              "token": token,
              "votou": False})
     .execute()
