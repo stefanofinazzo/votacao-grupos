@@ -73,18 +73,22 @@ def widget_excluir_pergunta(perguntas_df: pd.DataFrame) -> None:
    
    with st.form("excluir_pergunta"):
       st.write("Exclusão de pergunta")
-      lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
-      n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_atuais)
-      
-      submitted = st.form_submit_button("Excluir Pergunta", type="primary")
-      
-      if submitted:
-         conn = db_utils.connect_supabase()
-         db_utils.delete_pergunta(conn, n_pergunta)
-         st.success('Pergunta excluída com sucesso!')
-         sleep(2)
-         st.rerun()
 
+      if not perguntas_df.empty:
+            lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
+            n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_atuais)
+      
+            submitted = st.form_submit_button("Excluir Pergunta", type="primary")
+            
+            if submitted:
+               conn = db_utils.connect_supabase()
+               db_utils.delete_pergunta(conn, n_pergunta)
+               st.success('Pergunta excluída com sucesso!')
+               sleep(2)
+               st.rerun()
+      else:
+            st.markdown('#### Sem perguntas cadastradas no momento!')
+            
 def widget_lista_perguntas() -> pd.DataFrame:
       
    st.markdown('### Lista de Perguntas')
