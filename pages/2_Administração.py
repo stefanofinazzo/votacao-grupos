@@ -12,6 +12,7 @@ from utils import db_utils
 #é suficiente
 
 ADMIN_PASSWORD = 'admin'
+MAX_QUESTOES = 10
       
 ############# WIDGETS ##################
 
@@ -31,7 +32,42 @@ def widget_autenticacao_admin():
             st.rerun()
          else:
             st.error('Senha inválida')
+               
+def widget_incluir_questao():
+   
+   with st.form("incluir_questao"):
+         st.write("Inclusão de novas questões")
+         
+         n_questao = st.slider('Número da questão', 1, MAX_QUESTOES, 1)
+         nome_questao = st.text_input('Nome da questão')
+         
+         submitted = st.form_submit_button("Cadastrar questao", type="primary")
+      
+         if submitted:
+            conn = db_utils.connect_supabase()
+            db_utils.insert_questao(conn, n_questao, nome_questao)
+            st.success('Questão incluída com sucesso!')
 
+def widget_excluir_votante():
+   
+   with st.form("excluir_votante"):
+      st.write("Exclusão de votante")
+      email = st.text_input('E-mail')
+      
+      submitted = st.form_submit_button("Excluir votante", type="primary")
+      
+      if submitted:
+         conn = db_utils.connect_supabase()
+         db_utils.delete_votante(conn, email)
+         st.success('Votante excluído com sucesso!')
+
+def widget_lista_votantes():
+   st.markdown('### Lista de Votantes')
+   conn = db_utils.connect_supabase()
+   votantes_list = db_utils.get_list_votantes(conn, table='votantes')
+   votantes_df = db_utils.list_votantes_para_df(votantes_list)
+   st.dataframe(votantes_df)
+      
 def widget_incluir_votante():
    
    with st.form("incluir_votante"):
@@ -63,7 +99,7 @@ def widget_excluir_votante():
 def widget_lista_votantes():
    st.markdown('### Lista de Votantes')
    conn = db_utils.connect_supabase()
-   votantes_list = db_utils.get_list_votantes(conn)
+   votantes_list = db_utils.get_list_votantes(conn, table='votantes')
    votantes_df = db_utils.list_votantes_para_df(votantes_list)
    st.dataframe(votantes_df)
    
