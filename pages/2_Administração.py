@@ -71,5 +71,8 @@ def mainpage():
       with funcoes_tab[0]:
          widget_incluir_votante()
 
+      with funcoes_tab[1]:
+         widget_excluir_votante()
+
 if __name__ == '__main__':
    mainpage()
