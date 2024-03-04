@@ -10,3 +10,16 @@ CREATE TABLE votos (
     voto_id SERIAL PRIMARY KEY,
     voto varchar(200)
 );
+
+CREATE TABLE perguntas (
+   pergunta_id INTEGER PRIMARY KEY,
+   pergunta_texto text
+);
+
+CREATE TABLE config (
+   onerow_id bool PRIMARY KEY DEFAULT true,
+   numero_grupos INTEGER DEFAULT 7,
+   
+    
+   CONSTRAINT onerow_uni CHECK (onerow_id)
+);
