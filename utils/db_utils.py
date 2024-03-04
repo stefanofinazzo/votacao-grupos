@@ -20,9 +20,9 @@ def connect_supabase():
 
   return conn
 
-def get_list_votantes(conn):
+def get_list_table(conn, table: str):
     
-  data, _ = conn.query("*", table="votantes", ttl="10m").execute()
+  data, _ = conn.query("*", table=table, ttl="10m").execute()
 
   rows = data[1]
   
