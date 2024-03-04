@@ -7,6 +7,8 @@ Todo:
 - Passar o token de acesso do admin para secrets
 - Redesenhar página de configurações
 - Refatorar widget de configurações (quebrar em subwidgets)
+- Melhorar descrição dos widgets
+- Helptips e ajuda nos widgets
 - Implementar módulo de votação
 - Refatorações gerais
 - Implementar descrição de tipagem em todas funções em todos módulos
