@@ -12,8 +12,7 @@ from utils import db_utils
 #é suficiente
 
 ADMIN_PASSWORD = 'admin'
-
-
+      
 ############# WIDGETS ##################
 
 def widget_autenticacao_admin():
@@ -73,11 +72,15 @@ def widget_resultados():
    pass
 
 def widget_reiniciar_votacao():
-   pass
+
+      numero_grupos = st.slider('Número de grupos', 1, 20)
+
+   
    
 ############# PÁGINA PRINCIPAL #########
 
-def mainpage():
+def mainpage():      
+      
    st.title('Página de Gerenciamento da Votação')
 
    if 'admin_user' not in st.session_state or not st.session_state['admin_user']:
