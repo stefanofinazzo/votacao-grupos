@@ -5,3 +5,7 @@ CREATE TABLE votantes (
     token varchar(80),
     votou boolean
 );
+
+CREATE TABLE votos (
+    voto SERIAL PRIMARY KEY
+);
