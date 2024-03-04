@@ -27,8 +27,11 @@ def lista_perguntas_no_banco(perguntas_df: pd.DataFrame) -> List:
       return lista_perguntas
 
 def obtem_configuracoes_atuais():
-
       pass
+
+def alterar_tab(tab_choice: str):
+
+      st.session_state['admin_tab'] = tab_choice
       
 ############# WIDGETS ##################
 
@@ -200,17 +203,32 @@ def mainpage():
       conn = db_utils.connect_supabase()
       app_config = db_utils.get_config(conn)
          
-      funcoes_tab = st.tabs(['Gerenciar Questões', 'Gerenciar Votantes', 'Resultados', 'Configurar Votação'])
+      funcoes_tab = st.columns(5)
 
+      if not 'admin_tab' in st.session_state:
+            st.session_state['admin_tab'] = 'perguntas'
+            
       with funcoes_tab[0]:
+            st.button('Gerenciar Perguntas', on_click=(lambda: alterar_tab('perguntas'))
+
+      with funcoes_tab[1]:
+            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('votantes'))
+
+      with funcoes_tab[2]:
+            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('resultados'))
+
+      with funcoes_tab[3]:
+            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('configuracao'))
+      
+      if st.session_state['admin_tab'] == 'perguntas':
          colunas_incluir_pergunta = st.columns(2)
          with colunas_incluir_pergunta[0]:
                perguntas_df = widget_lista_perguntas()
          with colunas_incluir_pergunta[1]:
                widget_incluir_pergunta(perguntas_df)
                widget_excluir_pergunta(perguntas_df)
-         
-      with funcoes_tab[1]:
+
+      elif st.session_state['admin_tab'] == 'votantes':
          colunas_incluir_votante = st.columns(2)
          with colunas_incluir_votante[0]:
                widget_lista_votantes()
@@ -218,10 +236,10 @@ def mainpage():
                widget_incluir_votante(app_config)
                widget_excluir_votante()
 
-      with funcoes_tab[2]:
+      elif st.session_state['admin_tab'] == 'resultados':   
          widget_resultados()
 
-      with funcoes_tab[3]:
+      elif st.session_state['admin_tab'] == 'configuracao':  
          widget_configurar_votacao(app_config)
 
 if __name__ == '__main__':
