@@ -60,8 +60,10 @@ def widget_excluir_votante():
          st.success('Votante excluído com sucesso!')
 
 def widget_lista_votantes():
-   pass
-
+   
+   rows = db_utils.get_dict_votantes()
+   st.write(rows)
+   
 def widget_resultados():
    pass
 
