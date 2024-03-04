@@ -165,9 +165,20 @@ def widget_configurar_votacao(app_config):
       with st.form("numero_grupos"):
             numero_grupos = st.slider('Número de grupos', 1, 10, app_config['numero_grupos'])
 
-            submitted = st.form_submit_button("Configurar", type="primary")
-            if submitted:
+            submitted_grupos = st.form_submit_button("Configurar", type="primary")
+            if submitted_grupos:
                   app_config['numero_grupos'] = numero_grupos
+                  conn = db_utils.connect_supabase()
+                  db_utils.update_config(conn, app_config)
+                  st.successs('Configuração atualizada com sucesso!')
+                  sleep(2.5)
+
+      with st.form("numero_perguntas"):
+            numero_perguntas = st.slider('Número de perguntas', 1, 20, app_config['numero_perguntas'])
+
+            submitted_perguntas = st.form_submit_button("Configurar", type="primary")
+            if submitted_perguntas:
+                  app_config['numero_perguntas'] = numero_perguntas
                   conn = db_utils.connect_supabase()
                   db_utils.update_config(conn, app_config)
                   st.successs('Configuração atualizada com sucesso!')
