@@ -185,6 +185,7 @@ def widget_configurar_votacao(app_config: dict):
             if submitted_perguntas:
                   app_config['numero_perguntas'] = numero_perguntas
                   db_utils.delete_perguntas_acima_limite(conn, app_config)     #eliminando as perguntas acima do limite
+                  db_utils.update_config(conn, app_config)
                   st.success('Configuração atualizada com sucesso!')
                   sleep(2.5)
                   st.rerun()
