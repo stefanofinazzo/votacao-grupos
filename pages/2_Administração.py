@@ -22,7 +22,7 @@ MAX_QUESTOES = 10
 
 def lista_perguntas_no_banco(perguntas_df: pd.DataFrame) -> List:
 
-      lista_perguntas = perguntas_df['pergunta_id'].unique().to_list()
+      lista_perguntas = perguntas_df['pergunta_id'].unique().tolist()
 
       return lista_perguntas
       
