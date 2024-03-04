@@ -35,6 +35,14 @@ def get_config(conn):
   app_config.pop('onerow_id')     #esta coluna apenas força o trigger de unicidade de uma linha
 
   return app_config
+
+def update_config(conn, app_config: dict):
+
+    _, _ = (conn.table('config')
+              .update(app_config)
+              .eq('onerow_id', True)
+              .execute()
+         )
   
 def list_para_df(data_dict):
 
