@@ -63,7 +63,7 @@ def widget_lista_votantes():
 
    conn = db_utils.connect_supabase()
    votantes_list = db_utils.get_list_votantes(conn)
-   votantes_df = list_votantes_para_df(votantes_dict)
+   votantes_df = list_votantes_para_df(votantes_list)
    st.dataframe(votantes_df)
    
 def widget_resultados():
