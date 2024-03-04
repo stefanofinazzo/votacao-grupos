@@ -24,3 +24,7 @@ CREATE TABLE config (
     
    CONSTRAINT onerow_uni CHECK (onerow_id)
 );
+
+-- Configuração padrão
+
+INSERT INTO config VALUES (true, 7, 10, false);
