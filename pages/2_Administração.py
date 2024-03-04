@@ -184,7 +184,7 @@ def widget_configurar_votacao(app_config):
                   conn = db_utils.connect_supabase()
                   db_utils.update_config(conn, app_config)
                   db_utils.delete_perguntas_acima_limite(conn, app_config)     #eliminando as perguntas acima do limite
-                  st.successs('Configuração atualizada com sucesso!')
+                  st.success('Configuração atualizada com sucesso!')
                   sleep(2.5)
      
 ############# PÁGINA PRINCIPAL #########
