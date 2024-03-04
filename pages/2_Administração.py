@@ -91,8 +91,12 @@ def widget_lista_perguntas() -> pd.DataFrame:
    conn = db_utils.connect_supabase()
    perguntas_list = db_utils.get_list_table(conn, table='perguntas')
    perguntas_df = db_utils.list_para_df(perguntas_list)
-   perguntas_df = perguntas_df.sort_values(by='pergunta_id')
-   st.dataframe(perguntas_df)
+   if not perguntas_df.empty:
+         perguntas_df = perguntas_df.sort_values(by='pergunta_id')
+         st.dataframe(perguntas_df)
+   else:
+         st.markdown('#### Sem perguntas cadastradas no momento!')
+         
    return perguntas_df
       
 def widget_incluir_votante():
