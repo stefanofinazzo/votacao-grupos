@@ -18,6 +18,14 @@ def connect_supabase():
 
   return conn
 
+def get_dict_votantes(conn):
+
+  pass
+
+def dict_votantes_para_df(votantes_dict):
+
+  pass
+  
 def insert_votante(conn, nome: str, email: str, grupo: int): 
 
   token = create_token()
