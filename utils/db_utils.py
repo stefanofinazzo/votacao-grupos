@@ -48,7 +48,7 @@ def delete_perguntas_acima_limite(conn, app_config: dict) -> None:
   
     _, _ = (conn.table('perguntas')
           .delete()
-          .gt('pergunta_id', app_config['numero_perguntas')
+          .gt('pergunta_id', app_config['numero_perguntas'])
           .execute()
          )
   
