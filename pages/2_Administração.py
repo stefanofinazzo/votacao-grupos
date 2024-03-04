@@ -50,9 +50,9 @@ def widget_incluir_pergunta(perguntas_df: pd.DataFrame) -> None:
    with st.form("incluir_pergunta"):
          st.write("Inclusão de novas perguntas")
 
-         lista_perguntas_no_banco = lista_perguntas_no_banco(perguntas_df)
+         lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
 
-         st.write(lista_perguntas_no_banco)
+         st.write(lista_perguntas_atuais)
          
          n_pergunta = st.slider('Número da pergunta', 1, MAX_QUESTOES, 1)
          nome_pergunta = st.text_input('Nome da pergunta')
