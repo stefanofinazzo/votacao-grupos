@@ -61,11 +61,10 @@ def widget_excluir_votante():
          st.success('Votante excluído com sucesso!')
 
 def widget_lista_votantes():
-
+   st.markdown('### Lista de Votantes')
    conn = db_utils.connect_supabase()
    votantes_list = db_utils.get_list_votantes(conn)
    votantes_df = db_utils.list_votantes_para_df(votantes_list)
-   st.write(votantes_list)
    st.dataframe(votantes_df)
    
 def widget_resultados():
