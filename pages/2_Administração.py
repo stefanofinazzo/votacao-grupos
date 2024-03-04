@@ -178,14 +178,14 @@ def widget_configurar_votacao(app_config):
 ############# PÁGINA PRINCIPAL #########
 
 def mainpage():      
-      
+
    st.title('Página de Gerenciamento da Votação')
 
    if 'admin_user' not in st.session_state or not st.session_state['admin_user']:
       widget_autenticacao_admin()
                
    else:
-      obtem_configuracoes_atuais()
+      app_config = db_utils.get_config(conn)
          
       funcoes_tab = st.tabs(['Gerenciar Questões', 'Gerenciar Votantes', 'Resultados', 'Configurar Votação'])
 
