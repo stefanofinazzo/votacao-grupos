@@ -172,7 +172,7 @@ def widget_configurar_votacao():
             submitted = st.form_submit_button("Configurar", type="primary")
             if submitted:
                   app_config['numero_grupos'] = numero_grupos
-                  update_config(conn, app_config)
+                  db_utils.update_config(conn, app_config)
      
 ############# PÁGINA PRINCIPAL #########
 
