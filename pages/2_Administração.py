@@ -98,7 +98,7 @@ def mainpage():
                widget_lista_votantes()
          with colunas_incluir_votante[1]:
                widget_incluir_votante()
-               widget_excluir_votante():
+               widget_excluir_votante()
 
       with funcoes_tab[2]:
          widget_resultados()
