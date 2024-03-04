@@ -1,6 +1,8 @@
 import string
 import secrets
 
+import pandas as pd
+
 import streamlit as st
 from st_supabase_connection import SupabaseConnection
 
@@ -26,7 +28,9 @@ def get_dict_votantes(conn):
 
 def dict_votantes_para_df(votantes_dict):
 
-  pass
+  votantes_df = pd.DataFrame.from_dict(votantes_dict)
+
+  return votantes_df
   
 def insert_votante(conn, nome: str, email: str, grupo: int): 
 
