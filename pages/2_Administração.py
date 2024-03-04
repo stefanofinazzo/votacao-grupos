@@ -89,7 +89,7 @@ def mainpage():
    else:
       funcoes_tab = st.tabs(['Gerenciar Questões', 'Gerenciar Votantes', 'Resultados', 'Reiniciar votação'])
 
-      with funcoes_tab[0]?
+      with funcoes_tab[0]:
          pass
          
       with funcoes_tab[1]:
