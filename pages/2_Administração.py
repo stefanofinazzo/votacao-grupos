@@ -87,21 +87,23 @@ def mainpage():
       widget_autenticacao_admin()
                
    else:
-      funcoes_tab = st.tabs(['Lista de Votantes', 'Inclusão', 'Exclusão', 'Resultados', 'Reiniciar votação'])
+      funcoes_tab = st.tabs(['Gerenciar Questões', 'Gerenciar Votantes', 'Resultados', 'Reiniciar votação'])
 
-      with funcoes_tab[0]:
-         widget_lista_votantes()
+      with funcoes_tab[0]?
+         pass
          
       with funcoes_tab[1]:
-         widget_incluir_votante()
+         colunas_incluir_votante = st.columns(2)
+         with colunas_incluir_votante[0]:
+               widget_lista_votantes()
+         with colunas_incluir_votante[1]:
+               widget_incluir_votante()
+               widget_excluir_votante():
 
       with funcoes_tab[2]:
-         widget_excluir_votante()
-
-      with funcoes_tab[3]:
          widget_resultados()
 
-      with funcoes_tab[4]:
+      with funcoes_tab[3]:
          widget_reiniciar_votacao()
 
 if __name__ == '__main__':
