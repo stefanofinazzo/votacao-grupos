@@ -51,10 +51,12 @@ def widget_incluir_pergunta(perguntas_df: pd.DataFrame) -> None:
          st.write("Inclusão de novas perguntas")
 
          lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
-
+         lista_perguntas_total = list(range(1, MAX_QUESTOES + 1))
+         lista_perguntas_ausentes = [(pergunta_id if pergunta_id not in lista_perguntas_atuais) for pergunta_id in  lista_perguntas_total]
+         
          st.write(lista_perguntas_atuais)
          
-         n_pergunta = st.slider('Número da pergunta', 1, MAX_QUESTOES, 1)
+         n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_ausentes)
          nome_pergunta = st.text_input('Nome da pergunta')
          
          submitted = st.form_submit_button("Cadastrar pergunta", type="primary")
@@ -134,9 +136,10 @@ def widget_lista_votantes():
 def widget_resultados():
    pass
 
-def widget_reiniciar_votacao():
-
-      numero_grupos = st.slider('Número de grupos', 1, 20)
+def widget_configurar_votacao():
+      
+   numero_grupos = st.slider('Número de grupos', 1, 20)
+      
 
    
    
@@ -172,7 +175,7 @@ def mainpage():
          widget_resultados()
 
       with funcoes_tab[3]:
-         widget_reiniciar_votacao()
+         widget_configurar_votacao()
 
 if __name__ == '__main__':
    mainpage()
