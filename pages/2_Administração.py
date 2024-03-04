@@ -45,6 +45,17 @@ def widget_incluir_votante():
             conn = db_utils.connect_supabase()
             db_utils.insert_votante(conn, nome, email, grupo)
             st.success('Votante incluído com sucesso!')
+
+def widget_excluir_votante():
+   with st.form("excluir_votante"):
+      st.write("Exclusão de votante")
+      email = st.text_input('E-mail')
+      
+      submitted = st.form_submit_button("Excluir votante")
+      if submitted:
+         conn = db_utils.connect_supabase()
+         db_utils.delete_votante(conn, email)
+         st.success('Votante excluído com sucesso!')
             
 ############# PÁGINA PRINCIPAL #########
 
