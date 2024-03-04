@@ -16,7 +16,6 @@ from utils import db_utils
 #é suficiente
 
 ADMIN_PASSWORD = 'admin'
-MAX_QUESTOES = 6
 
 ############# FUNÇÕES AUXILIARES #######
 
@@ -115,13 +114,13 @@ def widget_lista_perguntas() -> pd.DataFrame:
          
    return perguntas_df
       
-def widget_incluir_votante():
+def widget_incluir_votante(app_config):
    
    with st.form("incluir_votante"):
          st.write("Inclusão de novos votantes")
          nome = st.text_input('Nome')
          email = st.text_input('E-mail')
-         grupo = st.slider('Grupo', 1, 1, 7)
+         grupo = st.slider('Grupo', 1, 1, app_config['numero_grupos'])
          
          submitted = st.form_submit_button("Cadastrar votante", type="primary")
       
@@ -201,7 +200,7 @@ def mainpage():
          with colunas_incluir_votante[0]:
                widget_lista_votantes()
          with colunas_incluir_votante[1]:
-               widget_incluir_votante()
+               widget_incluir_votante(app_config)
                widget_excluir_votante()
 
       with funcoes_tab[2]:
