@@ -45,7 +45,7 @@ def widget_incluir_pergunta():
       
          if submitted:
             conn = db_utils.connect_supabase()
-            db_utils.insert_questao(conn, n_pergunta, nome_pergunta)
+            db_utils.insert_pergunta(conn, n_pergunta, nome_pergunta)
             st.success('Pergunta incluída com sucesso!')
 
 def widget_excluir_pergunta():
