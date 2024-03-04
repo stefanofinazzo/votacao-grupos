@@ -20,13 +20,13 @@ def connect_supabase():
 
   return conn
 
-def get_dict_votantes(conn):
+def get_list_votantes(conn):
     
   rows = conn.query("*", table="votantes", ttl="10m").execute()
   
   return rows
 
-def dict_votantes_para_df(votantes_dict):
+def list_votantes_para_df(votantes_dict):
 
   votantes_df = pd.DataFrame.from_dict(votantes_dict)
 
