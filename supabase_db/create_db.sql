@@ -7,6 +7,6 @@ CREATE TABLE votantes (
 );
 
 CREATE TABLE votos (
-    voto_id SERIAL PRIMARY KEY
+    voto_id SERIAL PRIMARY KEY,
     voto varchar(200)
 );
