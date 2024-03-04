@@ -215,10 +215,10 @@ def mainpage():
             st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('votantes')))
 
       with funcoes_tab[2]:
-            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('resultados')))
+            st.button('Resultados', on_click=(lambda: alterar_tab('resultados')))
 
       with funcoes_tab[3]:
-            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('configuracao')))
+            st.button('Configurações', on_click=(lambda: alterar_tab('configuracao')))
       
       if st.session_state['admin_tab'] == 'perguntas':
          colunas_incluir_pergunta = st.columns(2)
