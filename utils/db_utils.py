@@ -19,8 +19,6 @@ def connect_supabase():
   return conn
 
 def get_dict_votantes(conn):
-
-  conn = st.connection("supabase",type=SupabaseConnection)
     
   rows = conn.query("*", table="votantes", ttl="10m").execute()
   
