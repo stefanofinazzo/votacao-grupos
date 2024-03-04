@@ -1,1 +1,1 @@
-INSERT INTO votantes VALUES ('Exemplo de Usuário', 'exemplo@gmail.com', 1, 'ABCD', false);
+INSERT INTO votantes VALUES ('exemplo@gmail.com', 'Exemplo de Usuário',  1, 'ABCD', false);
