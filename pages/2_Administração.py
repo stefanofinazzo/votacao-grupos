@@ -164,6 +164,7 @@ def widget_resultados():
 def widget_configurar_votacao(app_config):
             
       st.write(app_config)
+      conn = db_utils.connect_supabase()
       
       with st.form("numero_grupos"):
             numero_grupos = st.slider('Número de grupos', 1, 10, app_config['numero_grupos'])
@@ -171,7 +172,6 @@ def widget_configurar_votacao(app_config):
             submitted_grupos = st.form_submit_button("Configurar", type="primary")
             if submitted_grupos:
                   app_config['numero_grupos'] = numero_grupos
-                  conn = db_utils.connect_supabase()
                   db_utils.update_config(conn, app_config)
                   st.successs('Configuração atualizada com sucesso!')
                   sleep(2.5)
@@ -184,10 +184,30 @@ def widget_configurar_votacao(app_config):
             submitted_perguntas = st.form_submit_button("Configurar", type="primary")
             if submitted_perguntas:
                   app_config['numero_perguntas'] = numero_perguntas
-                  conn = db_utils.connect_supabase()
-                  db_utils.update_config(conn, app_config)
                   db_utils.delete_perguntas_acima_limite(conn, app_config)     #eliminando as perguntas acima do limite
                   st.success('Configuração atualizada com sucesso!')
+                  sleep(2.5)
+
+      with st.form("liberar_votacao"):
+            numero_pergunta_a_liberar = st.slider('Número da pergunta a liberar', 1, app_config['numero_perguntas'], app_config['numero_pergunta_a_liberar'])
+
+            submitted_liberar_votacao = st.form_submit_button("Liberar votação da pergunta", type="primary")
+            
+            if submitted_liberar_votacao:
+                  app_config['votacao_ativa'] = True
+                  app_config['pergunta_em_votacao'] = numero_pergunta_a_liberar
+                  db_utils.update_config(conn, app_config)
+                  st.success('Votação liberada com sucesso!')
+                  sleep(2.5)
+
+      with st.form("fechar_votacao"):
+            
+            submitted_fechar_votacao = st.form_submit_button("Fechar votação", type="primary")
+            
+            if submitted_fechar_votacao:
+                  app_config['votacao_ativa'] = False
+                  db_utils.update_config(conn, app_config)
+                  st.success('Votação fechada com sucesso!')
                   sleep(2.5)
      
 ############# PÁGINA PRINCIPAL #########
