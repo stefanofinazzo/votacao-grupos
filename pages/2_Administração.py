@@ -25,6 +25,10 @@ def lista_perguntas_no_banco(perguntas_df: pd.DataFrame) -> List:
       lista_perguntas = perguntas_df['pergunta_id'].unique().tolist()
 
       return lista_perguntas
+
+def obtem_configuracoes_atuais():
+
+      pass
       
 ############# WIDGETS ##################
 
@@ -156,11 +160,13 @@ def widget_resultados():
 
 def widget_configurar_votacao():
       
-   numero_grupos = st.slider('Número de grupos', 1, 20)
-      
+      with st.form("numero_grupos"):
+            numero_grupos = st.slider('Número de grupos', 1, 10)
 
-   
-   
+            submitted = st.form_submit_button("Configurar", type="primary")
+            if submitted:
+                  pass
+     
 ############# PÁGINA PRINCIPAL #########
 
 def mainpage():      
@@ -171,6 +177,8 @@ def mainpage():
       widget_autenticacao_admin()
                
    else:
+      obtem_configuracoes_atuais()
+         
       funcoes_tab = st.tabs(['Gerenciar Questões', 'Gerenciar Votantes', 'Resultados', 'Configurar Votação'])
 
       with funcoes_tab[0]:
