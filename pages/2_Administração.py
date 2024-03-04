@@ -58,7 +58,7 @@ def widget_incluir_pergunta(perguntas_df: pd.DataFrame) -> None:
          else:
                lista_perguntas_ausentes = list(range(1, MAX_QUESTOES + 1))
 
-         if len(lista_perguntas_ausentes) < MAX_QUESTOES:
+         if len(lista_perguntas_atuais) < MAX_QUESTOES:
                n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_ausentes)
                nome_pergunta = st.text_input('Nome da pergunta')
                submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=False)
