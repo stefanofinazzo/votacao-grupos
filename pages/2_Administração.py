@@ -174,6 +174,7 @@ def widget_configurar_votacao(app_config):
                   db_utils.update_config(conn, app_config)
                   st.successs('Configuração atualizada com sucesso!')
                   sleep(2.5)
+                  st.rerun()
 
       with st.form("numero_perguntas"):
             numero_perguntas = st.slider('Número de perguntas', 1, 20, app_config['numero_perguntas'])
@@ -186,6 +187,7 @@ def widget_configurar_votacao(app_config):
                   db_utils.delete_perguntas_acima_limite(conn, app_config)     #eliminando as perguntas acima do limite
                   st.success('Configuração atualizada com sucesso!')
                   sleep(2.5)
+                  st.rerun()
 
       with st.form("liberar_votacao"):
             numero_pergunta_a_liberar = st.slider('Número da pergunta a liberar', 1, app_config['numero_perguntas'], app_config['pergunta_liberada'])
@@ -198,6 +200,7 @@ def widget_configurar_votacao(app_config):
                   db_utils.update_config(conn, app_config)
                   st.success('Votação liberada com sucesso!')
                   sleep(2.5)
+                  st.rerun()
 
       with st.form("fechar_votacao"):
             
@@ -208,6 +211,7 @@ def widget_configurar_votacao(app_config):
                   db_utils.update_config(conn, app_config)
                   st.success('Votação fechada com sucesso!')
                   sleep(2.5)
+                  st.rerun()
      
 ############# PÁGINA PRINCIPAL #########
 
