@@ -34,6 +34,7 @@ def widget_autenticacao_admin():
             st.error('Senha inválida')
 
 def widget_incluir_votante():
+   
    with st.form("incluir_votante"):
          st.write("Inclusão de novos votantes")
          nome = st.text_input('Nome')
@@ -47,6 +48,7 @@ def widget_incluir_votante():
             st.success('Votante incluído com sucesso!')
 
 def widget_excluir_votante():
+   
    with st.form("excluir_votante"):
       st.write("Exclusão de votante")
       email = st.text_input('E-mail')
@@ -56,7 +58,16 @@ def widget_excluir_votante():
          conn = db_utils.connect_supabase()
          db_utils.delete_votante(conn, email)
          st.success('Votante excluído com sucesso!')
-            
+
+def widget_lista_votantes():
+   pass
+
+def widget_resultados():
+   pass
+
+def widget_reiniciar_votacao():
+   pass
+   
 ############# PÁGINA PRINCIPAL #########
 
 def mainpage():
@@ -66,13 +77,22 @@ def mainpage():
       widget_autenticacao_admin()
                
    else:
-      funcoes_tab = st.tabs(['Inclusão', 'Exclusão', 'Reiniciar'])
-      
+      funcoes_tab = st.tabs(['Lista de Votantes', 'Inclusão', 'Exclusão', 'Resultados', 'Reiniciar votação'])
+
       with funcoes_tab[0]:
+         widget_lista_votantes()
+         
+      with funcoes_tab[1]:
          widget_incluir_votante()
 
-      with funcoes_tab[1]:
+      with funcoes_tab[2]:
          widget_excluir_votante()
+
+      with funcoes_tab[3]:
+         widget_resultados()
+
+      with funcoes_tab[4]:
+         widget_reiniciar_votacao()
 
 if __name__ == '__main__':
    mainpage()
