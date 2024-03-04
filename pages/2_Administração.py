@@ -160,7 +160,7 @@ def widget_lista_votantes():
 def widget_resultados():
    pass
 
-def widget_configurar_votacao(app_config):
+def widget_configurar_votacao(app_config: dict):
             
       st.write(app_config)
       conn = db_utils.connect_supabase()
@@ -195,6 +195,7 @@ def widget_configurar_votacao(app_config):
             submitted_liberar_votacao = st.form_submit_button("Liberar votação da pergunta", type="primary")
             
             if submitted_liberar_votacao:
+                  lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
                   app_config['votacao_ativa'] = True
                   app_config['pergunta_liberada'] = numero_pergunta_a_liberar
                   db_utils.update_config(conn, app_config)
@@ -248,7 +249,7 @@ def mainpage():
          with colunas_incluir_pergunta[0]:
                perguntas_df = widget_lista_perguntas()
          with colunas_incluir_pergunta[1]:
-               widget_incluir_pergunta(perguntas_df)
+               widget_incluir_pergunta(app_config, perguntas_df)
                widget_excluir_pergunta(perguntas_df)
 
       elif st.session_state['admin_tab'] == 'votantes':
