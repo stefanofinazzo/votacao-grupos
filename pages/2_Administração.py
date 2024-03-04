@@ -33,40 +33,41 @@ def widget_autenticacao_admin():
          else:
             st.error('Senha inválida')
                
-def widget_incluir_questao():
+def widget_incluir_pergunta():
    
-   with st.form("incluir_questao"):
-         st.write("Inclusão de novas questões")
+   with st.form("incluir_pergunta"):
+         st.write("Inclusão de novas perguntas")
          
-         n_questao = st.slider('Número da questão', 1, MAX_QUESTOES, 1)
-         nome_questao = st.text_input('Nome da questão')
+         n_pergunta = st.slider('Número da pergunta', 1, MAX_QUESTOES, 1)
+         nome_pergunta = st.text_input('Nome da pergunta')
          
-         submitted = st.form_submit_button("Cadastrar questao", type="primary")
+         submitted = st.form_submit_button("Cadastrar pergunta", type="primary")
       
          if submitted:
             conn = db_utils.connect_supabase()
-            db_utils.insert_questao(conn, n_questao, nome_questao)
-            st.success('Questão incluída com sucesso!')
+            db_utils.insert_questao(conn, n_pergunta, nome_pergunta)
+            st.success('Pergunta incluída com sucesso!')
 
-def widget_excluir_votante():
+def widget_excluir_pergunta():
    
-   with st.form("excluir_votante"):
-      st.write("Exclusão de votante")
-      email = st.text_input('E-mail')
+   with st.form("excluir_pergunta"):
+      st.write("Exclusão de pergunta")
+      n_pergunta = st.text_input('Número da Pergunta')
       
-      submitted = st.form_submit_button("Excluir votante", type="primary")
+      submitted = st.form_submit_button("Excluir Pergunta", type="primary")
       
       if submitted:
          conn = db_utils.connect_supabase()
-         db_utils.delete_votante(conn, email)
-         st.success('Votante excluído com sucesso!')
+         db_utils.delete_pergunta(conn, n_pergunta)
+         st.success('Pergunta excluída com sucesso!')
 
-def widget_lista_votantes():
-   st.markdown('### Lista de Votantes')
+def widget_lista_perguntas():
+      
+   st.markdown('### Lista de Perguntas')
    conn = db_utils.connect_supabase()
-   votantes_list = db_utils.get_list_votantes(conn, table='votantes')
-   votantes_df = db_utils.list_votantes_para_df(votantes_list)
-   st.dataframe(votantes_df)
+   perguntas_list = db_utils.get_list_table(conn, table='perguntas')
+   perguntas_df = db_utils.list_votantes_para_df(perguntas_df)
+   st.dataframe(perguntas_df)
       
 def widget_incluir_votante():
    
@@ -99,7 +100,7 @@ def widget_excluir_votante():
 def widget_lista_votantes():
    st.markdown('### Lista de Votantes')
    conn = db_utils.connect_supabase()
-   votantes_list = db_utils.get_list_votantes(conn, table='votantes')
+   votantes_list = db_utils.get_list_table(conn, table='votantes')
    votantes_df = db_utils.list_votantes_para_df(votantes_list)
    st.dataframe(votantes_df)
    
@@ -125,7 +126,12 @@ def mainpage():
       funcoes_tab = st.tabs(['Gerenciar Questões', 'Gerenciar Votantes', 'Resultados', 'Reiniciar votação'])
 
       with funcoes_tab[0]:
-         pass
+         colunas_incluir_pergunta = st.columns(2)
+         with colunas_incluir_pergunta[0]:
+               widget_lista_perguntas()
+         with colunas_incluir_pergunta[1]:
+               widget_incluir_pergunta()
+               widget_excluir_pergunta()
          
       with funcoes_tab[1]:
          colunas_incluir_votante = st.columns(2)
