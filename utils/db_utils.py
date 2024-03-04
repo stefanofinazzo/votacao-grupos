@@ -37,7 +37,7 @@ def list_para_df(data_dict):
 def insert_pergunta(conn, n_pergunta: int, nome_pergunta: str): 
   
   _, _ = (conn.table('perguntas')
-             .insert({"n_pergunta": n_pergunta, 
+             .insert({"pergunta_id": n_pergunta, 
                "nome_pergunta": nome_pergunta})
             .execute()
          )
@@ -46,7 +46,7 @@ def delete_pergunta(conn, n_pergunta: int):
 
   _, _ = (conn.table('perguntas')
           .delete()
-          .eq('n_pergunta', n_pergunta)
+          .eq('pergunta_id', n_pergunta)
           .execute()
          )
   
