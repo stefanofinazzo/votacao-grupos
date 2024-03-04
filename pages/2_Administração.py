@@ -47,6 +47,8 @@ def widget_incluir_pergunta():
             conn = db_utils.connect_supabase()
             db_utils.insert_pergunta(conn, n_pergunta, nome_pergunta)
             st.success('Pergunta incluída com sucesso!')
+            sleep(2)
+            st.rerun()
 
 def widget_excluir_pergunta():
    
@@ -60,6 +62,8 @@ def widget_excluir_pergunta():
          conn = db_utils.connect_supabase()
          db_utils.delete_pergunta(conn, n_pergunta)
          st.success('Pergunta excluída com sucesso!')
+         sleep(2)
+         st.rerun()
 
 def widget_lista_perguntas():
       
@@ -83,6 +87,8 @@ def widget_incluir_votante():
             conn = db_utils.connect_supabase()
             db_utils.insert_votante(conn, nome, email, grupo)
             st.success('Votante incluído com sucesso!')
+            sleep(2)
+            st.rerun()
 
 def widget_excluir_votante():
    
@@ -96,6 +102,8 @@ def widget_excluir_votante():
          conn = db_utils.connect_supabase()
          db_utils.delete_votante(conn, email)
          st.success('Votante excluído com sucesso!')
+         sleep(2)
+         st.rerun()    
 
 def widget_lista_votantes():
    st.markdown('### Lista de Votantes')
