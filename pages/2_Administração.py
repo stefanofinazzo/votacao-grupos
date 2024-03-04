@@ -203,22 +203,22 @@ def mainpage():
       conn = db_utils.connect_supabase()
       app_config = db_utils.get_config(conn)
          
-      funcoes_tab = st.columns(5)
+      funcoes_tab = st.columns(4)
 
       if not 'admin_tab' in st.session_state:
             st.session_state['admin_tab'] = 'perguntas'
             
       with funcoes_tab[0]:
-            st.button('Gerenciar Perguntas', on_click=(lambda: alterar_tab('perguntas'))
+            st.button('Gerenciar Perguntas', on_click=(lambda: alterar_tab('perguntas')))
 
       with funcoes_tab[1]:
-            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('votantes'))
+            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('votantes')))
 
       with funcoes_tab[2]:
-            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('resultados'))
+            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('resultados')))
 
       with funcoes_tab[3]:
-            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('configuracao'))
+            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('configuracao')))
       
       if st.session_state['admin_tab'] == 'perguntas':
          colunas_incluir_pergunta = st.columns(2)
