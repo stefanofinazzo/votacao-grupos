@@ -22,7 +22,8 @@ def connect_supabase():
 
 def get_list_votantes(conn):
     
-  rows, _ = conn.query("*", table="votantes", ttl="10m").execute()
+  data, _ = conn.query("*", table="votantes", ttl="10m").execute()
+  rows = data[0]
   
   return rows
 
