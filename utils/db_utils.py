@@ -28,11 +28,27 @@ def get_list_table(conn, table: str):
   
   return rows
 
-def list_votantes_para_df(votantes_dict):
+def list_para_df(data_dict):
 
-  votantes_df = pd.DataFrame.from_dict(votantes_dict)
+  df = pd.DataFrame.from_dict(data_dict)
 
-  return votantes_df
+  return df
+
+def insert_pergunta(conn, n_pergunta: int, nome_pergunta: str): 
+  
+  _, _ = (conn.table('perguntas')
+             .insert({"n_pergunta": n_pergunta, 
+               "nome_pergunta": nome_pergunta})
+            .execute()
+         )
+
+def delete_pergunta(conn, n_pergunta: int): 
+
+  _, _ = (conn.table('perguntas')
+          .delete()
+          .eq('n_pergunta', n_pergunta)
+          .execute()
+         )
   
 def insert_votante(conn, nome: str, email: str, grupo: int): 
 
