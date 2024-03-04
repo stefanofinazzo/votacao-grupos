@@ -2,6 +2,8 @@
 
 from time import sleep
 
+from typing import List
+
 import streamlit as st
 from utils import db_utils
 
@@ -13,6 +15,14 @@ from utils import db_utils
 
 ADMIN_PASSWORD = 'admin'
 MAX_QUESTOES = 10
+
+############# FUNÇÕES AUXILIARES #######
+
+def lista_perguntas_no_banco(perguntas_df: pd.DataFrame) -> List:
+
+      lista_perguntas = perguntas_df['pergunta_id'].unique().to_list()
+
+      return lista_perguntas
       
 ############# WIDGETS ##################
 
@@ -33,10 +43,14 @@ def widget_autenticacao_admin():
          else:
             st.error('Senha inválida')
                
-def widget_incluir_pergunta():
+def widget_incluir_pergunta(perguntas_df: pd.DataFrame) -> None:
    
    with st.form("incluir_pergunta"):
          st.write("Inclusão de novas perguntas")
+
+         lista_perguntas_no_banco = lista_perguntas_no_banco(perguntas_df)
+
+         st.write(lista_perguntas_no_banco)
          
          n_pergunta = st.slider('Número da pergunta', 1, MAX_QUESTOES, 1)
          nome_pergunta = st.text_input('Nome da pergunta')
@@ -65,13 +79,15 @@ def widget_excluir_pergunta():
          sleep(2)
          st.rerun()
 
-def widget_lista_perguntas():
+def widget_lista_perguntas() -> pd.DataFrame:
       
    st.markdown('### Lista de Perguntas')
    conn = db_utils.connect_supabase()
    perguntas_list = db_utils.get_list_table(conn, table='perguntas')
    perguntas_df = db_utils.list_para_df(perguntas_list)
    st.dataframe(perguntas_df)
+
+   return perguntas_df
       
 def widget_incluir_votante():
    
@@ -136,9 +152,9 @@ def mainpage():
       with funcoes_tab[0]:
          colunas_incluir_pergunta = st.columns(2)
          with colunas_incluir_pergunta[0]:
-               widget_lista_perguntas()
+               perguntas_df = widget_lista_perguntas()
          with colunas_incluir_pergunta[1]:
-               widget_incluir_pergunta()
+               widget_incluir_pergunta(perguntas_df)
                widget_excluir_pergunta()
          
       with funcoes_tab[1]:
