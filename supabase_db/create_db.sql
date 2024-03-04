@@ -20,11 +20,12 @@ CREATE TABLE config (
    onerow_id bool PRIMARY KEY DEFAULT true,
    numero_grupos INTEGER DEFAULT 7,
    numero_perguntas INTEGER DEFAULT 10,
-   votacao_ativa boolean DEFAULT false  
+   pergunta_liberada INTEGER DEFAULT 1,
+   votacao_ativa boolean DEFAULT false
     
    CONSTRAINT onerow_uni CHECK (onerow_id)
 );
 
 -- Configuração padrão
 
-INSERT INTO config VALUES (true, 7, 10, false);
+INSERT INTO config VALUES (true, 7, 10, 1, false);
