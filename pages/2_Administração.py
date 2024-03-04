@@ -16,6 +16,7 @@ from utils import db_utils
 #é suficiente
 
 ADMIN_PASSWORD = 'admin'
+MAX_QUESTOES = 6
 
 ############# FUNÇÕES AUXILIARES #######
 
