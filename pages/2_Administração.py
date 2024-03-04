@@ -175,12 +175,15 @@ def widget_configurar_votacao(app_config):
 
       with st.form("numero_perguntas"):
             numero_perguntas = st.slider('Número de perguntas', 1, 20, app_config['numero_perguntas'])
-
+            
+            st.warning('Atenção: as perguntas já cadastradas acima do limite serão eliminadas!')
+            
             submitted_perguntas = st.form_submit_button("Configurar", type="primary")
             if submitted_perguntas:
                   app_config['numero_perguntas'] = numero_perguntas
                   conn = db_utils.connect_supabase()
                   db_utils.update_config(conn, app_config)
+                  db_utils.delete_perguntas_acima_limite(conn, app_config)     #eliminando as perguntas acima do limite
                   st.successs('Configuração atualizada com sucesso!')
                   sleep(2.5)
      
