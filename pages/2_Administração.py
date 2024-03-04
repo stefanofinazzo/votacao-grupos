@@ -194,7 +194,7 @@ def widget_configurar_votacao(app_config):
             
             if submitted_liberar_votacao:
                   app_config['votacao_ativa'] = True
-                  app_config['pergunta_em_votacao'] = numero_pergunta_a_liberar
+                  app_config['pergunta_liberada'] = numero_pergunta_a_liberar
                   db_utils.update_config(conn, app_config)
                   st.success('Votação liberada com sucesso!')
                   sleep(2.5)
