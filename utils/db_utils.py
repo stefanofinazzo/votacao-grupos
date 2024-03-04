@@ -32,7 +32,7 @@ def get_config(conn):
 
   data, _ = conn.query("*", table='config', ttl="10m").execute()
   app_config = data[1]
-  app_config.pop('onerow_id', None)        #esta coluna apenas força o trigger de unicidade de uma linha
+  del app_config['onerow_id']     #esta coluna apenas força o trigger de unicidade de uma linha
 
   return app_config
   
