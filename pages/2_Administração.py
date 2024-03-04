@@ -52,7 +52,7 @@ def widget_incluir_pergunta(perguntas_df: pd.DataFrame) -> None:
 
          lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
          lista_perguntas_total = list(range(1, MAX_QUESTOES + 1))
-         lista_perguntas_ausentes = [(pergunta_id if pergunta_id not in lista_perguntas_atuais) for pergunta_id in  lista_perguntas_total]
+         lista_perguntas_ausentes = [pergunta_id for pergunta_id in lista_perguntas_total if pergunta_id not in lista_perguntas_atuais]
          
          st.write(lista_perguntas_atuais)
          
