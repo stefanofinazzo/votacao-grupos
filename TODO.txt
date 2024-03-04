@@ -10,6 +10,7 @@ Todo:
 - Melhorar descrição dos widgets
 - Helptips e ajuda nos widgets
 - Implementar módulo de votação
+- Implementar cálculo da pontuação
 - Refatorações gerais
 - Implementar descrição de tipagem em todas funções em todos módulos
 - Corrigir indentações e espaços
