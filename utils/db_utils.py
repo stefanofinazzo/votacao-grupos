@@ -33,7 +33,7 @@ def insert_votante(conn, nome: str, email: str, grupo: int):
 
 def delete_votante(conn, email: str): 
 
-  _, _ = (supabase.table('votantes')
+  _, _ = (conn.table('votantes')
           .delete()
           .eq('email', email)
           .execute()
