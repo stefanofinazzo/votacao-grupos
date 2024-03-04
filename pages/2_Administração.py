@@ -62,8 +62,9 @@ def widget_excluir_votante():
 def widget_lista_votantes():
 
    conn = db_utils.connect_supabase()
-   rows = db_utils.get_dict_votantes(conn)
-   st.write(rows)
+   votantes_list = db_utils.get_list_votantes(conn)
+   votantes_df = list_votantes_para_df(votantes_dict)
+   st.dataframe(votantes_df)
    
 def widget_resultados():
    pass
