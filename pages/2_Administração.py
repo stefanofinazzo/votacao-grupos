@@ -158,10 +158,8 @@ def widget_lista_votantes():
 def widget_resultados():
    pass
 
-def widget_configurar_votacao():
-      
-      conn = db_utils.connect_supabase()
-      
+def widget_configurar_votacao(app_config):
+            
       app_config = db_utils.get_config(conn)
 
       st.write(app_config)
@@ -172,7 +170,10 @@ def widget_configurar_votacao():
             submitted = st.form_submit_button("Configurar", type="primary")
             if submitted:
                   app_config['numero_grupos'] = numero_grupos
+                  conn = db_utils.connect_supabase()
                   db_utils.update_config(conn, app_config)
+                  st.successs('Configuração atualizada com sucesso!')
+                  sleep(2.5)
      
 ############# PÁGINA PRINCIPAL #########
 
@@ -208,7 +209,7 @@ def mainpage():
          widget_resultados()
 
       with funcoes_tab[3]:
-         widget_configurar_votacao()
+         widget_configurar_votacao(app_config)
 
 if __name__ == '__main__':
    mainpage()
