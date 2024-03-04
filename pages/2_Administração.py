@@ -202,11 +202,11 @@ def widget_configurar_votacao(app_config: dict):
             numero_pergunta_a_liberar = st.slider('Número da pergunta a liberar', 1, app_config['numero_perguntas'], app_config['pergunta_liberada'])
 
             if not app_config['votacao_ativa']:
-                  submitted_perguntas = st.form_submit_button("Liberar votação", type="primary")
+                  submitted_liberar_votacao = st.form_submit_button("Liberar votação", type="primary")
             else:
-                  submitted_perguntas = st.form_submit_button("Liberar votação", type="primary", disabled=True)
+                  submitted_liberar_votacao = st.form_submit_button("Liberar votação", type="primary", disabled=True)
             
-            if submitted_perguntas:
+            if submitted_liberar_votacao:
                   lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
                   app_config['votacao_ativa'] = True
                   app_config['pergunta_liberada'] = numero_pergunta_a_liberar
