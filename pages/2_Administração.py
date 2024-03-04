@@ -160,8 +160,6 @@ def widget_resultados():
 
 def widget_configurar_votacao(app_config):
             
-      app_config = db_utils.get_config(conn)
-
       st.write(app_config)
       
       with st.form("numero_grupos"):
@@ -185,6 +183,7 @@ def mainpage():
       widget_autenticacao_admin()
                
    else:
+      conn = db_utils.connect_supabase()
       app_config = db_utils.get_config(conn)
          
       funcoes_tab = st.tabs(['Gerenciar Questões', 'Gerenciar Votantes', 'Resultados', 'Configurar Votação'])
