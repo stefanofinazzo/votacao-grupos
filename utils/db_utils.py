@@ -38,7 +38,7 @@ def insert_pergunta(conn, n_pergunta: int, nome_pergunta: str):
   
   _, _ = (conn.table('perguntas')
              .insert({"pergunta_id": n_pergunta, 
-               "nome_pergunta": nome_pergunta})
+               "pergunta_nome": nome_pergunta})
             .execute()
          )
 
