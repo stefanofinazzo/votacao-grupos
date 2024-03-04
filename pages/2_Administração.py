@@ -42,6 +42,7 @@ def widget_incluir_votante():
          grupo = st.slider('Grupo', 1, 1, 7)
          
          submitted = st.form_submit_button("Cadastrar votante")
+      
          if submitted:
             conn = db_utils.connect_supabase()
             db_utils.insert_votante(conn, nome, email, grupo)
@@ -54,6 +55,7 @@ def widget_excluir_votante():
       email = st.text_input('E-mail')
       
       submitted = st.form_submit_button("Excluir votante")
+      
       if submitted:
          conn = db_utils.connect_supabase()
          db_utils.delete_votante(conn, email)
