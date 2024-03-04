@@ -171,7 +171,7 @@ def mainpage():
       widget_autenticacao_admin()
                
    else:
-      funcoes_tab = st.tabs(['Gerenciar Questões', 'Gerenciar Votantes', 'Resultados', 'Reiniciar votação'])
+      funcoes_tab = st.tabs(['Gerenciar Questões', 'Gerenciar Votantes', 'Resultados', 'Configurar Votação'])
 
       with funcoes_tab[0]:
          colunas_incluir_pergunta = st.columns(2)
