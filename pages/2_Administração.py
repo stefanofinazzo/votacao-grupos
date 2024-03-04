@@ -50,9 +50,12 @@ def widget_incluir_pergunta(perguntas_df: pd.DataFrame) -> None:
    with st.form("incluir_pergunta"):
          st.write("Inclusão de novas perguntas")
 
-         lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
-         lista_perguntas_total = list(range(1, MAX_QUESTOES + 1))
-         lista_perguntas_ausentes = [pergunta_id for pergunta_id in lista_perguntas_total if pergunta_id not in lista_perguntas_atuais]
+         if not perguntas_df.empty:
+               lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
+               lista_perguntas_total = list(range(1, MAX_QUESTOES + 1))
+               lista_perguntas_ausentes = [pergunta_id for pergunta_id in lista_perguntas_total if pergunta_id not in lista_perguntas_atuais]
+         else:
+               lista_perguntas_ausentes = list(range(1, MAX_QUESTOES + 1))
                   
          n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_ausentes)
          nome_pergunta = st.text_input('Nome da pergunta')
