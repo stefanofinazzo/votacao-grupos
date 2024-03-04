@@ -66,7 +66,7 @@ def widget_lista_perguntas():
    st.markdown('### Lista de Perguntas')
    conn = db_utils.connect_supabase()
    perguntas_list = db_utils.get_list_table(conn, table='perguntas')
-   perguntas_df = db_utils.list_para_df(perguntas_df)
+   perguntas_df = db_utils.list_para_df(perguntas_list)
    st.dataframe(perguntas_df)
       
 def widget_incluir_votante():
