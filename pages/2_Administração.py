@@ -66,11 +66,12 @@ def widget_incluir_pergunta(perguntas_df: pd.DataFrame) -> None:
             sleep(2)
             st.rerun()
 
-def widget_excluir_pergunta():
+def widget_excluir_pergunta(perguntas_df: pd.DataFrame) -> None:
    
    with st.form("excluir_pergunta"):
       st.write("Exclusão de pergunta")
-      n_pergunta = st.text_input('Número da Pergunta')
+      lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
+      n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_atuais)
       
       submitted = st.form_submit_button("Excluir Pergunta", type="primary")
       
