@@ -171,7 +171,7 @@ def widget_configurar_votacao(app_config: dict):
                   numero_grupos = st.slider('Número de grupos', 1, 10, app_config['numero_grupos'])
                   submitted_grupos = st.form_submit_button("Configurar", type="primary")
             else:
-                  numero_grupos = st.slider('Número de grupos', 1, 10, app_config['numero_grupos'], disabled=False)
+                  numero_grupos = st.slider('Número de grupos', 1, 10, app_config['numero_grupos'], disabled=True)
                   submitted_grupos = st.form_submit_button("Configurar", type="primary", disabled=True)
                   
             if submitted_grupos:
