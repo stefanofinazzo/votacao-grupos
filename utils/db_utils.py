@@ -31,8 +31,8 @@ def get_list_table(conn, table: str):
 def get_config(conn):
 
   data, _ = conn.query("*", table='config', ttl="10m").execute()
-  app_config = data[1]
-  #del app_config['onerow_id']     #esta coluna apenas força o trigger de unicidade de uma linha
+  app_config = data[1][0]
+  app_config.pop('onerow_id')     #esta coluna apenas força o trigger de unicidade de uma linha
 
   return app_config
   
