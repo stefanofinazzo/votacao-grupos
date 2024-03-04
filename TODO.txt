@@ -1,0 +1,13 @@
+Todo:
+
+- Implementar tab de teste de conexão ao supabase no módulo de admin 
+- Remover página de teste de conexão
+- Implementar tab de analytics para o admin
+- Redesenhar página de configurações
+- Refatorar widget de configurações (quebrar em subwidgets)
+- Implementar módulo de votação
+- Refatorações gerais
+- Implementar descrição de tipagem em todas funções em todos módulos
+- Corrigir indentações e espaços
+- Rotinas iniciais de teste
+- Documentação geral
