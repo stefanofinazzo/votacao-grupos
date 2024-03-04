@@ -160,6 +160,12 @@ def widget_resultados():
 
 def widget_configurar_votacao():
       
+      conn = db_utils.connect_supabase()
+      
+      app_config = db_utils.get_config(conn)
+
+      st.write(app_config)
+      
       with st.form("numero_grupos"):
             numero_grupos = st.slider('Número de grupos', 1, 10)
 
