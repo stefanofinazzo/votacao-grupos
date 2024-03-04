@@ -59,7 +59,7 @@ def widget_excluir_votante():
          db_utils.delete_votante(conn, email)
          st.success('Votante excluído com sucesso!')
 
-def widget_lista_votantes():
+def widget_lista_votantes(conn):
 
    conn = db_utils.connect_supabase()
    rows = db_utils.get_dict_votantes()
