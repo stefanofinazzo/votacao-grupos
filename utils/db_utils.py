@@ -36,12 +36,20 @@ def get_config(conn):
 
   return app_config
 
-def update_config(conn, app_config: dict):
+def update_config(conn, app_config: dict) -> None:
 
     _, _ = (conn.table('config')
               .update(app_config)
               .eq('onerow_id', True)
               .execute()
+         )
+
+def delete_perguntas_acima_limite(conn, app_config: dict) -> None:
+  
+    _, _ = (conn.table('perguntas')
+          .delete()
+          .gt('pergunta_id', app_config['numero_perguntas')
+          .execute()
          )
   
 def list_para_df(data_dict):
