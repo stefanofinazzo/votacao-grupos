@@ -19,7 +19,8 @@ CREATE TABLE perguntas (
 CREATE TABLE config (
    onerow_id bool PRIMARY KEY DEFAULT true,
    numero_grupos INTEGER DEFAULT 7,
-   
+   numero_perguntas INTEGER DEFAULT 10,
+   votacao_ativa boolean DEFAULT false  
     
    CONSTRAINT onerow_uni CHECK (onerow_id)
 );
