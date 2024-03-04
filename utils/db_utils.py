@@ -31,10 +31,10 @@ def get_list_table(conn, table: str):
 def get_config(conn):
 
   data, _ = conn.query("*", table='config', ttl="10m").execute()
+  app_config = data[1]
+  app_config.pop('onerow_id', None)        #esta coluna apenas força o trigger de unicidade de uma linha
 
-  rows = data[1]
-
-  return rows
+  return app_config
   
 def list_para_df(data_dict):
 
