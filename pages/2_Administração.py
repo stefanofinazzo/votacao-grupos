@@ -166,12 +166,14 @@ def widget_configurar_votacao(app_config: dict):
       conn = db_utils.connect_supabase()
       
       with st.form("numero_grupos"):
-            numero_grupos = st.slider('Número de grupos', 1, 10, app_config['numero_grupos'])
 
             if not app_config['votacao_ativa']:
+                  numero_grupos = st.slider('Número de grupos', 1, 10, app_config['numero_grupos'])
                   submitted_grupos = st.form_submit_button("Configurar", type="primary")
             else:
+                  numero_grupos = st.slider('Número de grupos', 1, 10, app_config['numero_grupos'], disabled=False)
                   submitted_grupos = st.form_submit_button("Configurar", type="primary", disabled=True)
+                  
             if submitted_grupos:
                   app_config['numero_grupos'] = numero_grupos
                   db_utils.update_config(conn, app_config)
@@ -180,13 +182,14 @@ def widget_configurar_votacao(app_config: dict):
                   st.rerun()
 
       with st.form("numero_perguntas"):
-            numero_perguntas = st.slider('Número de perguntas', 1, 20, app_config['numero_perguntas'])
             
             st.warning('Atenção: as perguntas já cadastradas acima do limite serão eliminadas!')
 
             if not app_config['votacao_ativa']:
+                  numero_perguntas = st.slider('Número de perguntas', 1, 20, app_config['numero_perguntas'])
                   submitted_perguntas = st.form_submit_button("Configurar", type="primary")
             else:
+                  numero_perguntas = st.slider('Número de perguntas', 1, 20, app_config['numero_perguntas'], disabled=True)
                   submitted_perguntas = st.form_submit_button("Configurar", type="primary", disabled=True)
                   
             if submitted_perguntas:
@@ -198,11 +201,20 @@ def widget_configurar_votacao(app_config: dict):
                   st.rerun()
 
       with st.form("liberar_votacao"):
-            numero_pergunta_a_liberar = st.slider('Número da pergunta a liberar', 1, app_config['numero_perguntas'], app_config['pergunta_liberada'])
-
+      
             if not app_config['votacao_ativa']:
+                  numero_pergunta_a_liberar = st.slider('Número da pergunta a liberar', 
+                                                        1, 
+                                                        app_config['numero_perguntas'],
+                                                        app_config['pergunta_liberada'],
+                                                        disabled=False)
                   submitted_liberar_votacao = st.form_submit_button("Liberar votação", type="primary")
             else:
+                  numero_pergunta_a_liberar = st.slider('Número da pergunta a liberar', 
+                                                        1, 
+                                                        app_config['numero_perguntas'],
+                                                        app_config['pergunta_liberada'],
+                                                        disabled=True)
                   submitted_liberar_votacao = st.form_submit_button("Liberar votação", type="primary", disabled=True)
             
             if submitted_liberar_votacao:
