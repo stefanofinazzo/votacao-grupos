@@ -16,7 +16,6 @@ from utils import db_utils
 #é suficiente
 
 ADMIN_PASSWORD = 'admin'
-MAX_QUESTOES = 6
 
 ############# FUNÇÕES AUXILIARES #######
 
@@ -52,7 +51,7 @@ def widget_autenticacao_admin():
          else:
             st.error('Senha inválida')
                
-def widget_incluir_pergunta(perguntas_df: pd.DataFrame) -> None:
+def widget_incluir_pergunta(app_config: dict, perguntas_df: pd.DataFrame) -> None:
    
    with st.form("incluir_pergunta"):
          
@@ -60,12 +59,12 @@ def widget_incluir_pergunta(perguntas_df: pd.DataFrame) -> None:
 
          if not perguntas_df.empty:
                lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
-               lista_perguntas_total = list(range(1, MAX_QUESTOES + 1))
+               lista_perguntas_total = list(range(1, app_config['numero_perguntas'] + 1))
                lista_perguntas_ausentes = [pergunta_id for pergunta_id in lista_perguntas_total if pergunta_id not in lista_perguntas_atuais]
          else:
-               lista_perguntas_ausentes = list(range(1, MAX_QUESTOES + 1))
+               lista_perguntas_ausentes = list(range(1, app_config['numero_perguntas']  + 1))
 
-         if len(lista_perguntas_atuais) < MAX_QUESTOES:
+         if len(lista_perguntas_atuais) < app_config['numero_perguntas']:
                n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_ausentes)
                nome_pergunta = st.text_input('Nome da pergunta')
                submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=False)
@@ -189,7 +188,7 @@ def widget_configurar_votacao(app_config):
                   sleep(2.5)
 
       with st.form("liberar_votacao"):
-            numero_pergunta_a_liberar = st.slider('Número da pergunta a liberar', 1, app_config['numero_perguntas'], app_config['numero_pergunta_a_liberar'])
+            numero_pergunta_a_liberar = st.slider('Número da pergunta a liberar', 1, app_config['numero_perguntas'], app_config['pergunta_liberada'])
 
             submitted_liberar_votacao = st.form_submit_button("Liberar votação da pergunta", type="primary")
             
