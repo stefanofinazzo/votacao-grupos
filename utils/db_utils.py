@@ -28,6 +28,14 @@ def get_list_table(conn, table: str):
   
   return rows
 
+def get_config(conn):
+
+  data, _ = conn.query("*", table='config', ttl="10m").execute()
+
+  rows = data[1]
+
+  return rows
+  
 def list_para_df(data_dict):
 
   df = pd.DataFrame.from_dict(data_dict)
