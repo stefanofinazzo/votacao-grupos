@@ -160,7 +160,7 @@ def mainpage():
                perguntas_df = widget_lista_perguntas()
          with colunas_incluir_pergunta[1]:
                widget_incluir_pergunta(perguntas_df)
-               widget_excluir_pergunta()
+               widget_excluir_pergunta(perguntas_df)
          
       with funcoes_tab[1]:
          colunas_incluir_votante = st.columns(2)
