@@ -87,8 +87,8 @@ def widget_lista_perguntas() -> pd.DataFrame:
    conn = db_utils.connect_supabase()
    perguntas_list = db_utils.get_list_table(conn, table='perguntas')
    perguntas_df = db_utils.list_para_df(perguntas_list)
+   perguntas_df = perguntas_df.sort_values(by='pergunta_id')
    st.dataframe(perguntas_df)
-
    return perguntas_df
       
 def widget_incluir_votante():
@@ -128,6 +128,7 @@ def widget_lista_votantes():
    conn = db_utils.connect_supabase()
    votantes_list = db_utils.get_list_table(conn, table='votantes')
    votantes_df = db_utils.list_para_df(votantes_list)
+   votantes_df = votantes_df.sort_values(by='nome')
    st.dataframe(votantes_df)
    
 def widget_resultados():
