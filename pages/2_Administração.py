@@ -48,6 +48,7 @@ def widget_autenticacao_admin():
 def widget_incluir_pergunta(perguntas_df: pd.DataFrame) -> None:
    
    with st.form("incluir_pergunta"):
+         
          st.write("Inclusão de novas perguntas")
 
          if not perguntas_df.empty:
@@ -56,11 +57,15 @@ def widget_incluir_pergunta(perguntas_df: pd.DataFrame) -> None:
                lista_perguntas_ausentes = [pergunta_id for pergunta_id in lista_perguntas_total if pergunta_id not in lista_perguntas_atuais]
          else:
                lista_perguntas_ausentes = list(range(1, MAX_QUESTOES + 1))
-                  
-         n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_ausentes)
-         nome_pergunta = st.text_input('Nome da pergunta')
-         
-         submitted = st.form_submit_button("Cadastrar pergunta", type="primary")
+
+         if len(lista_perguntas_ausentes) < MAX_QUESTOES:
+               n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_ausentes)
+               nome_pergunta = st.text_input('Nome da pergunta')
+               submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=False)
+               
+         else:
+               st.markdown('#### Todas perguntas já cadastradas!')
+               submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=True)
       
          if submitted:
             conn = db_utils.connect_supabase()
