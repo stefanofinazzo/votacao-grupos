@@ -20,11 +20,17 @@ ADMIN_PASSWORD = 'admin'
 
 ############# FUNÇÕES AUXILIARES #######
 
-def lista_perguntas_no_banco(perguntas_df: pd.DataFrame) -> List:
+def lista_perguntas_no_banco(perguntas_df: pd.DataFrame):
 
       lista_perguntas = perguntas_df['pergunta_id'].unique().tolist()
 
-      return lista_perguntas
+      perguntas_com_votos = votos_df['pergunta_id'].unique().tolist()
+            
+      for pergunta in perguntas_com_votos:
+
+            votos_pergunta_df = votos_df[filtro_pergunta]
+
+      return None
 
 def alterar_tab(tab_choice: str) -> None:
 
@@ -36,6 +42,13 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
       fig.show()
 
       st.plotly_chart(fig, use_container_width=True)
+
+def calcula_pontuacao(votos_pergunta_df: pd.DataFrame):
+
+      ranking_df = votos_pergunta_df.copy()
+      ranking_df['ranking'] = ranking_df['n_votos'].rank()
+
+      st.write(ranking_df)
       
 ############# WIDGETS ##################
 
@@ -184,6 +197,7 @@ def widget_resultados(conn):
                   
                   with colunas_resultados[0]:
                         st.dataframe(votos_pergunta_df)
+                        calcula_pontuacao(votos_pergunta_df)
                   with colunas_resultados[1]:
                         votos_bar_plot(votos_pergunta_df)
                         
