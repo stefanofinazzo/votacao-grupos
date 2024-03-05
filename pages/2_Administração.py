@@ -153,7 +153,7 @@ def widget_lista_votantes(conn):
    votantes_df = votantes_df.sort_values(by='nome')
    st.dataframe(votantes_df)
    
-def widget_resultados():
+def widget_resultados(conn):
    st.markdown('## Resultados')
 
    contagem_votos = db_utils.get_votos(conn)
@@ -338,7 +338,7 @@ def mainpage():
                widget_excluir_votante()
 
       elif st.session_state['admin_tab'] == 'resultados':   
-         widget_resultados()
+         widget_resultados(conn)
 
       elif st.session_state['admin_tab'] == 'configuracao':  
          widget_configurar_votacao(app_config)
