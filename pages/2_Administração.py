@@ -50,7 +50,7 @@ def pontuacao_final(pontuacao_df: pd.DataFrame) -> pd.DataFrame:
 
       pontuacao_final_df = (pontuacao_df
                             .groupby('grupo')
-                            .agg({'pontuacao': 'sum')
+                            .agg({'pontuacao': 'sum'})
                            )
 
       st.write(pontuacao_final_df)
