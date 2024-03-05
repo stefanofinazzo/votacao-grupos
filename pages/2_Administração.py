@@ -191,7 +191,7 @@ def widget_resultados(conn, app_config: dict):
             colunas_resultados = st.columns(2)
             
             perguntas_com_votos = votos_df['pergunta_id'].unique().tolist()
-            pontuacao_df = pd.Dataframe()
+            pontuacao_df = pd.DataFrame()
             
             for pergunta in perguntas_com_votos:
 
