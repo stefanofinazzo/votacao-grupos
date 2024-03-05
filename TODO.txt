@@ -1,6 +1,8 @@
 Todo:
 
 - Embelezar tab de resultados
+- Implementar limpeza de urna
+- Implementar reset geral
 - Incluir pontuação no tab de resultados
 - Melhorar descrição dos widgets
 - Helptips e ajuda nos widgets
