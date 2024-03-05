@@ -5,6 +5,7 @@ from time import sleep
 from typing import List
 
 import pandas as pd
+import plotly.express as px
 import streamlit as st
 
 from utils import db_utils
