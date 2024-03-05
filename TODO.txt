@@ -2,7 +2,6 @@ Todo:
 
 - Embelezar tab de resultados
 - Incluir pontuação no tab de resultados
-- Passar o token de acesso do admin para secrets
 - Melhorar descrição dos widgets
 - Helptips e ajuda nos widgets
 - Implementar cálculo da pontuação
