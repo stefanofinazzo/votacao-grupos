@@ -160,7 +160,7 @@ def widget_lista_votantes():
 def widget_resultados():
    pass
 
-def widget_configurar_votacao(app_config: dict):
+def display_metrics(app_config: dict) -> None:
 
       metrics = st.columns(3)
 
@@ -173,11 +173,11 @@ def widget_configurar_votacao(app_config: dict):
                   st.metric('Votação', 'ATIVA')
             else:
                    st.metric('Votação', 'FECHADA')
-            
-      conn = db_utils.connect_supabase()
+                  
+def widget_set_grupos(conn, app_config: dict) -> None: 
       
       with st.form("numero_grupos"):
-
+      
             if not app_config['votacao_ativa']:
                   numero_grupos = st.slider('Número de grupos', 1, 10, app_config['numero_grupos'])
                   submitted_grupos = st.form_submit_button("Configurar", type="primary")
@@ -192,10 +192,12 @@ def widget_configurar_votacao(app_config: dict):
                   sleep(2.5)
                   st.rerun()
 
+def widget_set_perguntas(conn, app_config: dict) -> None:
+      
       with st.form("numero_perguntas"):
-            
+      
             st.warning('Atenção: as perguntas já cadastradas acima do limite serão eliminadas!')
-
+      
             if not app_config['votacao_ativa']:
                   numero_perguntas = st.slider('Número de perguntas', 1, 20, app_config['numero_perguntas'])
                   submitted_perguntas = st.form_submit_button("Configurar", type="primary")
@@ -210,6 +212,15 @@ def widget_configurar_votacao(app_config: dict):
                   st.success('Configuração atualizada com sucesso!')
                   sleep(2.5)
                   st.rerun()
+
+def widget_configurar_votacao(app_config: dict):
+
+      conn = db_utils.connect_supabase()
+
+      display_metrics(app_config)
+      
+      widget_set_grupos(conn, app_config)
+      widget_set_perguntas(conn, app_config)
 
       with st.form("liberar_votacao"):
       
