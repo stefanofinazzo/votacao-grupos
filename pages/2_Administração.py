@@ -55,7 +55,7 @@ def pontuacao_final(pontuacao_df: pd.DataFrame) -> pd.DataFrame:
                             .reset_index()
                            )
 
-      pontuacao_final_df['ranking'] = pontuacao_final_df['n_votos'].rank(method='min', ascending=True)
+      pontuacao_final_df['ranking'] = pontuacao_final_df['pontuacao'].rank(method='min', ascending=True)
       pontuacao_final_df = pontuacao_final_df.sort_values(by='pontuacao')
       
       return pontuacao_final_df
