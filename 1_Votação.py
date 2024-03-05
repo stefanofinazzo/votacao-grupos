@@ -26,35 +26,33 @@ def mainpage():
         st.session_state['votante_autorizado'] = False
       
     if not st.session_state['votante_autorizado']: 
-
-        votante_atual = st.text_input('Coloque seu token de votação')
+      
+        with st.form("auth_votante_form"):
+                                
+            email_votante = st.text_input('E-mail funcional', 'Insira seu e-mail funcional aqui')
+            token = st.selectbox('Senha de acesso', 'Insira o token de votação')
         
-        if votante_atual in list(DICT_VOTANTES.keys()):
-            st.session_state['votante_autorizado']
-            st.session_state['grupo_votante'] = DICT_VOTANTES[votante_atual]
-            st.success('Bem-vindo!')
-            sleep(2)
-            st.rerun()
-    
-        elif votante_atual is not None:
-            st.error('Votante não localizado')
-    
+            submitted = st.form_submit_button("Entrar", type="primary")
+              
+            if submitted:
+                 conn = db_utils.connect_supabase()
+                 votante_localizado = db_utils.delete_perguntalocaliza_votante(conn, email_votante)
+
+                 st.write(votante_localizado)
+              
+                 #st.success('Pergunta excluída com sucesso!')
+                 #sleep(5)
+                 #st.rerun()
+              
     else:
         #em votação
         pergunta_atual = app_config['pergunta_liberada']
         
         st.markdown('## Pergunta em votação: ' + pergunta_atual)
         st.markdown('### ' + 'PERGUNTA ATUAL AQUI')
-      
-        grupos_a_votar = list(range(1,8))
-        grupos_a_votar.remove(st.session_state['grupo_votante'])
-        
-        grupo_escolhido = st.selectbox('Escolha o seu grupo', grupos_a_votar)
         
         if st.button('Votar'):
-            st.write('Você escolheu o grupo ' + str(grupo_escolhido))
-            #lógica para transferir o voto para db aqui
-            #lógica para remover voto da lista aqui
+            pass
 
 ################### PÁGINA PRINCIPAL ###################
 
