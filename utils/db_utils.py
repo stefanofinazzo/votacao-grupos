@@ -83,12 +83,14 @@ def localiza_votante(conn, email: str):
              .execute()
             )
 
-  st.write(data[0])
+  st.write(data[1])
+
+  votante = data[1][0]
   
-  if data[1] != []:
-    votante = data[1][0]
-  else:
-    votante = None
+  #if data[1] != []:
+  #  votante = data[1][0]
+  #else:
+  #  votante = None
 
   return votante
 
