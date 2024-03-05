@@ -142,12 +142,12 @@ def insert_voto(conn, voto: str, pergunta_id: int) -> None:
             .execute()
          )
 
-def registra_ja_votou(conn, email: str, ja_votou: bool) -> None:
+def atualiza_votante(conn, votante: dict) -> None:
 
-    update_dict = {'votou': ja_votou}
-  
+    email = votante['email']
+    
     _, _ = (conn.table('votantes')
-            .update(update_dict)
+            .update(votante)
             .eq('email', email)
             .execute()
        )
