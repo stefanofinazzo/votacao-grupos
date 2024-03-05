@@ -16,7 +16,7 @@ from utils import db_utils
 #para fins de jogos corporativos, não é necessário, e um token hardcoded
 #é suficiente
 
-ADMIN_PASSWORD = 'admin'
+ADMIN_PASSWORD = st.secrets['ADMIN_PASSWORD']
 
 ############# FUNÇÕES AUXILIARES #######
 
