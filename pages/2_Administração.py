@@ -37,14 +37,14 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 
       st.plotly_chart(fig, use_container_width=True)
 
-def calcula_pontuacao(votos_pergunta_df: pd.DataFrame):
+def calcula_pontuacao(votos_pergunta_df: pd.DataFrame, total_grupos: int):
 
       ranking_df = votos_pergunta_df.copy()
       ranking_df['ranking'] = ranking_df['n_votos'].rank(method='dense', ascending=True)
-      ranking_df['pontuacao'] = ranking_df['n_votos'].rank(method='dense', ascending=False)
+      ranking_df['pontuacao'] = total_grupos+ 1 - ranking_df['ranking'] 
       ranking_df = ranking_df.sort_values(by='ranking', ascending=True)
 
-      st.write(ranking_df)
+      return ranking_df
       
 ############# WIDGETS ##################
 
@@ -193,7 +193,9 @@ def widget_resultados(conn):
                   
                   with colunas_resultados[0]:
                         st.dataframe(votos_pergunta_df)
-                        calcula_pontuacao(votos_pergunta_df)
+                        ranking_df = calcula_pontuacao(votos_pergunta_df)
+                        st.dataframe(ranking_df)
+                        
                   with colunas_resultados[1]:
                         votos_bar_plot(votos_pergunta_df)
                         
