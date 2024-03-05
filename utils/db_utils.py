@@ -134,14 +134,6 @@ def delete_votante(conn, email: str):
           .execute()
          )
 
-def insert_voto(conn, voto: str, pergunta_id: int) -> None: 
-  
-  _, _ = (conn.table('votos')
-             .insert({"voto": voto, 
-               "pergunta_id": pergunta_id})
-            .execute()
-         )
-
 def atualiza_votante(conn, votante: dict) -> None:
 
     email = votante['email']
@@ -151,3 +143,20 @@ def atualiza_votante(conn, votante: dict) -> None:
             .eq('email', email)
             .execute()
        )
+
+def insert_voto(conn, voto: str, pergunta_id: int) -> None: 
+  
+  _, _ = (conn.table('votos')
+             .insert({"voto": voto, 
+               "pergunta_id": pergunta_id})
+            .execute()
+         )
+
+def reinicia_votantes(conn):
+
+  update_dict = {'votou': False'}
+  
+  _, _ = (conn.table('votantes')
+        .update(update_dict)
+        .execute()
+   )
