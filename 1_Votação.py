@@ -65,6 +65,7 @@ def widget_em_votacao(conn, app_config: dict) -> None:
         db_utils.insert_voto(conn, str(grupo_selecionado), pergunta_atual_id)
         st.session_state['votante_atual']['votou'] = True
         db_utils.atualiza_votante(conn, st.session_state['votante_atual'])
+        st.session_state['votante_autorizado'] = False
         
         st.success('Voto realizado com sucesso!')
         sleep(2.5)
