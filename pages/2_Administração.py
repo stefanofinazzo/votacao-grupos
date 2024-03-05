@@ -52,9 +52,10 @@ def pontuacao_final(pontuacao_df: pd.DataFrame) -> pd.DataFrame:
       pontuacao_final_df = (pontuacao_df
                             .groupby('grupo')
                             .agg({'pontuacao': 'sum'})
+                            .reset_index()
                            )
 
-      st.write(pontuacao_final_df)
+      return pontuacao_final_df
       
 ############# WIDGETS ##################
 
@@ -188,6 +189,9 @@ def widget_resultados(conn, app_config: dict):
       numero_grupos = app_config['numero_grupos']
       
       if not votos_df.empty:
+
+            container_pontuacao_final = st.container(border=True)
+            container_pontuacao_final.markdown('##### Resultado final ' + str(pergunta))
             
             colunas_resultados = st.columns(2)
             
@@ -214,9 +218,10 @@ def widget_resultados(conn, app_config: dict):
                         pontuacao_df = ranking_pergunta_df
                   else:
                         pontuacao_df = pd.concat([pontuacao_df, ranking_pergunta_df])
-
-            pontuacao_final(pontuacao_df)
-            
+           
+            pontuacao_final_df = pontuacao_final(pontuacao_df)
+            container_pontuacao_final.dataframe(pontuacao_final_df)
+                        
       else:
             st.markdown('#### Urna vazia!')
       
