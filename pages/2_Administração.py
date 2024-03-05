@@ -154,12 +154,15 @@ def widget_lista_votantes(conn):
    st.dataframe(votantes_df)
    
 def widget_resultados(conn):
-   st.markdown('## Resultados')
-
-   contagem_votos, urna_vazia = db_utils.get_votos(conn)
-
-   st.write(urna_vazia)   
-   st.write(contagem_votos)
+      st.markdown('## Resultados')
+      
+      votos_list = db_utils.get_list_table(conn, table='contagem_votos')
+      votos_df = db_utils.list_para_df(votos_list)
+      
+      if not votos_df.empty:
+            st.dataframe(votos_df)
+      else:
+            st.markdown('#### Urna vazia!')
       
 def display_metrics(app_config: dict) -> None:
 
