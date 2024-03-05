@@ -151,7 +151,7 @@ def get_votos(conn):
             )
   
   if data[1] != []:
-      contagem_votos = data[1][0]
+      contagem_votos = data[1]
       urna_vazia = False
   else:
       contagem_votos = None
