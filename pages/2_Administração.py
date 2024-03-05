@@ -162,8 +162,8 @@ def widget_resultados():
 
 def display_metrics(app_config: dict) -> None:
 
-      metrics = st.columns(3)
-
+      metrics = st.columns(4)
+      
       with metrics[0]:
             st.metric('Número de grupos', app_config['numero_grupos'])
       with metrics[1]:
