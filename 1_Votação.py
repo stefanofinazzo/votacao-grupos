@@ -46,7 +46,7 @@ def widget_em_votacao(app_config: dict) -> None:
 
     pergunta_atual = app_config['pergunta_liberada']
     
-    st.markdown('## Pergunta em votação: ' + pergunta_atual)
+    st.markdown('## Pergunta em votação: ' + str(pergunta_atual))
     st.markdown('### ' + 'PERGUNTA ATUAL AQUI')
     
     if st.button('Votar'):
