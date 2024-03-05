@@ -191,7 +191,7 @@ def widget_resultados(conn, app_config: dict):
       if not votos_df.empty:
 
             container_pontuacao_final = st.container(border=True)
-            container_pontuacao_final.markdown('##### Resultado final ' + str(pergunta))
+            container_pontuacao_final.markdown('##### Resultado Final')
             
             colunas_resultados = st.columns(2)
             
