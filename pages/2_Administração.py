@@ -48,7 +48,7 @@ def calcula_pontuacao(votos_pergunta_df: pd.DataFrame):
       ranking_df = votos_pergunta_df.copy()
       ranking_df['ranking'] = ranking_df['n_votos'].rank(method='dense', ascending=True)
       ranking_df['pontuacao'] = ranking_df['n_votos'].rank(method='dense', ascending=False)
-      ranking_df.sort_values(by='ranking', ascending=True)
+      ranking_df.sort_values(by='ranking', ascending=False)
 
       st.write(ranking_df)
       
