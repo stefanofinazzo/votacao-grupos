@@ -47,11 +47,18 @@ def widget_em_votacao(conn, app_config: dict) -> None:
     pergunta_atual_id = app_config['pergunta_liberada']
     pergunta_atual_text = db_utils.localiza_pergunta(conn, pergunta_atual_id)['pergunta_texto']
   
-    st.markdown('## Pergunta em votação: ' + str(pergunta_atual_id))
+    st.markdown('## Pergunta ' + str(pergunta_atual_id))
     st.markdown('### ' + pergunta_atual_text)
-    
+
+    grupo_votante_atual = st.session_state['votante_atual']['grupo']
+
+    lista_grupos_passiveis_voto = list(range(1,app_config['numero_grupos']+1))
+    lista_grupos_passiveis_voto.remove(grupo_votante_atual)                                        
+
+    grupo_selecionado = st.selectbox('Escolha a sua opção: ', lista_grupos_passiveis_voto)
+  
     if st.button('Votar'):
-        pass
+        st.write(grupo_selecionado)
 
 def mainpage():
     st.title('Sistema de votação')
