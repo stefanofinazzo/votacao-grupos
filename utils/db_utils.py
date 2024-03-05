@@ -154,9 +154,14 @@ def insert_voto(conn, voto: str, pergunta_id: int) -> None:
 
 def reinicia_votantes(conn):
 
-  update_dict = {'votou': False}
+  update_dict = {}
+  votantes_list = get_list_table(conn, table='votantes')
+
+  for idx, votante in enumerate(votantes_list):
+    email_atual = votante['email']
+    update_dict.update({'email': email_atual, 'ja_votou': True})
   
   _, _ = (conn.table('votantes')
-        .update(update_dict)
+        .upsert(update_dict)
         .execute()
    )
