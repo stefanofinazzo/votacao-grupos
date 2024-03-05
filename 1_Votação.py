@@ -19,8 +19,8 @@ st.set_page_config(page_title='Sistema de Votação',
 def mainpage():
     st.title('Sistema de votação')
     
-    conn = connect_supabase()
-    app_config = get_config(conn)
+    conn = db_utils.connect_supabase()
+    app_config = db_utils.get_config(conn)
 
     if not 'votante_autorizado' in st.session_state:
         st.session_state['votante_autorizado'] = False
