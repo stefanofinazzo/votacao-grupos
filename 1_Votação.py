@@ -22,6 +22,8 @@ def mainpage():
     conn = db_utils.connect_supabase()
     app_config = db_utils.get_config(conn)
 
+    st.write(app_config)
+  
     if not 'votante_autorizado' in st.session_state:
         st.session_state['votante_autorizado'] = False
       
