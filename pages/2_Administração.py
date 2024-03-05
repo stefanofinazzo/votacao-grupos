@@ -20,17 +20,11 @@ ADMIN_PASSWORD = 'admin'
 
 ############# FUNÇÕES AUXILIARES #######
 
-def lista_perguntas_no_banco(perguntas_df: pd.DataFrame):
+def lista_perguntas_no_banco(perguntas_df: pd.DataFrame, votos_df: pd.DataFrame):
 
       lista_perguntas = perguntas_df['pergunta_id'].unique().tolist()
-
-      perguntas_com_votos = votos_df['pergunta_id'].unique().tolist()
             
-      for pergunta in perguntas_com_votos:
-
-            votos_pergunta_df = votos_df[filtro_pergunta]
-
-      return None
+      return lista_perguntas
 
 def alterar_tab(tab_choice: str) -> None:
 
