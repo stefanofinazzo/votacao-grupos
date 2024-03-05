@@ -1,6 +1,8 @@
 Todo:
 
 - Embelezar tab de resultados
+- Incluir resultado de grupos com 0 votos
+- Verificar critério de desempate
 - Implementar limpeza de urna
 - Implementar reset geral
 - Incluir pontuação no tab de resultados
