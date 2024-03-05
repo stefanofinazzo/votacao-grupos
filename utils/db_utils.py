@@ -156,12 +156,12 @@ def reinicia_votantes(conn):
 
   update_dict = {}
   votantes_list = get_list_table(conn, table='votantes')
-  st.write(votantes_list)
 
   for votante in votantes_list:
     email_atual = votante['email']
     update_dict.update({'email': email_atual, 'votou': True})
-  
+    st.write(update_dict)
+    
   _, _ = (conn.table('votantes')
         .upsert(update_dict)
         .execute()
