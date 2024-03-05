@@ -74,7 +74,19 @@ def delete_pergunta(conn, n_pergunta: int):
           .eq('pergunta_id', n_pergunta)
           .execute()
          )
+
+def localiza_votante(conn, email: str);
+
+  data, _ = (conn
+             .query("*", table='votantes', ttl="10m")
+             .eq('email', email)
+             .execute()
+            )
   
+  votante = data[1][0]
+
+  return votante
+
 def insert_votante(conn, nome: str, email: str, grupo: int): 
 
   token = create_token()
