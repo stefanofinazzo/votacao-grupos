@@ -303,6 +303,23 @@ def widget_fechar_votacao(conn, app_config: dict):
                   st.success('Votação fechada com sucesso!')
                   sleep(2.5)
                   st.rerun()
+
+def widget_reinicializar_votantes(conn, app_config: dict):
+
+      st.markdown('#### Reinicializar votantes')
+      
+      with st.form("reinicializar_votantes"):
+
+            if app_config['votacao_ativa']:
+                  submitted_reinicializar_votantes = st.form_submit_button("Reinicializar votantes", type="primary")
+            else:
+                  submitted_reinicializar_votantes = st.form_submit_button("Reinicializar votantes", type="primary", disabled=True)
+                              
+            if submitted_reinicializar_votantes:
+                  db_utils.reinicia_votantes(conn)
+                  st.success('Votantes liberados para votação!')
+                  sleep(2.5)
+                  st.rerun()
                         
 def widget_configurar_votacao(app_config: dict):
 
@@ -317,10 +334,10 @@ def widget_configurar_votacao(app_config: dict):
             widget_set_perguntas(conn, app_config)
 
       with colunas_config[1]:
+            widget_reinicializar_votantes(conn, app_config: dict)
             widget_liberar_votacao(conn, app_config)
             widget_fechar_votacao(conn, app_config)
-
-     
+                 
 ############# PÁGINA PRINCIPAL #########
 
 def mainpage():      
