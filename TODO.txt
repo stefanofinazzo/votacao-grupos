@@ -2,7 +2,8 @@ Todo:
 
 - Gráfico de resultado final no tab de resultados
 - Embelezar tab de resultados
-- Incluir resultado de grupos com 0 votos
+- Incluir resultado de grupos com 0 votos (com pontos)
+- Gráficos de votos devem incluir os grupos com 0 votos
 - Verificar critério de desempate (se está computando corretamente desempates)
 - Implementar limpeza de urna
 - Implementar reset geral
