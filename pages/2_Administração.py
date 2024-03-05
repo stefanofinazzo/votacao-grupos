@@ -43,6 +43,7 @@ def calcula_pontuacao_pergunta(votos_pergunta_df: pd.DataFrame, total_grupos: in
       ranking_pergunta_df['ranking'] = ranking_pergunta_df['n_votos'].rank(method='min', ascending=True)
       ranking_pergunta_df['pontuacao'] = total_grupos + 1 - ranking_pergunta_df['ranking'] 
       ranking_pergunta_df = ranking_pergunta_df .sort_values(by='ranking', ascending=True)
+      ranking_pergunta_df = ranking_pergunta_df.rename(columns={'voto': 'grupo'})
 
       return ranking_pergunta_df
 
