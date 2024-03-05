@@ -47,7 +47,7 @@ def widget_em_votacao(conn, app_config: dict) -> None:
     pergunta_atual_id = app_config['pergunta_liberada']
     pergunta_atual_nome = db_utils.localiza_pergunta(conn, pergunta_atual_id)
   
-    st.markdown('## Pergunta em votação: ' + str(pergunta_atual))
+    st.markdown('## Pergunta em votação: ' + str(pergunta_atual_id))
     st.markdown('### ' + pergunta_atual_nome)
     
     if st.button('Votar'):
