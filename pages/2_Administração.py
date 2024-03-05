@@ -311,9 +311,9 @@ def widget_reinicializar_votantes(conn, app_config: dict):
       with st.form("reinicializar_votantes"):
 
             if app_config['votacao_ativa']:
-                  submitted_reinicializar_votantes = st.form_submit_button("Reinicializar votantes", type="primary")
-            else:
                   submitted_reinicializar_votantes = st.form_submit_button("Reinicializar votantes", type="primary", disabled=True)
+            else:
+                  submitted_reinicializar_votantes = st.form_submit_button("Reinicializar votantes", type="primary", disabled=False)
                               
             if submitted_reinicializar_votantes:
                   db_utils.reinicia_votantes(conn)
