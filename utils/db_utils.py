@@ -75,7 +75,7 @@ def delete_pergunta(conn, n_pergunta: int):
           .execute()
          )
 
-def localiza_votante(conn, email: str);
+def localiza_votante(conn, email: str):
 
   data, _ = (conn
              .query("*", table='votantes', ttl="10m")
