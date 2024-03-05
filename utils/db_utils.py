@@ -144,7 +144,7 @@ def insert_voto(conn, voto: str, pergunta_id: int) -> None:
 
 def get_votos(conn):
 
-    data, _ = (conn
+  data, _ = (conn
              .table('contagem_votos')
              .select("*")
              .execute()
