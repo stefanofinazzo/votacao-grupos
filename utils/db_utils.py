@@ -14,7 +14,7 @@ def create_token(digits: int = 4):
    
   return token
 
-#@st.cache_resource
+@st.cache_resource
 def connect_supabase():
   
   conn = st.connection("supabase",type=SupabaseConnection)
@@ -85,11 +85,6 @@ def localiza_votante(conn, email: str):
 
   st.write(data)
   
-  if data[1] != []:
-    votante = data[1][0]
-  else:
-    votante = None
-
   return votante
 
 def insert_votante(conn, nome: str, email: str, grupo: int): 
