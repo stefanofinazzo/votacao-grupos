@@ -156,8 +156,9 @@ def widget_lista_votantes(conn):
 def widget_resultados(conn):
    st.markdown('## Resultados')
 
-   contagem_votos = db_utils.get_votos(conn)
+   contagem_votos, urna_vazia = db_utils.get_votos(conn)
 
+   st.write(urna_vazia)   
    st.write(contagem_votos)
       
 def display_metrics(app_config: dict) -> None:
