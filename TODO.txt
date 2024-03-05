@@ -5,8 +5,6 @@ Todo:
 - Implementar tab de analytics para o admin
 - Implementar status do app para o tab de configurações de admin
 - Passar o token de acesso do admin para secrets
-- Redesenhar página de configurações
-- Refatorar widget de configurações (quebrar em subwidgets)
 - Melhorar descrição dos widgets
 - Helptips e ajuda nos widgets
 - Implementar módulo de votação
