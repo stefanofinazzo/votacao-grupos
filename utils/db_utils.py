@@ -154,7 +154,7 @@ def insert_voto(conn, voto: str, pergunta_id: int) -> None:
 
 def reinicia_votantes(conn):
 
-  update_dict = {'votou': False'}
+  update_dict = {'votou': False}
   
   _, _ = (conn.table('votantes')
         .update(update_dict)
