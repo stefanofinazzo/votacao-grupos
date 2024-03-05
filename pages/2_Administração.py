@@ -20,7 +20,7 @@ ADMIN_PASSWORD = 'admin'
 
 ############# FUNÇÕES AUXILIARES #######
 
-def lista_perguntas_no_banco(perguntas_df: pd.DataFrame, votos_df: pd.DataFrame):
+def lista_perguntas_no_banco(perguntas_df: pd.DataFrame):
 
       lista_perguntas = perguntas_df['pergunta_id'].unique().tolist()
             
