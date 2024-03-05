@@ -1,3 +1,5 @@
+################ PACOTES #################
+
 import string
 import secrets
 
@@ -6,7 +8,11 @@ import pandas as pd
 import streamlit as st
 from st_supabase_connection import SupabaseConnection
 
+############### VARIÁVEIS GLOBAIS ########
+
 ALPHABET = string.ascii_letters
+
+############## FUNÇÕES ###################
 
 def create_token(digits: int = 4):
   
