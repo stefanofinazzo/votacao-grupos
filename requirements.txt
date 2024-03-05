@@ -1,4 +1,4 @@
-altair
 pandas==2.2.1
+plotly==5.19.0
 streamlit==1.31.1
 st-supabase-connection==1.2.2
