@@ -319,7 +319,7 @@ def widget_liberar_votacao(conn, app_config: dict):
                         sleep(2.5)
                         st.rerun()
                   else:
-                        st.error('Pergunta ' + str(numero_pergunta_a_liberar) + 'não cadastrada!')
+                        st.error('Pergunta ' + str(numero_pergunta_a_liberar) + ' não cadastrada!')
 
 def widget_fechar_votacao(conn, app_config: dict):
 
