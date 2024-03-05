@@ -159,7 +159,7 @@ def reinicia_votantes(conn):
 
   for votante in votantes_list:
     email_atual = votante['email']
-    update_dict.update({'email': email_atual, 'ja_votou': True})
+    update_dict.update({'email': email_atual, 'votou': True})
   
   _, _ = (conn.table('votantes')
         .upsert(update_dict)
