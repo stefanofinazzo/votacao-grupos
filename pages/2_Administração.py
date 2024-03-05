@@ -30,19 +30,12 @@ def alterar_tab(tab_choice: str) -> None:
 
       st.session_state['admin_tab'] = tab_choice
 
-def votos_bar_plot(votos_df: pd.DataFrame):
+def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 
-      perguntas_com_votos = votos_df['pergunta_id'].unique().tolist()
-      
-      for pergunta in perguntas_com_votos:
+      fig = px.bar(votos_pergunta_df, x='voto', y='n_votos')
+      fig.show()
 
-            st.markdown('##### Pergunta ' + str(pergunta))
-
-            filtro_pergunta = votos_df['pergunta_id'] == pergunta
-            fig = px.bar(votos_df[filtro_pergunta], x='voto', y='n_votos')
-            fig.show()
-      
-            st.plotly_chart(fig, use_container_width=True)
+      st.plotly_chart(fig, use_container_width=True)
       
 ############# WIDGETS ##################
 
@@ -175,11 +168,25 @@ def widget_resultados(conn):
       votos_df = db_utils.list_para_df(votos_list)
       
       if not votos_df.empty:
+            
             colunas_resultados = st.columns(2)
-            with colunas_resultados[0]:
-                  st.dataframe(votos_df)
-            with colunas_resultados[1]:
-                  votos_bar_plot(votos_df)
+            
+            perguntas_com_votos = votos_df['pergunta_id'].unique().tolist()
+            
+            for pergunta in perguntas_com_votos:
+
+                  st.markdown('##### Pergunta ' + str(pergunta))
+                  
+                  colunas_resultados = st.columns(2)
+                  
+                  filtro_pergunta = votos_df['pergunta_id'] == pergunta
+                  votos_pergunta_df = votos_df[filtro_pergunta]
+                  
+                  with colunas_resultados[0]:
+                        st.dataframe(votos_pergunta_df)
+                  with colunas_resultados[1]:
+                        votos_bar_plot(votos_pergunta_df)
+                        
       else:
             st.markdown('#### Urna vazia!')
       
