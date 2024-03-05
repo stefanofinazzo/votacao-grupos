@@ -77,13 +77,14 @@ def delete_pergunta(conn, n_pergunta: int):
 
 def localiza_votante(conn, email: str):
 
-  data, _ = (conn
+  data, test = (conn
              .query("*", table='votantes', ttl="10m")
              .eq('email', email)
              .execute()
             )
 
   st.write(data[1])
+  st.write(test)
 
   votante = data[1][0]
   
