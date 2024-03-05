@@ -141,20 +141,3 @@ def insert_voto(conn, voto: str, pergunta_id: int) -> None:
                "pergunta_id": pergunta_id})
             .execute()
          )
-
-def get_votos(conn):
-
-  data, _ = (conn
-             .table('contagem_votos')
-             .select("*")
-             .execute()
-            )
-  
-  if data[1] != []:
-      contagem_votos = data[1]
-      urna_vazia = False
-  else:
-      contagem_votos = None
-      urna_vazia = True
-  
-  return contagem_votos, urna_vazia 
