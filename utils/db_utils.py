@@ -133,3 +133,11 @@ def delete_votante(conn, email: str):
           .eq('email', email)
           .execute()
          )
+
+def insert_voto(conn, voto: str, pergunta_id: int) -> None: 
+  
+  _, _ = (conn.table('perguntas')
+             .insert({"voto": voto, 
+               "pergunta_id": pergunta_id})
+            .execute()
+         )
