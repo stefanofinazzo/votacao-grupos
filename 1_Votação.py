@@ -58,7 +58,8 @@ def widget_em_votacao(conn, app_config: dict) -> None:
     grupo_selecionado = st.selectbox('Escolha a sua opção: ', lista_grupos_passiveis_voto)
   
     if st.button('Votar'):
-        st.write(grupo_selecionado)
+        db_utils.insert_voto(conn, str(grupo_selecionado), pergunta_atual_id)
+        st.success('Voto realizado com sucesso!')
 
 def mainpage():
     st.title('Sistema de votação')
