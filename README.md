@@ -21,11 +21,11 @@ No caso deste app, ele tem o formato:
 ### ./.streamlit/secrets.toml
 ```TOML
 [admin_config]
-ADMIN_PASSWORD = "admin"
+ADMIN_PASSWORD = "SENHA DO USUARIO ADMINISTRADOR DO APP"
 
 [connections.supabase]
-SUPABASE_URL = "https://kmkxxnkvbynwdmtlxbev.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtta3h4bmt2Ynlud2RtdGx4YmV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkzOTc4NjgsImV4cCI6MjAyNDk3Mzg2OH0.3Acbdn80NO-Hl77WfQB-ZHqnUGn7brKDRBmkGJoC7A8"
+SUPABASE_URL = "URL DO DB DO STREAMLIT"
+SUPABASE_KEY = "Chave do URL do Streamlit"
 ```
 
 Para deploy no Streamlit Cloud, você deve atualizar os secrets conforme [as instruções do Streamlit](https://docs.streamlit.io/streamlit-community-cloud/deploy-your-app/secrets-management).
