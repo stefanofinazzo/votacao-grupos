@@ -1,7 +1,5 @@
 Todo:
 
-- Implementar tab de teste de conexão ao supabase no módulo de admin 
-- Remover página de teste de conexão
 - Implementar tab de analytics para o admin
 - Implementar status do app para o tab de configurações de admin
 - Passar o token de acesso do admin para secrets
