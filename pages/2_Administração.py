@@ -46,8 +46,9 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 def calcula_pontuacao(votos_pergunta_df: pd.DataFrame):
 
       ranking_df = votos_pergunta_df.copy()
-      ranking_df['ranking'] = ranking_df['n_votos'].rank(method='max')
-      ranking_df.sort_values(by='ranking', ascending=False)
+      ranking_df['ranking'] = ranking_df['n_votos'].rank(method='max', ascending=True)
+      ranking_df['pontuacao'] = ranking_df['n_votos'].rank(method='min', ascending=False)
+      ranking_df.sort_values(by='ranking', ascending=True)
 
       st.write(ranking_df)
       
