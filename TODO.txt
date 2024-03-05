@@ -10,5 +10,6 @@ Todo:
 - Refatorações gerais
 - Implementar descrição de tipagem em todas funções em todos módulos
 - Corrigir indentações e espaços
+- Testes de responsividade
 - Rotinas iniciais de teste
 - Documentação geral
