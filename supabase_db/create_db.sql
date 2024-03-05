@@ -8,12 +8,10 @@ CREATE TABLE votantes (
 
 CREATE TABLE votos (
     voto_id SERIAL PRIMARY KEY,
-    pergunta_id INT,
-    voto varchar(200)
-
-   CONSTRAINT fk_perguntas
-      FOREIGN KEY(pergunta_id) 
-      REFERENCES perguntas(pergunta_id)
+    pergunta_id INTEGER,
+    voto varchar(200),
+    
+    FOREIGN KEY(pergunta_id) REFERENCES perguntas(pergunta_id)
 );
 
 CREATE TABLE perguntas (
