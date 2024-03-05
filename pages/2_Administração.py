@@ -39,7 +39,7 @@ def votos_bar_plot(votos_df: pd.DataFrame):
             st.markdown('##### Pergunta ' + str(pergunta))
 
             filtro_pergunta = votos_df['pergunta_id'] == pergunta
-            fig = px.bar(votos_df[filtro_pergunta], x='pergunta_id')
+            fig = px.bar(votos_df[filtro_pergunta], x='voto', y='n_votos')
             fig.show()
       
             st.plotly_chart(fig, use_container_width=True)
