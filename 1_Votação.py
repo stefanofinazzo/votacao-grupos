@@ -39,7 +39,7 @@ def mainpage():
                  votante_localizado = db_utils.localiza_votante(conn, email_votante)
 
                  st.write(votante_localizado)
-              
+                     
                  #st.success('Pergunta excluída com sucesso!')
                  #sleep(5)
                  #st.rerun()
