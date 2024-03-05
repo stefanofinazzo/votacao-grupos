@@ -161,8 +161,19 @@ def widget_resultados():
    pass
 
 def widget_configurar_votacao(app_config: dict):
+
+      metrics = st.columns(3)
+
+      with metrics[0]:
+            st.metric('Número de grupos', app_config['numero_grupos'])
+      with metrics[1]:
+            st.metric('Número de perguntas', app_config['numero_grupos'])
+      with metrics[2]:
+            if app_config['votacao_ativa']:
+                  st.metric('Votação', 'ATIVA')
+            else:
+                   st.metric('Votação', 'FECHADA')
             
-      st.write(app_config)
       conn = db_utils.connect_supabase()
       
       with st.form("numero_grupos"):
