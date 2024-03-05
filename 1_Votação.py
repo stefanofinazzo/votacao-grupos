@@ -31,7 +31,7 @@ def widget_verifica_votante(conn):
              votante, votante_localizado = db_utils.localiza_votante(conn, email_votante)
     
              if votante_localizado:
-                 if token == votante['token']
+                 if token == votante['token']:
                      st.session_state['votante_autorizado'] = True
                      st.session_state['votante_atual'] = votante
                      st.success('Bem-vindo!')
