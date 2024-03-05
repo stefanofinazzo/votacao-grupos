@@ -41,7 +41,7 @@ def calcula_pontuacao(votos_pergunta_df: pd.DataFrame, total_grupos: int):
 
       ranking_df = votos_pergunta_df.copy()
       ranking_df['ranking'] = ranking_df['n_votos'].rank(method='dense', ascending=True)
-      ranking_df['pontuacao'] = total_grupos+ 1 - ranking_df['ranking'] 
+      ranking_df['pontuacao'] = total_grupos + 1 - ranking_df['ranking'] 
       ranking_df = ranking_df.sort_values(by='ranking', ascending=True)
 
       return ranking_df
@@ -170,11 +170,12 @@ def widget_lista_votantes(conn):
    votantes_df = votantes_df.sort_values(by='nome')
    st.dataframe(votantes_df)
    
-def widget_resultados(conn):
+def widget_resultados(conn, app_config: dict):
       st.markdown('## Resultados')
       
       votos_list = db_utils.get_list_table(conn, table='contagem_votos')
       votos_df = db_utils.list_para_df(votos_list)
+      numero_grupos = app_config['numero_grupos']
       
       if not votos_df.empty:
             
@@ -193,7 +194,7 @@ def widget_resultados(conn):
                   
                   with colunas_resultados[0]:
                         st.dataframe(votos_pergunta_df)
-                        ranking_df = calcula_pontuacao(votos_pergunta_df)
+                        ranking_df = calcula_pontuacao(votos_pergunta_df, numero_grupos)
                         st.dataframe(ranking_df)
                         
                   with colunas_resultados[1]:
