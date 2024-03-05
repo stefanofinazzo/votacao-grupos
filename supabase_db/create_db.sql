@@ -29,6 +29,18 @@ CREATE TABLE config (
    CONSTRAINT onerow_uni CHECK (onerow_id)
 );
 
+-- View para contagem de votos --
+
+CREATE VIEW contagem_votos as
+  (SELECT COUNT(votos.voto) AS n_votos, 
+    votos.pergunta_id AS pergunta_id,
+    perguntas.pergunta_texto AS pergunta_texto
+  FROM votos
+  INNER JOIN perguntas ON perguntas.pergunta_id = votos.pergunta_id
+  GROUP BY votos.pergunta_id, perguntas.pergunta_texto
+  ORDER BY pergunta_id
+  );
+
 -- Configuração padrão
 
 INSERT INTO config VALUES (true, 7, 10, 1, false);
