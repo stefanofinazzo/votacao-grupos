@@ -175,6 +175,8 @@ def display_metrics(app_config: dict) -> None:
                    st.metric('Votação', 'FECHADA')
                   
 def widget_set_grupos(conn, app_config: dict) -> None: 
+
+      st.markdown('#### Configuração de grupos')
       
       with st.form("numero_grupos"):
       
@@ -193,6 +195,8 @@ def widget_set_grupos(conn, app_config: dict) -> None:
                   st.rerun()
 
 def widget_set_perguntas(conn, app_config: dict) -> None:
+
+      st.markdown('#### Configuração de perguntas')
       
       with st.form("numero_perguntas"):
       
@@ -215,7 +219,7 @@ def widget_set_perguntas(conn, app_config: dict) -> None:
 
 def widget_liberar_votacao(conn, app_config: dict):
 
-      st.markdown('### Liberar votação')
+      st.markdown('#### Liberar votação')
       
       with st.form("liberar_votacao"):
 
@@ -254,6 +258,8 @@ def widget_liberar_votacao(conn, app_config: dict):
 
 def widget_fechar_votacao(conn, app_config: dict):
 
+      st.markdown('#### Fechar votação')
+      
       with st.form("fechar_votacao"):
 
             if app_config['votacao_ativa']:
