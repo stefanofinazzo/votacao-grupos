@@ -26,10 +26,10 @@ def widget_verifica_votante(conn):
         submitted = st.form_submit_button("Entrar", type="primary")
           
         if submitted:
-             st.write(email_votante)
           
              votante, votante_localizado = db_utils.localiza_votante(conn, email_votante)
-    
+             st.write(votante)
+          
              if votante_localizado:
                  if token == votante['token']:
                      st.session_state['votante_autorizado'] = True
@@ -60,8 +60,6 @@ def mainpage():
             
     conn = db_utils.connect_supabase()
     app_config = db_utils.get_config(conn)
-
-    st.write(app_config)
     
     if app_config['votacao_ativa']:
         if not st.session_state['votante_autorizado']: 
