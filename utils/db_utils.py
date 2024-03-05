@@ -14,7 +14,7 @@ def create_token(digits: int = 4):
    
   return token
 
-@st.cache_resource
+#@st.cache_resource
 def connect_supabase():
   
   conn = st.connection("supabase",type=SupabaseConnection)
