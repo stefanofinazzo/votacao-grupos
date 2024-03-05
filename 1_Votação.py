@@ -35,7 +35,7 @@ def mainpage():
             submitted = st.form_submit_button("Entrar", type="primary")
               
             if submitted:
-                 conn = db_utils.connect_supabase()
+              
                  votante_localizado = db_utils.delete_perguntalocaliza_votante(conn, email_votante)
 
                  st.write(votante_localizado)
