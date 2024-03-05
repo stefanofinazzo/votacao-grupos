@@ -398,7 +398,7 @@ def mainpage():
                widget_excluir_votante()
 
       elif st.session_state['admin_tab'] == 'resultados':   
-         widget_resultados(conn)
+         widget_resultados(conn, app_config)
 
       elif st.session_state['admin_tab'] == 'configuracao':  
          widget_configurar_votacao(app_config)
