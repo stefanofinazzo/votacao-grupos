@@ -55,6 +55,9 @@ def pontuacao_final(pontuacao_df: pd.DataFrame) -> pd.DataFrame:
                             .reset_index()
                            )
 
+      pontuacao_final_df['ranking'] = pontuacao_final_df['n_votos'].rank(method='min', ascending=True)
+      pontuacao_final_df = pontuacao_final_df.sort_values(by='pontuacao')
+      
       return pontuacao_final_df
       
 ############# WIDGETS ##################
@@ -182,48 +185,52 @@ def widget_lista_votantes(conn):
    st.dataframe(votantes_df)
    
 def widget_resultados(conn, app_config: dict):
+      
       st.markdown('## Resultados')
-      
-      votos_list = db_utils.get_list_table(conn, table='contagem_votos')
-      votos_df = db_utils.list_para_df(votos_list)
-      numero_grupos = app_config['numero_grupos']
-      
-      if not votos_df.empty:
 
-            container_pontuacao_final = st.container(border=True)
-            container_pontuacao_final.markdown('##### Resultado Final')
-            
-            colunas_resultados = st.columns(2)
-            
-            perguntas_com_votos = votos_df['pergunta_id'].unique().tolist()
-            pontuacao_df = pd.DataFrame()
-            
-            for pergunta in perguntas_com_votos:
-
-                  st.markdown('##### Pergunta ' + str(pergunta))
+      if app_config['votacao_ativa']:
+            st.markdown('### A votação está ativa! Encerre a votação para visualizar os resultados.')
+      else:
+            votos_list = db_utils.get_list_table(conn, table='contagem_votos')
+            votos_df = db_utils.list_para_df(votos_list)
+            numero_grupos = app_config['numero_grupos']
+      
+            if not votos_df.empty:
+      
+                  container_pontuacao_final = st.container(border=True)
+                  container_pontuacao_final.markdown('##### Resultado Final')
                   
                   colunas_resultados = st.columns(2)
                   
-                  filtro_pergunta = votos_df['pergunta_id'] == pergunta
-                  votos_pergunta_df = votos_df[filtro_pergunta]
+                  perguntas_com_votos = votos_df['pergunta_id'].unique().tolist()
+                  pontuacao_df = pd.DataFrame()
                   
-                  with colunas_resultados[0]:
-                        ranking_pergunta_df = calcula_pontuacao_pergunta(votos_pergunta_df, numero_grupos)
-                        st.dataframe(ranking_pergunta_df)
+                  for pergunta in perguntas_com_votos:
+      
+                        st.markdown('##### Pergunta ' + str(pergunta))
                         
-                  with colunas_resultados[1]:
-                        votos_bar_plot(votos_pergunta_df)
-
-                  if pontuacao_df.empty:
-                        pontuacao_df = ranking_pergunta_df
-                  else:
-                        pontuacao_df = pd.concat([pontuacao_df, ranking_pergunta_df])
-           
-            pontuacao_final_df = pontuacao_final(pontuacao_df)
-            container_pontuacao_final.dataframe(pontuacao_final_df)
+                        colunas_resultados = st.columns(2)
                         
-      else:
-            st.markdown('#### Urna vazia!')
+                        filtro_pergunta = votos_df['pergunta_id'] == pergunta
+                        votos_pergunta_df = votos_df[filtro_pergunta]
+                        
+                        with colunas_resultados[0]:
+                              ranking_pergunta_df = calcula_pontuacao_pergunta(votos_pergunta_df, numero_grupos)
+                              st.dataframe(ranking_pergunta_df)
+                              
+                        with colunas_resultados[1]:
+                              votos_bar_plot(votos_pergunta_df)
+      
+                        if pontuacao_df.empty:
+                              pontuacao_df = ranking_pergunta_df
+                        else:
+                              pontuacao_df = pd.concat([pontuacao_df, ranking_pergunta_df])
+                 
+                  pontuacao_final_df = pontuacao_final(pontuacao_df)
+                  container_pontuacao_final.dataframe(pontuacao_final_df)
+                              
+            else:
+                  st.markdown('#### Urna vazia!')
       
 def display_metrics(app_config: dict) -> None:
 
