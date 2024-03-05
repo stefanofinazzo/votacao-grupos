@@ -25,9 +25,23 @@ def lista_perguntas_no_banco(perguntas_df: pd.DataFrame) -> List:
 
       return lista_perguntas
 
-def alterar_tab(tab_choice: str):
+def alterar_tab(tab_choice: str) -> None:
 
       st.session_state['admin_tab'] = tab_choice
+
+def votos_bar_plot(votos_df: pd.DataFrame):
+
+      perguntas_com_votos = votos_df['pergunta_id'].unique().tolist()
+      
+      for pergunta in perguntas_com_votos:
+
+            st.markdown('##### Pergunta ' + str(pergunta))
+
+            filtro_pergunta = votos_df['pergunta_id'] == pergunta
+            fig = px.bar(votos_df[filtro_pergunta], x='pergunta_id')
+            fig.show()
+      
+            st.plotly_chart(fig, use_container_width=True)
       
 ############# WIDGETS ##################
 
@@ -160,7 +174,11 @@ def widget_resultados(conn):
       votos_df = db_utils.list_para_df(votos_list)
       
       if not votos_df.empty:
-            st.dataframe(votos_df)
+            colunas_resultados = st.columns(2)
+            with colunas_resultados[0]:
+                  st.dataframe(votos_df)
+            with colunas_resultados[1]:
+                  votos_bar_plot(votos_df)
       else:
             st.markdown('#### Urna vazia!')
       
