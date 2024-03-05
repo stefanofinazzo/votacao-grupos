@@ -82,8 +82,8 @@ def localiza_votante(conn, email: str):
              .eq('email', email)
              .execute()
             )
-
-  if len(data[1]) > 0:
+  
+  if data[1] != []:
     votante = data[1][0]
   else:
     votante = None
