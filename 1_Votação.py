@@ -70,7 +70,7 @@ def mainpage():
             widget_em_votacao(app_config)
 
     else:
-        st.header('Votação ainda não liberada!)
+        st.header('Votação ainda não liberada!')
         st.subheader('Por favor, aguarde a liberação!')
 
 
