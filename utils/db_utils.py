@@ -83,7 +83,7 @@ def localiza_votante(conn, email: str):
              .execute()
             )
 
-  st.write(data[1])
+  st.write(data)
   st.write(test)
 
   votante = data[1][0]
