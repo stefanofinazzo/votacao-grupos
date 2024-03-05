@@ -25,9 +25,6 @@ def lista_perguntas_no_banco(perguntas_df: pd.DataFrame) -> List:
 
       return lista_perguntas
 
-def obtem_configuracoes_atuais():
-      pass
-
 def alterar_tab(tab_choice: str):
 
       st.session_state['admin_tab'] = tab_choice
@@ -149,17 +146,20 @@ def widget_excluir_votante():
          sleep(2)
          st.rerun()    
 
-def widget_lista_votantes():
+def widget_lista_votantes(conn):
    st.markdown('### Lista de Votantes')
-   conn = db_utils.connect_supabase()
    votantes_list = db_utils.get_list_table(conn, table='votantes')
    votantes_df = db_utils.list_para_df(votantes_list)
    votantes_df = votantes_df.sort_values(by='nome')
    st.dataframe(votantes_df)
    
 def widget_resultados():
-   pass
+   st.markdown('## Resultados')
 
+   contagem_votos = db_utils.get_votos(conn)
+
+   st.write(contagem_votos)
+      
 def display_metrics(app_config: dict) -> None:
 
       metrics = st.columns(3)
@@ -332,7 +332,7 @@ def mainpage():
       elif st.session_state['admin_tab'] == 'votantes':
          colunas_incluir_votante = st.columns(2)
          with colunas_incluir_votante[0]:
-               widget_lista_votantes()
+               widget_lista_votantes(conn)
          with colunas_incluir_votante[1]:
                widget_incluir_votante(app_config)
                widget_excluir_votante()
