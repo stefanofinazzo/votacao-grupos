@@ -33,11 +33,12 @@ CREATE TABLE config (
 
 CREATE VIEW contagem_votos as
   (SELECT COUNT(votos.voto) AS n_votos, 
+    votos.voto as voto,
     votos.pergunta_id AS pergunta_id,
     perguntas.pergunta_texto AS pergunta_texto
   FROM votos
   INNER JOIN perguntas ON perguntas.pergunta_id = votos.pergunta_id
-  GROUP BY votos.pergunta_id, perguntas.pergunta_texto
+  GROUP BY votos.voto, votos.pergunta_id, perguntas.pergunta_texto
   ORDER BY pergunta_id
   );
 
