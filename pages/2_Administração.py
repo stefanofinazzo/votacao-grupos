@@ -167,7 +167,7 @@ def display_metrics(app_config: dict) -> None:
       with metrics[0]:
             st.metric('Número de grupos', app_config['numero_grupos'])
       with metrics[1]:
-            st.metric('Número de perguntas', app_config['numero_grupos'])
+            st.metric('Número de perguntas', app_config['numero_perguntas'])
       with metrics[2]:
             if app_config['votacao_ativa']:
                   st.metric('Votação', 'ATIVA')
@@ -213,17 +213,12 @@ def widget_set_perguntas(conn, app_config: dict) -> None:
                   sleep(2.5)
                   st.rerun()
 
-def widget_configurar_votacao(app_config: dict):
+def widget_liberar_votacao(conn, app_config: dict):
 
-      conn = db_utils.connect_supabase()
-
-      display_metrics(app_config)
+      st.markdown('### Liberar votação')
       
-      widget_set_grupos(conn, app_config)
-      widget_set_perguntas(conn, app_config)
-
       with st.form("liberar_votacao"):
-      
+
             if not app_config['votacao_ativa']:
                   numero_pergunta_a_liberar = st.slider('Número da pergunta a liberar', 
                                                         1, 
@@ -245,7 +240,7 @@ def widget_configurar_votacao(app_config: dict):
                   perguntas_df = db_utils.list_para_df(perguntas_list)
                   lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
                   pergunta_valida = True if (numero_pergunta_a_liberar in lista_perguntas_atuais) else False
-
+      
                   if pergunta_valida:
                         app_config['votacao_ativa'] = True
                         app_config['pergunta_liberada'] = numero_pergunta_a_liberar
@@ -256,6 +251,8 @@ def widget_configurar_votacao(app_config: dict):
                         st.rerun()
                   else:
                         st.error('Pergunta ' + str(numero_pergunta_a_liberar) + 'não cadastrada!')
+
+def widget_fechar_votacao(conn, app_config: dict):
 
       with st.form("fechar_votacao"):
 
@@ -270,6 +267,23 @@ def widget_configurar_votacao(app_config: dict):
                   st.success('Votação fechada com sucesso!')
                   sleep(2.5)
                   st.rerun()
+                        
+def widget_configurar_votacao(app_config: dict):
+
+      conn = db_utils.connect_supabase()
+
+      display_metrics(app_config)
+
+      colunas_config = st.columns(2)
+
+      with colunas_config[0]:
+            widget_set_grupos(conn, app_config)
+            widget_set_perguntas(conn, app_config)
+
+      with colunas_config[1]:
+            widget_liberar_votacao(conn, app_config)
+            widget_fechar_votacao(conn, app_config)
+
      
 ############# PÁGINA PRINCIPAL #########
 
