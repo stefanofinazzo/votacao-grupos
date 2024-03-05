@@ -40,7 +40,7 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 def calcula_pontuacao_pergunta(votos_pergunta_df: pd.DataFrame, total_grupos: int) -> pd.DataFrame:
 
       ranking_pergunta_df = votos_pergunta_df.copy()
-      ranking_pergunta_df['ranking'] = ranking_pergunta_df['n_votos'].rank(method='min', ascending=True)
+      ranking_pergunta_df['ranking'] = ranking_pergunta_df['n_votos'].rank(method='min', ascending=False)
       ranking_pergunta_df['pontuacao'] = total_grupos + 1 - ranking_pergunta_df['ranking'] 
       ranking_pergunta_df = ranking_pergunta_df .sort_values(by='ranking', ascending=True)
       ranking_pergunta_df = ranking_pergunta_df.rename(columns={'voto': 'grupo'})
@@ -55,8 +55,8 @@ def pontuacao_final(pontuacao_df: pd.DataFrame) -> pd.DataFrame:
                             .reset_index()
                            )
 
-      pontuacao_final_df['ranking'] = pontuacao_final_df['pontuacao'].rank(method='min', ascending=True)
-      pontuacao_final_df = pontuacao_final_df.sort_values(by='pontuacao')
+      pontuacao_final_df['ranking'] = pontuacao_final_df['pontuacao'].rank(method='min', ascending=False)
+      pontuacao_final_df = pontuacao_final_df.sort_values(by='pontuacao', ascending=False)
       
       return pontuacao_final_df
       
