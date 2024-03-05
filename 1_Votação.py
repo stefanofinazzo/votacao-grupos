@@ -30,7 +30,7 @@ def mainpage():
         with st.form("auth_votante_form"):
                                 
             email_votante = st.text_input('E-mail funcional', 'Insira seu e-mail funcional aqui')
-            token = st.selectbox('Senha de acesso', 'Insira o token de votação')
+            token = st.text_input('Senha de acesso', 'Insira o token de votação')
         
             submitted = st.form_submit_button("Entrar", type="primary")
               
