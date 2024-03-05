@@ -36,7 +36,7 @@ def mainpage():
               
             if submitted:
               
-                 votante_localizado = db_utils.delete_perguntalocaliza_votante(conn, email_votante)
+                 votante_localizado = db_utils.localiza_votante(conn, email_votante)
 
                  st.write(votante_localizado)
               
