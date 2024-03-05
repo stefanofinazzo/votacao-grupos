@@ -3,7 +3,6 @@ Todo:
 - Embelezar tab de resultados
 - Incluir pontuação no tab de resultados
 - Passar o token de acesso do admin para secrets
-- Após voto, atualizar status do votante e voltar à página inicial
 - Melhorar descrição dos widgets
 - Helptips e ajuda nos widgets
 - Implementar cálculo da pontuação
