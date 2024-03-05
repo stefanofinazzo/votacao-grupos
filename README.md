@@ -14,17 +14,18 @@ Não é implementado nenhum sistema de hashing, autenticação ou autorização 
 
 ## Secrets
 
-Para deploy, é necessário fornecer o arquivo .secrets.toml.
+Para deploy, é necessário fornecer o arquivo secrets.toml para o Streamlit (mais informações [aqui](https://docs.streamlit.io/library/advanced-features/secrets-management)).
 
 No caso deste app, ele tem o formato:
 
+### ./.streamlit/secrets.toml
 ```TOML
-[admin_password]
-ADMIN_PASSWORD = "SENHA DO USUARIO ADMINISTRADOR DO APP"
+[admin_config]
+ADMIN_PASSWORD = "admin"
 
 [connections.supabase]
-SUPABASE_URL = "URL DO DB DO SUPABASE"
-SUPABASE_KEY = "CHAVE DE ACESSO AO DB"
+SUPABASE_URL = "https://kmkxxnkvbynwdmtlxbev.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtta3h4bmt2Ynlud2RtdGx4YmV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkzOTc4NjgsImV4cCI6MjAyNDk3Mzg2OH0.3Acbdn80NO-Hl77WfQB-ZHqnUGn7brKDRBmkGJoC7A8"
 ```
 
 Para deploy no Streamlit Cloud, você deve atualizar os secrets conforme [as instruções do Streamlit](https://docs.streamlit.io/streamlit-community-cloud/deploy-your-app/secrets-management).
