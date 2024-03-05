@@ -32,11 +32,14 @@ def widget_verifica_votante(conn):
           
              if votante_localizado:
                  if token == votante['token']:
-                     st.session_state['votante_autorizado'] = True
-                     st.session_state['votante_atual'] = votante
-                     st.success('Bem-vindo!')
-                     sleep(2.5)
-                     st.rerun()
+                     if not votante['votou']:
+                       st.session_state['votante_autorizado'] = True
+                       st.session_state['votante_atual'] = votante
+                       st.success('Bem-vindo!')
+                       sleep(2.5)
+                       st.rerun()
+                     else:
+                       st.error('Seu voto já foi computado!')
                  else:
                      st.error('Token incorreto')
              else:
@@ -50,6 +53,7 @@ def widget_em_votacao(conn, app_config: dict) -> None:
     st.markdown('## Pergunta ' + str(pergunta_atual_id))
     st.markdown('### ' + pergunta_atual_text)
 
+    email_votante_atual = st.session_state['votante_atual']['email']
     grupo_votante_atual = st.session_state['votante_atual']['grupo']
 
     lista_grupos_passiveis_voto = list(range(1,app_config['numero_grupos']+1))
@@ -59,7 +63,12 @@ def widget_em_votacao(conn, app_config: dict) -> None:
   
     if st.button('Votar'):
         db_utils.insert_voto(conn, str(grupo_selecionado), pergunta_atual_id)
+        st.session_state['votante_atual']['votou'] = True
+        db_utils.atualiza_votante(conn, st.session_state['votante_atual'])
+        
         st.success('Voto realizado com sucesso!')
+        sleep(2.5)
+        st.rerun()
 
 def mainpage():
     st.title('Sistema de votação')
