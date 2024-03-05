@@ -83,8 +83,6 @@ def localiza_votante(conn, email: str):
              .execute()
             )
 
-  st.write(data)
-
   if len(data[1]) > 0:
     votante = data[1][0]
   else:
