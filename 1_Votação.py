@@ -42,12 +42,13 @@ def widget_verifica_votante(conn):
              else:
                  st.error('E-mail não cadastrado')
 
-def widget_em_votacao(app_config: dict) -> None:
+def widget_em_votacao(conn, app_config: dict) -> None:
 
-    pergunta_atual = app_config['pergunta_liberada']
-    
+    pergunta_atual_id = app_config['pergunta_liberada']
+    pergunta_atual_nome = db_utils.localiza_pergunta(conn, pergunta_atual_id)
+  
     st.markdown('## Pergunta em votação: ' + str(pergunta_atual))
-    st.markdown('### ' + 'PERGUNTA ATUAL AQUI')
+    st.markdown('### ' + pergunta_atual_nome)
     
     if st.button('Votar'):
         pass
@@ -65,7 +66,7 @@ def mainpage():
         if not st.session_state['votante_autorizado']: 
             widget_verifica_votante(conn)
         else:
-            widget_em_votacao(app_config)
+            widget_em_votacao(conn, app_config)
 
     else:
         st.header('Votação ainda não liberada!')
