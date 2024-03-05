@@ -35,6 +35,7 @@ def mainpage():
             submitted = st.form_submit_button("Entrar", type="primary")
               
             if submitted:
+                 st.write(email_votante)
               
                  votante_localizado = db_utils.localiza_votante(conn, email_votante)
 
