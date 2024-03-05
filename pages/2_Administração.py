@@ -39,12 +39,21 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 
 def calcula_pontuacao_pergunta(votos_pergunta_df: pd.DataFrame, total_grupos: int) -> pd.DataFrame:
 
-      ranking_df = votos_pergunta_df.copy()
-      ranking_df['ranking'] = ranking_df['n_votos'].rank(method='min', ascending=True)
-      ranking_df['pontuacao'] = total_grupos + 1 - ranking_df['ranking'] 
-      ranking_df = ranking_df.sort_values(by='ranking', ascending=True)
+      ranking_pergunta_df = votos_pergunta_df.copy()
+      ranking_pergunta_df['ranking'] = ranking_pergunta_df['n_votos'].rank(method='min', ascending=True)
+      ranking_pergunta_df['pontuacao'] = total_grupos + 1 - ranking_pergunta_df['ranking'] 
+      ranking_pergunta_df = ranking_df.sort_values(by='ranking', ascending=True)
 
-      return ranking_df
+      return ranking_pergunta_df
+
+def pontuacao_final(pontuacao_df: pd.DataFrame) -> pd.DataFrame:
+
+      pontuacao_final_df = (pontuacao_df
+                            .groupby('grupo')
+                            .agg({'pontuacao': 'sum')
+                           )
+
+      st.write(pontuacao_final_df)
       
 ############# WIDGETS ##################
 
@@ -182,6 +191,7 @@ def widget_resultados(conn, app_config: dict):
             colunas_resultados = st.columns(2)
             
             perguntas_com_votos = votos_df['pergunta_id'].unique().tolist()
+            pontuacao_df = pd.Dataframe()
             
             for pergunta in perguntas_com_votos:
 
@@ -193,12 +203,19 @@ def widget_resultados(conn, app_config: dict):
                   votos_pergunta_df = votos_df[filtro_pergunta]
                   
                   with colunas_resultados[0]:
-                        ranking_df = calcula_pontuacao_pergunta(votos_pergunta_df, numero_grupos)
-                        st.dataframe(ranking_df)
+                        ranking_pergunta_df = calcula_pontuacao_pergunta(votos_pergunta_df, numero_grupos)
+                        st.dataframe(ranking_pergunta_df)
                         
                   with colunas_resultados[1]:
                         votos_bar_plot(votos_pergunta_df)
-                        
+
+                  if pontuacao_df.empty:
+                        pontuacao_df = ranking_pergunta_df
+                  else:
+                        pontuacao_df = pd.concat([pontuacao_df, ranking_pergunta_df])
+
+            pontuacao_final(pontuacao_df)
+            
       else:
             st.markdown('#### Urna vazia!')
       
