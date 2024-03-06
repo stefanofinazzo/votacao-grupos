@@ -498,9 +498,8 @@ def widget_status_config(conn, app_config: Dict, lista_perguntas_atuais: List):
                   st.success('Todas perguntas cadastradas!')
             
       
-def widget_configurar_votacao(app_config: Dict):
+def widget_configurar_votacao(conn, app_config: Dict):
 
-      conn = db_utils.connect_supabase()
       perguntas_list = db_utils.get_list_table(conn, table='perguntas')
       perguntas_df = db_utils.list_para_df(perguntas_list)
       if not perguntas_df.empty:
@@ -561,7 +560,7 @@ def mainpage():
             
             match st.session_state['admin_tab']:
                   case 'configuracao':
-                        widget_configurar_votacao(app_config)
+                        widget_configurar_votacao(conn, app_config)
             
                   case'perguntas':
                         colunas_incluir_pergunta = st.columns(2)
