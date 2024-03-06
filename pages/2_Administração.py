@@ -371,16 +371,17 @@ def widget_exclusao_dados(conn):
       st.markdown('#### Excluir votantes e perguntas')
 
       colunas_botoes_exclusao = st.columns(2)
+      confirma_exclusao = st.checkbox('Confirmar exclusão')
       
       with colunas_botoes_exclusao[0]: 
-            if st.button('Excluir perguntas'):
+            if st.button('Excluir perguntas') and confirma_exclusao:
       
                   st.success('Todas perguntas excluídos com sucesso')
                   sleep(2.5)
                   st.rerun()
 
       with colunas_botoes_exclusao[1]: 
-            if st.button('Excluir votantes'):
+            if st.button('Excluir votantes') and confirma_exclusao:
       
                   st.success('Todos votantes excluídos com sucesso')
                   sleep(2.5)
