@@ -265,7 +265,7 @@ def widget_set_grupos(conn, app_config: dict) -> None:
                   app_config['numero_grupos'] = numero_grupos
                   db_utils.update_config(conn, app_config)
                   db_utils.delete_usuarios_acima_grupo_limite(conn, app_config) 
-                  st.successs('Configuração atualizada com sucesso!')
+                  st.success('Configuração atualizada com sucesso!')
                   sleep(2.5)
                   st.rerun()
 
