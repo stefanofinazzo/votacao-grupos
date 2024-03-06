@@ -396,7 +396,6 @@ def widget_limpar_urna(conn, app_config: dict) -> None:
                         #      deletar_votos(conn)
                               st.success('Todos votos da urna limpos com sucesso!')
                               
-                        st.success('Votos removidos com sucesso!')
                         sleep(2.5)
                         st.rerun()
                         
