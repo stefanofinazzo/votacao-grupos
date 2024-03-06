@@ -147,7 +147,7 @@ def widget_lista_perguntas() -> pd.DataFrame:
                         hide_index=True,
                         column_config={
                           "pergunta_id":  st.column_config.NumberColumn("Número"),
-                          "pergunta_texto": st.column_config.NumberColumn("Pergunta")
+                          "pergunta_texto": st.column_config.TextColumn("Pergunta")
                       },
                      )
 
