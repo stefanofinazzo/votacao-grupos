@@ -183,10 +183,16 @@ def widget_excluir_votante():
 
 def widget_lista_votantes(conn):
       st.markdown('### Lista de Votantes')
+      
       votantes_list = db_utils.get_list_table(conn, table='votantes')
-      votantes_df = db_utils.list_para_df(votantes_list)
-      votantes_df = votantes_df.sort_values(by='nome')
-      st.dataframe(votantes_df)
+      
+      if votantes_list:
+            
+            votantes_df = db_utils.list_para_df(votantes_list)
+            votantes_df = votantes_df.sort_values(by='nome')
+            st.dataframe(votantes_df)
+      else:
+            st.info('Sem votantes cadastrados!')
    
 def widget_resultados(conn, app_config: Dict):
       
