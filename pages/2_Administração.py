@@ -33,6 +33,12 @@ def alterar_tab(tab_choice: str) -> None:
 
       st.session_state['admin_tab'] = tab_choice
 
+def logout_admin() -> None:
+      st.session_state['admin_user'] = False
+      st.success('Logout realizado')
+      sleep(1.5)
+      st.rerun()        
+      
 def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 
       fig = px.bar(votos_pergunta_df, x='voto', y='n_votos')
@@ -539,7 +545,7 @@ def mainpage():
             conn = db_utils.connect_supabase()
             app_config = db_utils.get_config(conn)
                
-            funcoes_tab = st.columns(4)
+            funcoes_tab = st.columns(5)
             
             if not 'admin_tab' in st.session_state:
                   st.session_state['admin_tab'] = 'configuracao'
@@ -556,12 +562,9 @@ def mainpage():
             with funcoes_tab[3]:
                   st.button('Resultados', on_click=(lambda: alterar_tab('resultados')))
             
-            with funcoes_tab[3]:
-                  if st.button('Logout'): 
-                        st.session_state['admin_user'] = False
-                        st.success('Logout realizado')
-                        sleep(1.5)
-                        st.rerun()                  
+            with funcoes_tab[4]:
+                  st.button('Logout', on_click=(lambda: logout_admin()))
+            
             
             match st.session_state['admin_tab']:
                   case 'configuracao':
