@@ -147,7 +147,7 @@ def widget_incluir_votante(conn, app_config: Dict):
                   submitted = st.form_submit_button("Cadastrar ou alterar votante", type="primary")
                   
             elif app_config['votacao_ativa']:
-                  st.info('Votação liberada. Inclusãp de votantes possível apenas com votação interrompida')
+                  st.info('Votação liberada. Inclusão de votantes possível apenas com votação interrompida')
                   nome = st.text_input('Nome', disabled=True)
                   email = st.text_input('E-mail', disabled=True)
                   grupo = st.slider('Grupo', 1, 1, app_config['numero_grupos'], disabled=True)
@@ -171,7 +171,7 @@ def widget_excluir_votante(conn, app_config: Dict):
                   submitted = st.form_submit_button("Excluir votante", type="primary")
                   
             elif app_config['votacao_ativa']:
-                  st.info('Votação liberada. Inclusãp de votantes possível apenas com votação interrompida')
+                  st.info('Votação liberada. Inclusão de votantes possível apenas com votação interrompida')
                   email = st.text_input('E-mail', disabled=True)
                   submitted = st.form_submit_button("Excluir votante", type="primary", disabled=True)
             
