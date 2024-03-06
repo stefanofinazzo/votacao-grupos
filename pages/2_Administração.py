@@ -190,7 +190,7 @@ def widget_excluir_votante():
                   st.rerun()    
 
 def widget_lista_votantes(conn):
-      st.markdown('### Lista de Votantes')
+      st.markdown('#### Lista de Votantes')
       
       votantes_list = db_utils.get_list_table(conn, table='votantes')
       
@@ -198,7 +198,17 @@ def widget_lista_votantes(conn):
             
             votantes_df = db_utils.list_para_df(votantes_list)
             votantes_df = votantes_df.sort_values(by='nome')
-            st.dataframe(votantes_df)
+            st.dataframe(perguntas_df,
+                        hide_index=True,
+                        use_container_width=True,
+                        column_config={
+                          "nome":  st.column_config.TextColumn("Nome"),
+                          "email": st.column_config.TextColumn("Email"),
+                          "grupo": st.column_config.TextColumn("Grupo"),
+                          "token": st.column_config.TextColumn("Token"),
+                          "votou": st.column_config.CheckboxColumn("Já votou?")   
+                          },
+                        )
       else:
             st.info('Sem votantes cadastrados!')
    
