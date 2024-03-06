@@ -118,7 +118,7 @@ def widget_excluir_pergunta(conn, perguntas_df: pd.DataFrame) -> None:
                   if not app_config['votacao_ativa']:
                         n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_atuais)
                         submitted = st.form_submit_button("Excluir Pergunta", type="primary")
-                  elif:
+                  else
                         n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_atuais, disabled=True)
                         submitted = st.form_submit_button("Excluir Pergunta", type="primary", disabled=True)
                         
