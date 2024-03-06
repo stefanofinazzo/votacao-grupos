@@ -113,17 +113,20 @@ def widget_excluir_pergunta(conn, perguntas_df: pd.DataFrame) -> None:
       if not perguntas_df.empty:
          
             with st.form("excluir_pergunta"):
-                                    
                   lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
-                  n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_atuais)
-            
-                  submitted = st.form_submit_button("Excluir Pergunta", type="primary")
                   
+                  if not app_config['votacao_ativa']:
+                        n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_atuais)
+                        submitted = st.form_submit_button("Excluir Pergunta", type="primary")
+                  elif:
+                        n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_atuais, disabled=True)
+                        submitted = st.form_submit_button("Excluir Pergunta", type="primary", disabled=True)
+                        
                   if submitted:
-                     db_utils.delete_pergunta(conn, n_pergunta)
-                     st.success('Pergunta excluída com sucesso!')
-                     sleep(2)
-                     st.rerun()
+                        db_utils.delete_pergunta(conn, n_pergunta)
+                        st.success('Pergunta excluída com sucesso!')
+                        sleep(2)
+                        st.rerun()
                         
       else:
             st.markdown('#### Sem perguntas cadastradas no momento!')
