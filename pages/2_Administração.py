@@ -92,7 +92,7 @@ def widget_incluir_pergunta(app_config: Dict, perguntas_df: pd.DataFrame) -> Non
    
    with st.form("incluir_pergunta"):
          
-         st.markdown("Inclusão/alteração de perguntas")
+         st.markdown("Inclusão de perguntas")
 
          if not perguntas_df.empty:
                lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
