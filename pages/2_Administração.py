@@ -530,56 +530,62 @@ def widget_configurar_votacao(app_config: Dict):
 
 def mainpage():      
 
-   st.title('Página de Gerenciamento da Votação')
+      st.title('Página de Gerenciamento da Votação')
 
-   if 'admin_user' not in st.session_state or not st.session_state['admin_user']:
-      widget_autenticacao_admin()
+      if 'admin_user' not in st.session_state or not st.session_state['admin_user']:
+            widget_autenticacao_admin()
                
-   else:
-      conn = db_utils.connect_supabase()
-      app_config = db_utils.get_config(conn)
-         
-      funcoes_tab = st.columns(4)
-
-      if not 'admin_tab' in st.session_state:
-            st.session_state['admin_tab'] = 'configuracao'
+      else:
+            conn = db_utils.connect_supabase()
+            app_config = db_utils.get_config(conn)
+               
+            funcoes_tab = st.columns(4)
             
-      with funcoes_tab[0]:
-            st.button('Configurações', on_click=(lambda: alterar_tab('configuracao')))
-
-      with funcoes_tab[1]:
-            st.button('Gerenciar Perguntas', on_click=(lambda: alterar_tab('perguntas')))
-
-      with funcoes_tab[2]:
-            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('votantes')))
+            if not 'admin_tab' in st.session_state:
+                  st.session_state['admin_tab'] = 'configuracao'
+                  
+            with funcoes_tab[0]:
+                  st.button('Configurações', on_click=(lambda: alterar_tab('configuracao')))
             
-      with funcoes_tab[3]:
-            st.button('Resultados', on_click=(lambda: alterar_tab('resultados')))
+            with funcoes_tab[1]:
+                  st.button('Gerenciar Perguntas', on_click=(lambda: alterar_tab('perguntas')))
             
-
-      match st.session_state['admin_tab']:
-            case 'configuracao':
-                  widget_configurar_votacao(app_config)
-      
-            case'perguntas':
-                  colunas_incluir_pergunta = st.columns(2)
-                  with colunas_incluir_pergunta[0]:
-                        perguntas_df = widget_lista_perguntas()
-                  with colunas_incluir_pergunta[1]:
-                        widget_incluir_pergunta(app_config, perguntas_df)
-                        widget_excluir_pergunta(perguntas_df)
-
-            case 'votantes':
-                  colunas_incluir_votante = st.columns(2)
-                  with colunas_incluir_votante[0]:
-                        widget_lista_votantes(conn)
-                  with colunas_incluir_votante[1]:
-                        st.markdown('#### Incluir, Alterar ou Excluir Votantes')
-                        widget_incluir_votante(app_config)
-                        widget_excluir_votante()
-
-            case 'resultados':   
-                  widget_resultados(conn, app_config)
+            with funcoes_tab[2]:
+                  st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('votantes')))
+                  
+            with funcoes_tab[3]:
+                  st.button('Resultados', on_click=(lambda: alterar_tab('resultados')))
+            
+            with funcoes_tab[3]:
+                  if st.button('Logout'): 
+                        st.session_state['admin_user'] = False
+                        st.success('Logout realizado')
+                        sleep(1.5)
+                        st.rerun()                  
+            
+            match st.session_state['admin_tab']:
+                  case 'configuracao':
+                        widget_configurar_votacao(app_config)
+            
+                  case'perguntas':
+                        colunas_incluir_pergunta = st.columns(2)
+                        with colunas_incluir_pergunta[0]:
+                              perguntas_df = widget_lista_perguntas()
+                        with colunas_incluir_pergunta[1]:
+                              widget_incluir_pergunta(app_config, perguntas_df)
+                              widget_excluir_pergunta(perguntas_df)
+            
+                  case 'votantes':
+                        colunas_incluir_votante = st.columns(2)
+                        with colunas_incluir_votante[0]:
+                              widget_lista_votantes(conn)
+                        with colunas_incluir_votante[1]:
+                              st.markdown('#### Incluir, Alterar ou Excluir Votantes')
+                              widget_incluir_votante(app_config)
+                              widget_excluir_votante()
+            
+                  case 'resultados':   
+                        widget_resultados(conn, app_config)
 
 
 
