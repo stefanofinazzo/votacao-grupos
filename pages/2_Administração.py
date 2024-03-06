@@ -2,7 +2,7 @@
 
 from time import sleep
 
-from typing import List
+from typing import List, Dict
 
 import pandas as pd
 import plotly.express as px
@@ -79,7 +79,7 @@ def widget_autenticacao_admin():
          else:
             st.error('Senha inválida')
                
-def widget_incluir_pergunta(app_config: dict, perguntas_df: pd.DataFrame) -> None:
+def widget_incluir_pergunta(app_config: Dict, perguntas_df: pd.DataFrame) -> None:
    
    with st.form("incluir_pergunta"):
          
@@ -145,7 +145,7 @@ def widget_lista_perguntas() -> pd.DataFrame:
          
    return perguntas_df
       
-def widget_incluir_votante(app_config):
+def widget_incluir_votante(app_config: Dict):
    
       with st.form("incluir_votante"):
             st.write("Inclusão de novos votantes")
@@ -184,7 +184,7 @@ def widget_lista_votantes(conn):
       votantes_df = votantes_df.sort_values(by='nome')
       st.dataframe(votantes_df)
    
-def widget_resultados(conn, app_config: dict):
+def widget_resultados(conn, app_config: Dict):
       
       st.markdown('## Resultados')
 
@@ -232,7 +232,7 @@ def widget_resultados(conn, app_config: dict):
             else:
                   st.markdown('#### Urna vazia!')
       
-def display_metrics(app_config: dict) -> None:
+def display_metrics(app_config: Dict) -> None:
 
       metrics = st.columns(4)
       
@@ -248,7 +248,7 @@ def display_metrics(app_config: dict) -> None:
       with metrics[3]:
             st.metric('Pergunta em votação', app_config['pergunta_liberada'])
                         
-def widget_set_grupos(conn, app_config: dict) -> None: 
+def widget_set_grupos(conn, app_config: Dict) -> None: 
 
       st.markdown('#### Configuração de grupos')
       
@@ -271,7 +271,7 @@ def widget_set_grupos(conn, app_config: dict) -> None:
                   sleep(2.5)
                   st.rerun()
 
-def widget_set_perguntas(conn, app_config: dict) -> None:
+def widget_set_perguntas(conn, app_config: Dict) -> None:
 
       st.markdown('#### Configuração de perguntas')
       
@@ -294,7 +294,7 @@ def widget_set_perguntas(conn, app_config: dict) -> None:
                   sleep(2.5)
                   st.rerun()
 
-def widget_liberar_votacao(conn, app_config: dict):
+def widget_liberar_votacao(conn, app_config: Dict):
 
       st.markdown('#### Liberar votação')
       
@@ -333,7 +333,7 @@ def widget_liberar_votacao(conn, app_config: dict):
                   else:
                         st.error('Pergunta ' + str(numero_pergunta_a_liberar) + ' não cadastrada!')
 
-def widget_fechar_votacao(conn, app_config: dict):
+def widget_fechar_votacao(conn, app_config: Dict):
 
       st.markdown('#### Fechar votação')
       
@@ -351,7 +351,7 @@ def widget_fechar_votacao(conn, app_config: dict):
                   sleep(2.5)
                   st.rerun()
 
-def widget_reinicializar_votantes(conn, app_config: dict):
+def widget_reinicializar_votantes(conn, app_config: Dict):
 
       st.markdown('#### Reinicializar votantes')
 
@@ -369,7 +369,7 @@ def widget_reinicializar_votantes(conn, app_config: dict):
                   sleep(2.5)
                   st.rerun()
 
-def widget_limpar_urna(conn, app_config: dict) -> None:
+def widget_limpar_urna(conn, app_config: Dict, lista_perguntas_atuais: List) -> None:
       st.markdown('#### Reinicializar votantes')
       
       with st.container(border=True):
@@ -377,10 +377,6 @@ def widget_limpar_urna(conn, app_config: dict) -> None:
             st.warning('Esta função permite limpa os votos da urna (de uma pergunta específica ou de todas perguntas)')
             st.warning('Para ser utilizado se for necessário reiniciar o voto de uma pergunta ou de todas perguntas, por razões técnicas.')
             
-            perguntas_list = db_utils.get_list_table(conn, table='perguntas')
-            perguntas_df = db_utils.list_para_df(perguntas_list)
-            lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
-            lista_perguntas_atuais.sort()
             lista_perguntas_atuais.append('Todas')
             
             if not app_config['votacao_ativa']:
@@ -408,7 +404,7 @@ def widget_limpar_urna(conn, app_config: dict) -> None:
                                                 
 
 
-def widget_exclusao_dados(conn, app_config: dict) -> None:
+def widget_exclusao_dados(conn, app_config: Dict) -> None:
 
       st.markdown('#### Excluir votantes e perguntas')
 
@@ -443,16 +439,30 @@ def widget_exclusao_dados(conn, app_config: dict) -> None:
                   st.button('Excluir perguntas', disabled=True)
             with colunas_botoes_exclusao[1]:
                   st.button('Excluir votantes', disabled=True)
-                  
-def widget_configurar_votacao(app_config: dict):
+
+def widget_status_config(conn, app_config: Dict, lista_perguntas_atuais: List):
+      st.markdown('#### Status da configuração')
+      
+      with st.container(border=True):
+               lista_perguntas_total = list(range(1, app_config['numero_perguntas'] + 1))
+               lista_perguntas_ausentes = [pergunta_id for pergunta_id in lista_perguntas_total if pergunta_id not in lista_perguntas_atuais]
+               mensagem_perguntas_ausentes = 'Perguntas: ' + ' ,'.join(lista_perguntas_ausentes)
+               st.write(mensagem_perguntas_ausentes)
+      
+def widget_configurar_votacao(app_config: Dict):
 
       conn = db_utils.connect_supabase()
-
+      perguntas_list = db_utils.get_list_table(conn, table='perguntas')
+      perguntas_df = db_utils.list_para_df(perguntas_list)
+      lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
+      lista_perguntas_atuais.sort()
+      
       display_metrics(app_config)
 
       colunas_config = st.columns(2)
 
       with colunas_config[0]:
+            widget_status_config(conn, app_config, lista_perguntas_atuais)
             widget_set_grupos(conn, app_config)
             widget_set_perguntas(conn, app_config)
             widget_exclusao_dados(conn, app_config)
@@ -461,7 +471,7 @@ def widget_configurar_votacao(app_config: dict):
             widget_liberar_votacao(conn, app_config)
             widget_fechar_votacao(conn, app_config)
             widget_reinicializar_votantes(conn, app_config)
-            widget_limpar_urna(conn, app_config)
+            widget_limpar_urna(conn, app_config, lista_perguntas_atuais)
                  
 ############# PÁGINA PRINCIPAL #########
 
