@@ -96,7 +96,7 @@ def widget_incluir_pergunta(app_config: Dict, perguntas_df: pd.DataFrame) -> Non
                lista_perguntas_atuais = None
                lista_perguntas_ausentes = list(range(1, app_config['numero_perguntas']  + 1))
 
-         if lista_perguntas_atuais and (len(lista_perguntas_atuais) < app_config['numero_perguntas']):
+         if (not lista_perguntas_atuais) or (len(lista_perguntas_atuais) < app_config['numero_perguntas']):
                n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_ausentes)
                nome_pergunta = st.text_input('Nome da pergunta')
                submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=False)
