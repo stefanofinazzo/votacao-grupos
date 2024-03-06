@@ -159,7 +159,7 @@ def widget_lista_perguntas(conn) -> pd.DataFrame:
          
    return perguntas_df
       
-def widget_incluir_votante(app_config: Dict):
+def widget_incluir_votante(conn, app_config: Dict):
    
       with st.form("incluir_votante"):
             st.write("Inclusão de novos votantes")
@@ -170,13 +170,12 @@ def widget_incluir_votante(app_config: Dict):
             submitted = st.form_submit_button("Cadastrar ou alterar votante", type="primary")
       
             if submitted:
-                  conn = db_utils.connect_supabase()
                   db_utils.insert_votante(conn, nome, email, grupo)
                   st.success('Votante incluído com sucesso!')
                   sleep(2)
                   st.rerun()
 
-def widget_excluir_votante():
+def widget_excluir_votante(conn):
    
       with st.form("excluir_votante"):
             st.write("Exclusão de votante")
@@ -185,7 +184,6 @@ def widget_excluir_votante():
             submitted = st.form_submit_button("Excluir votante", type="primary")
             
             if submitted:
-                  conn = db_utils.connect_supabase()
                   db_utils.delete_votante(conn, email)
                   st.success('Votante excluído com sucesso!')
                   sleep(2)
@@ -582,8 +580,8 @@ def mainpage():
                               widget_lista_votantes(conn)
                         with colunas_incluir_votante[1]:
                               st.markdown('#### Incluir, Alterar ou Excluir Votantes')
-                              widget_incluir_votante(app_config)
-                              widget_excluir_votante()
+                              widget_incluir_votante(conn, app_config)
+                              widget_excluir_votante(conn)
             
                   case 'resultados':   
                         widget_resultados(conn, app_config)
