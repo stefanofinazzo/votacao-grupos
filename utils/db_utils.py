@@ -175,6 +175,21 @@ def insert_voto(conn, voto: str, pergunta_id: int) -> None:
             .execute()
          )
 
+def deletar_votos(conn, pergunta_id: int = None) -> None: 
+
+	if pergunta_id:
+		_, _ = (conn.table('votos')
+			.delete()
+			.eq('pergunta_id', pergunta_id)
+			.execute()
+		 )
+	else:
+		_, _ = (conn.table('votos')
+			.delete()
+			.gt('voto_id', 0)
+			.execute()
+		 )
+	
 def reinicia_votantes(conn):
 
 	update_list = []
