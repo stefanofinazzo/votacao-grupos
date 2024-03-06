@@ -5,8 +5,6 @@ Todo:
 - Incluir resultado de grupos com 0 votos (com pontos)
 - Gráficos de votos devem incluir os grupos com 0 votos
 - Verificar critério de desempate (se está computando corretamente desempates)
-- Implementar limpeza de urna
-- Implementar reset geral
 - Incluir pontuação no tab de resultados
 - Melhorar descrição dos widgets
 - Helptips e ajuda nos widgets
