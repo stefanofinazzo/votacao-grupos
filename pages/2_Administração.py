@@ -378,6 +378,7 @@ def widget_limpar_urna(conn, app_config: dict) -> None:
             perguntas_list = db_utils.get_list_table(conn, table='perguntas')
             perguntas_df = db_utils.list_para_df(perguntas_list)
             lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
+            lista_perguntas_atuais.sort()
             lista_perguntas_atuais.append('Todas')
             
             if not app_config['votacao_ativa']:
