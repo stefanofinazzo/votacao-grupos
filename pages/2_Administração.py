@@ -446,7 +446,7 @@ def widget_status_config(conn, app_config: Dict, lista_perguntas_atuais: List):
       with st.container(border=True):
                lista_perguntas_total = list(range(1, app_config['numero_perguntas'] + 1))
                lista_perguntas_ausentes = [pergunta_id for pergunta_id in lista_perguntas_total if pergunta_id not in lista_perguntas_atuais]
-               mensagem_perguntas_ausentes = 'Perguntas: ' + ' ,'.join(lista_perguntas_ausentes)
+               mensagem_perguntas_ausentes = 'Perguntas: ' + ' ,'.join(str(lista_perguntas_ausentes))
                st.write(mensagem_perguntas_ausentes)
       
 def widget_configurar_votacao(app_config: Dict):
