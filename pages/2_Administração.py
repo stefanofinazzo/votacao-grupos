@@ -396,7 +396,7 @@ def mainpage():
       funcoes_tab = st.columns(4)
 
       if not 'admin_tab' in st.session_state:
-            st.session_state['admin_tab'] = 'perguntas'
+            st.session_state['admin_tab'] = 'configuracao'
             
       with funcoes_tab[0]:
             st.button('Gerenciar Perguntas', on_click=(lambda: alterar_tab('perguntas')))
@@ -409,28 +409,31 @@ def mainpage():
 
       with funcoes_tab[3]:
             st.button('Configurações', on_click=(lambda: alterar_tab('configuracao')))
+
+      match st.session_state['admin_tab']:
+            case 'configuracao':
+                  widget_configurar_votacao(app_config)
       
-      if st.session_state['admin_tab'] == 'perguntas':
-         colunas_incluir_pergunta = st.columns(2)
-         with colunas_incluir_pergunta[0]:
-               perguntas_df = widget_lista_perguntas()
-         with colunas_incluir_pergunta[1]:
-               widget_incluir_pergunta(app_config, perguntas_df)
-               widget_excluir_pergunta(perguntas_df)
+            case'perguntas':
+                  colunas_incluir_pergunta = st.columns(2)
+                  with colunas_incluir_pergunta[0]:
+                        perguntas_df = widget_lista_perguntas()
+                  with colunas_incluir_pergunta[1]:
+                        widget_incluir_pergunta(app_config, perguntas_df)
+                        widget_excluir_pergunta(perguntas_df)
 
-      elif st.session_state['admin_tab'] == 'votantes':
-         colunas_incluir_votante = st.columns(2)
-         with colunas_incluir_votante[0]:
-               widget_lista_votantes(conn)
-         with colunas_incluir_votante[1]:
-               widget_incluir_votante(app_config)
-               widget_excluir_votante()
+            case 'votantes':
+                  colunas_incluir_votante = st.columns(2)
+                  with colunas_incluir_votante[0]:
+                        widget_lista_votantes(conn)
+                  with colunas_incluir_votante[1]:
+                        widget_incluir_votante(app_config)
+                        widget_excluir_votante()
 
-      elif st.session_state['admin_tab'] == 'resultados':   
-         widget_resultados(conn, app_config)
+            case st.session_state['admin_tab'] == 'resultados':   
+                  widget_resultados(conn, app_config)
 
-      elif st.session_state['admin_tab'] == 'configuracao':  
-         widget_configurar_votacao(app_config)
+
 
 if __name__ == '__main__':
    mainpage()
