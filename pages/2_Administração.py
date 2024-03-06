@@ -37,7 +37,6 @@ def logout_admin() -> None:
       st.session_state['admin_user'] = False
       st.success('Logout realizado')
       sleep(1.5)
-      st.rerun()        
       
 def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 
@@ -556,6 +555,7 @@ def mainpage():
             
             with funcoes_tab[4]:
                   st.button('Logout', on_click=(lambda: logout_admin()))
+                  st.rerun()        
             
             
             match st.session_state['admin_tab']:
