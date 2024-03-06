@@ -503,5 +503,3 @@ def widget_configurar_votacao(conn, app_config: Dict):
             widget_fechar_votacao(conn, app_config)
             widget_reinicializar_votantes(conn, app_config)
             widget_limpar_urna(conn, app_config, lista_perguntas_atuais)
-                 
-############# PÁGINA PRINCIPAL #########
