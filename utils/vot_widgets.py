@@ -1,4 +1,12 @@
 ############# PACOTES ##################
+from time import sleep
+
+import pandas as pd
+import plotly.express as px
+
+import streamlit as st
+
+from . import db_utils
 
 ############# FUNÇÕES AUXILIARES #######
 
@@ -11,15 +19,6 @@ def lista_perguntas_no_banco(perguntas_df: pd.DataFrame):
             
       return lista_perguntas
 
-def alterar_tab(tab_choice: str) -> None:
-
-      st.session_state['admin_tab'] = tab_choice
-
-def logout_admin() -> None:
-      st.session_state['admin_user'] = False
-      st.success('Logout realizado')
-      sleep(1.5)
-      
 def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 
       fig = px.bar(votos_pergunta_df, x='voto', y='n_votos')
