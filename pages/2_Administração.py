@@ -382,7 +382,7 @@ def widget_limpar_urna(conn, app_config: Dict, lista_perguntas_atuais: List) -> 
       
       with st.container(border=True):
             
-            st.warning('Esta função permite limpa os votos da urna (de uma pergunta específica ou de todas perguntas)\nPara ser utilizado se for necessário reiniciar o voto de uma pergunta ou de todas perguntas, por razões técnicas.')
+            st.warning('Esta função permite limpa os votos da urna (de uma pergunta específica ou de todas perguntas). Para ser utilizado se for necessário reiniciar o voto de uma pergunta ou de todas perguntas, por razões técnicas.')
 
             if lista_perguntas_atuais:
                   lista_perguntas_atuais.append('Todas')
@@ -419,7 +419,7 @@ def widget_exclusao_dados(conn, app_config: Dict) -> None:
 
       st.markdown('#### Excluir votantes e perguntas')
 
-      st.error('Atenção, estas configurações EXCLUEM todos votantes ou perguntas')
+      st.error('Atenção, estas configurações EXCLUEM todos votantes ou perguntas. Excluir todas perguntas irá esvaziar a urna!')
       
       if not app_config['votacao_ativa']:
             
@@ -430,7 +430,9 @@ def widget_exclusao_dados(conn, app_config: Dict) -> None:
                   if st.button('Excluir perguntas'):
                         if confirma_exclusao:
                               db_utils.delete_todas_perguntas(conn)
+                              db_utils.deletar_votos(conn)
                               st.success('Todas perguntas excluídas com sucesso')
+                              st.success('Todos votos excluídos com sucesso!')
                               sleep(2.5)
                               st.rerun()
                         else:
