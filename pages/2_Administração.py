@@ -69,8 +69,9 @@ def mainpage() -> None:
                               st.markdown('#### Lista de Perguntas')
                               perguntas_df = vot_widgets.widget_lista_perguntas(conn)
                         with colunas_incluir_pergunta[1]:
-                              st.markdown('#### Incluir ou Excluir Perguntas')
+                              st.markdown('#### Incluir Perguntas')
                               vot_widgets.widget_incluir_pergunta(conn, app_config, perguntas_df)
+                              st.markdown('#### Excluir Perguntas')
                               vot_widgets.widget_excluir_pergunta(conn, app_config, perguntas_df)
             
                   case 'votantes':
