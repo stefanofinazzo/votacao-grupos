@@ -198,7 +198,7 @@ def widget_lista_votantes(conn):
             
             votantes_df = db_utils.list_para_df(votantes_list)
             votantes_df = votantes_df.sort_values(by='nome')
-            st.dataframe(perguntas_df,
+            st.dataframe(votantes_df,
                         hide_index=True,
                         use_container_width=True,
                         column_config={
