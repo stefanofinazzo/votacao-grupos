@@ -107,12 +107,11 @@ def widget_incluir_pergunta(conn, app_config: Dict, perguntas_df: pd.DataFrame) 
       
 
 def widget_excluir_pergunta(conn, app_config: Dict, perguntas_df: pd.DataFrame) -> None:
-
-      st.write("Exclusão de pergunta")
       
       if not perguntas_df.empty:
          
             with st.form("excluir_pergunta"):
+                  st.write("Exclusão de pergunta")
                   lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
                   
                   if not app_config['votacao_ativa']:
