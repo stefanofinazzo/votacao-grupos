@@ -146,9 +146,8 @@ def widget_lista_perguntas() -> pd.DataFrame:
          st.dataframe(perguntas_df,
                         hide_index=True,
                         column_config={
-                          "pergunta_id":  st.column_config.NumberColumn("Número")
+                          "pergunta_id":  st.column_config.NumberColumn("Número"),
                           "pergunta_texto": st.column_config.NumberColumn("Pergunta")
-                          ),
                       },
                      )
 
