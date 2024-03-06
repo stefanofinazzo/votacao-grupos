@@ -92,7 +92,8 @@ def widget_incluir_pergunta(conn, app_config: Dict, perguntas_df: pd.DataFrame) 
                else:
                      st.markdown('#### Todas perguntas já cadastradas!')
                      submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=True)
-         elif app_config['votacao_ativa']
+                     
+         elif app_config['votacao_ativa']:
                st.info('Votação liberada')
                st.selectbox('Número da pergunta', lista_perguntas_ausentes, disabled=True)
                st.text_input('Nome da pergunta', disabled=True)
