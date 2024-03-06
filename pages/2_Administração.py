@@ -353,10 +353,9 @@ def widget_reinicializar_votantes(conn, app_config: dict):
 
       st.markdown('#### Reinicializar votantes')
 
-      st.info('Utilize esta opção para liberar o voto de todos votantes')
-      
       with st.form("reinicializar_votantes"):
-
+            st.info('Utilize esta opção para liberar o voto de todos votantes')
+            
             if app_config['votacao_ativa']:
                   submitted_reinicializar_votantes = st.form_submit_button("Reinicializar votantes", type="primary", disabled=True)
             else:
