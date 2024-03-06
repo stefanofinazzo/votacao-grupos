@@ -52,23 +52,6 @@ def pontuacao_final(pontuacao_df: pd.DataFrame) -> pd.DataFrame:
       
 ############# WIDGETS ##################
 
-def widget_autenticacao_admin():
-   
-   with st.form("autenticar_admin"):
-      st.write("Insira a senha de administrador")
-      admin_password = st.text_input('Senha')
-      
-      submitted = st.form_submit_button("Enviar")
-      
-      if submitted:
-         if admin_password == ADMIN_PASSWORD:
-            st.session_state['admin_user'] = True
-            st.success('Bem-vindo!')
-            sleep(2.5)
-            st.rerun()
-         else:
-            st.error('Senha inválida')
-               
 def widget_incluir_pergunta(conn, app_config: Dict, perguntas_df: pd.DataFrame) -> None:
    
       with st.form("incluir_pergunta"):
