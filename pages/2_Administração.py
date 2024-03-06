@@ -527,7 +527,7 @@ def widget_configurar_votacao(conn, app_config: Dict):
 
 def mainpage():      
 
-      st.title('Página de Gerenciamento da Votação')
+      st.title('Gerenciamento da Votação')
 
       if 'admin_user' not in st.session_state or not st.session_state['admin_user']:
             widget_autenticacao_admin()
