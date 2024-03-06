@@ -390,10 +390,10 @@ def widget_limpar_urna(conn, app_config: dict) -> None:
                   if confirma_limpa_urna:
 
                         if pergunta_a_limpar != 'Todas':
-                        #      deletar_votos(conn, pergunta_id=pergunta_a_limpar)
+                              deletar_votos(conn, pergunta_id=pergunta_a_limpar)
                               st.success('Votos da pergunta ' + str(pergunta_a_limpar) + ' removidos com sucesso!')
                         else:
-                        #      deletar_votos(conn)
+                              deletar_votos(conn)
                               st.success('Todos votos da urna limpos com sucesso!')
                               
                         sleep(2.5)
