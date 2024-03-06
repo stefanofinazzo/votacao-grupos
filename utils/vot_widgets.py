@@ -125,7 +125,7 @@ def widget_excluir_pergunta(conn, app_config: Dict, perguntas_df: pd.DataFrame) 
                   if submitted:
                         db_utils.delete_pergunta(conn, n_pergunta)
                         st.success('Pergunta excluída com sucesso!')
-                        sleep(2)
+                        sleep(1)
                         st.rerun()
                         
       else:
@@ -135,6 +135,7 @@ def widget_lista_perguntas(conn) -> pd.DataFrame:
       
    perguntas_list = db_utils.get_list_table(conn, table='perguntas')
    perguntas_df = db_utils.list_para_df(perguntas_list)
+      
    if not perguntas_df.empty:
          perguntas_df = perguntas_df.sort_values(by='pergunta_id')
          st.dataframe(perguntas_df,
@@ -155,30 +156,44 @@ def widget_incluir_votante(conn, app_config: Dict):
    
       with st.form("incluir_votante"):
             st.write("Inclusão de novos votantes")
-            nome = st.text_input('Nome')
-            email = st.text_input('E-mail')
-            grupo = st.slider('Grupo', 1, 1, app_config['numero_grupos'])
-            
-            submitted = st.form_submit_button("Cadastrar ou alterar votante", type="primary")
+            if not app_config['votacao_ativa']:
+                  nome = st.text_input('Nome')
+                  email = st.text_input('E-mail')
+                  grupo = st.slider('Grupo', 1, 1, app_config['numero_grupos'])
+                  
+                  submitted = st.form_submit_button("Cadastrar ou alterar votante", type="primary")
+                  
+            elif app_config['votacao_ativa']:
+                  st.info('Votação liberada. Inclusãp de votantes possível apenas com votação interrompida')
+                  nome = st.text_input('Nome', disabled=True)
+                  email = st.text_input('E-mail', disabled=True)
+                  grupo = st.slider('Grupo', 1, 1, app_config['numero_grupos'], disabled=True)
+                  
+                  submitted = st.form_submit_button("Cadastrar ou alterar votante", type="primary",disabled=True)
+                  
       
             if submitted:
                   db_utils.insert_votante(conn, nome, email, grupo)
                   st.success('Votante incluído com sucesso!')
-                  sleep(2)
+                  sleep(1)
                   st.rerun()
 
 def widget_excluir_votante(conn):
    
       with st.form("excluir_votante"):
             st.write("Exclusão de votante")
-            email = st.text_input('E-mail')
-            
-            submitted = st.form_submit_button("Excluir votante", type="primary")
+            if not app_config['votacao_ativa']:
+                  email = st.text_input('E-mail')
+                  submitted = st.form_submit_button("Excluir votante", type="primary")
+            elif app_config['votacao_ativa']:
+                  st.info('Votação liberada. Inclusãp de votantes possível apenas com votação interrompida')
+                  email = st.text_input('E-mail', disabled=True)
+                  submitted = st.form_submit_button("Excluir votante", type="primary", disabled=True)
             
             if submitted:
                   db_utils.delete_votante(conn, email)
                   st.success('Votante excluído com sucesso!')
-                  sleep(2)
+                  sleep(1)
                   st.rerun()    
 
 def widget_lista_votantes(conn):
@@ -287,7 +302,7 @@ def widget_set_grupos(conn, app_config: Dict) -> None:
                   db_utils.update_config(conn, app_config)
                   db_utils.delete_votantes_acima_grupo_limite(conn, app_config) 
                   st.success('Configuração atualizada com sucesso!')
-                  sleep(2.5)
+                  sleep(2)
                   st.rerun()
 
 def widget_set_perguntas(conn, app_config: Dict) -> None:
@@ -310,7 +325,7 @@ def widget_set_perguntas(conn, app_config: Dict) -> None:
                   db_utils.delete_perguntas_acima_limite(conn, app_config)     #eliminando as perguntas acima do limite
                   db_utils.update_config(conn, app_config)
                   st.success('Configuração atualizada com sucesso!')
-                  sleep(2.5)
+                  sleep(2)
                   st.rerun()
 
 def widget_liberar_votacao(conn, app_config: Dict):
@@ -347,7 +362,7 @@ def widget_liberar_votacao(conn, app_config: Dict):
                                     
                                     db_utils.update_config(conn, app_config)
                                     st.success('Votação liberada com sucesso!')
-                                    sleep(2.5)
+                                    sleep(2)
                                     st.rerun()
                                     
                               else:
@@ -373,7 +388,7 @@ def widget_fechar_votacao(conn, app_config: Dict):
                   app_config['votacao_ativa'] = False
                   db_utils.update_config(conn, app_config)
                   st.success('Votação fechada com sucesso!')
-                  sleep(2.5)
+                  sleep(2)
                   st.rerun()
 
 def widget_reinicializar_votantes(conn, app_config: Dict):
@@ -391,7 +406,7 @@ def widget_reinicializar_votantes(conn, app_config: Dict):
             if submitted_reinicializar_votantes:
                   db_utils.reinicia_votantes(conn)
                   st.success('Votantes liberados para votação!')
-                  sleep(2.5)
+                  sleep(2)
                   st.rerun()
 
 def widget_limpar_urna(conn, app_config: Dict, lista_perguntas_atuais: List) -> None:
@@ -419,7 +434,7 @@ def widget_limpar_urna(conn, app_config: Dict, lista_perguntas_atuais: List) -> 
                                     db_utils.deletar_votos(conn)
                                     st.success('Todos votos da urna limpos com sucesso!')
                                     
-                              sleep(2.5)
+                              sleep(2)
                               st.rerun()
                               
                         
@@ -450,7 +465,7 @@ def widget_exclusao_dados(conn, app_config: Dict) -> None:
                               db_utils.deletar_votos(conn)
                               st.success('Todas perguntas excluídas com sucesso')
                               st.success('Todos votos excluídos com sucesso!')
-                              sleep(2.5)
+                              sleep(2)
                               st.rerun()
                         else:
                               st.error('Confirme a exclusão primeiro')
@@ -460,7 +475,7 @@ def widget_exclusao_dados(conn, app_config: Dict) -> None:
                         if confirma_exclusao:
                               db_utils.delete_todos_votantes(conn)
                               st.success('Todos votantes excluídos com sucesso')
-                              sleep(2.5)
+                              sleep(2)
                               st.rerun()
                         else:
                               st.error('Confirme a exclusão primeiro')
