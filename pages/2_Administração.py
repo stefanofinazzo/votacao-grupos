@@ -367,6 +367,39 @@ def widget_reinicializar_votantes(conn, app_config: dict):
                   sleep(2.5)
                   st.rerun()
 
+def widget_limpar_urna(conn, app_config: dict) -> None:
+      st.markdown('#### Reinicializar votantes')
+      
+      with st.container(border=True):
+            
+            st.warning('Esta função permite limpa os votos da urna (de uma pergunta específica ou de todas perguntas)')
+            st.warning('Para ser utilizado se for necessário reiniciar o voto de uma pergunta ou de todas perguntas, por razões técnicas.')
+            
+            perguntas_list = db_utils.get_list_table(conn, table='perguntas')
+            perguntas_df = db_utils.list_para_df(perguntas_list)
+            lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
+            lista_perguntas_atuais.append('Todas')
+            
+            if not app_config['votacao_ativa']:
+                  
+                  pergunta_a_limpar = st.selectbox('Pergunta com votos a serem removidos', lista_perguntas_atuais)
+                  
+                  confirma_limpa_urna = st.button("Limpar urna", type="primary")
+
+                  if confirma_limpa_urna:
+                        
+                        st.success('Votos removidos com sucesso!')
+                        sleep(2.5)
+                        st.rerun()
+                        
+            else:
+                  st.button("Limpar urna", type="primary", disabled=True)
+                  st.selectbox('Pergunta com votos a serem removidos', lista_perguntas_atuais, disabled=True)
+                              
+
+                  
+      deletar_votos(conn, pergunta_id: int = None)
+
 def widget_exclusao_dados(conn, app_config: dict) -> None:
 
       st.markdown('#### Excluir votantes e perguntas')
@@ -418,6 +451,7 @@ def widget_configurar_votacao(app_config: dict):
 
       with colunas_config[1]:
             widget_reinicializar_votantes(conn, app_config)
+            widget_limpar_urna(conn, app_config)
             widget_liberar_votacao(conn, app_config)
             widget_fechar_votacao(conn, app_config)
                  
