@@ -91,16 +91,16 @@ def delete_todas_perguntas(conn) -> None:
   
 def localiza_pergunta(conn, pergunta_id: int):
 
-		data, _ = (conn
-		           .table('perguntas')
-		           .select("*")
-		           .eq('pergunta_id', pergunta_id)
-		           .execute()
-		          )
-		
-		pergunta = data[1][0]
-		
-		return pergunta
+	data, _ = (conn
+		   .table('perguntas')
+		   .select("*")
+		   .eq('pergunta_id', pergunta_id)
+		   .execute()
+		  )
+	
+	pergunta = data[1][0]
+	
+	return pergunta
   
 def localiza_votante(conn, email: str):
 
@@ -177,14 +177,14 @@ def insert_voto(conn, voto: str, pergunta_id: int) -> None:
 
 def reinicia_votantes(conn):
 
-  update_list = []
-  votantes_list = get_list_table(conn, table='votantes')
-
-  for votante in votantes_list:
-    email_atual = votante['email']
-    update_list.append({'email': email_atual, 'votou': False})
-    
-  _, _ = (conn.table('votantes')
-        .upsert(update_list)
-        .execute()
-   )
+	update_list = []
+	votantes_list = get_list_table(conn, table='votantes')
+	
+	for votante in votantes_list:
+		email_atual = votante['email']
+		update_list.append({'email': email_atual, 'votou': False})
+	
+		_, _ = (conn.table('votantes')
+				.upsert(update_list)
+				.execute()
+				)
