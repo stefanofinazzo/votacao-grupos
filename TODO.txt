@@ -6,12 +6,10 @@ Todo:
 - Gráficos de votos devem incluir os grupos com 0 votos
 - Verificar critério de desempate (se está computando corretamente desempates)
 - Incluir pontuação no tab de resultados
-- Melhorar descrição dos widgets
-- Helptips e ajuda nos widgets
-- Implementar cálculo da pontuação
 - Refatorações gerais
 - Implementar descrição de tipagem em todas funções em todos módulos
 - Corrigir indentações e espaços
 - Testes de responsividade
+- Configurações de cores e estilo
 - Rotinas iniciais de teste
 - Documentação geral
