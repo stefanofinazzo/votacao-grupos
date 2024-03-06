@@ -93,6 +93,7 @@ def widget_incluir_pergunta(app_config: Dict, perguntas_df: pd.DataFrame) -> Non
                lista_perguntas_total = list(range(1, app_config['numero_perguntas'] + 1))
                lista_perguntas_ausentes = [pergunta_id for pergunta_id in lista_perguntas_total if pergunta_id not in lista_perguntas_atuais]
          else:
+               lista_perguntas_atuais = None
                lista_perguntas_ausentes = list(range(1, app_config['numero_perguntas']  + 1))
 
          if len(lista_perguntas_atuais) < app_config['numero_perguntas']:
