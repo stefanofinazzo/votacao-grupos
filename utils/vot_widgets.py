@@ -71,40 +71,40 @@ def widget_autenticacao_admin():
                
 def widget_incluir_pergunta(conn, app_config: Dict, perguntas_df: pd.DataFrame) -> None:
    
-   with st.form("incluir_pergunta"):
+      with st.form("incluir_pergunta"):
          
-         st.markdown("Inclusão de perguntas")
-
-         if not perguntas_df.empty:
-               lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
-               lista_perguntas_total = list(range(1, app_config['numero_perguntas'] + 1))
-               lista_perguntas_ausentes = [pergunta_id for pergunta_id in lista_perguntas_total if pergunta_id not in lista_perguntas_atuais]
-         else:
-               lista_perguntas_atuais = None
-               lista_perguntas_ausentes = list(range(1, app_config['numero_perguntas']  + 1))
-
-         if not app_config['votacao_ativa']:
-               if (not lista_perguntas_atuais) or (len(lista_perguntas_atuais) < app_config['numero_perguntas']):
-                     n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_ausentes)
-                     nome_pergunta = st.text_input('Nome da pergunta')
-                     submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=False)
-                     
-               else:
-                     st.markdown('#### Todas perguntas já cadastradas!')
-                     submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=True)
-                     
-         elif app_config['votacao_ativa']:
-               st.info('Votação liberada')
-               st.selectbox('Número da pergunta', lista_perguntas_ausentes, disabled=True)
-               st.text_input('Nome da pergunta', disabled=True)
-               st.form_submit_button("Cadastrar pergunta", type="primary", disabled=True)
-               
+      st.markdown("Inclusão de perguntas")
       
-         if submitted:
+      if not perguntas_df.empty:
+            lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
+            lista_perguntas_total = list(range(1, app_config['numero_perguntas'] + 1))
+            lista_perguntas_ausentes = [pergunta_id for pergunta_id in lista_perguntas_total if pergunta_id not in lista_perguntas_atuais]
+      else:
+            lista_perguntas_atuais = None
+            lista_perguntas_ausentes = list(range(1, app_config['numero_perguntas']  + 1))
+      
+      if not app_config['votacao_ativa']:
+            if (not lista_perguntas_atuais) or (len(lista_perguntas_atuais) < app_config['numero_perguntas']):
+                  n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_ausentes)
+                  nome_pergunta = st.text_input('Nome da pergunta')
+                  submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=False)
+
+            else:
+                  st.markdown('#### Todas perguntas já cadastradas!')
+                  submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=True)
+               
+      elif app_config['votacao_ativa']:
+            st.info('Votação liberada')
+            st.selectbox('Número da pergunta', lista_perguntas_ausentes, disabled=True)
+            st.text_input('Nome da pergunta', disabled=True)
+            submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=True)
+
+      if submitted:
             db_utils.insert_pergunta(conn, n_pergunta, nome_pergunta)
             st.success('Pergunta incluída com sucesso!')
-            sleep(2)
+            sleep(1)
             st.rerun()
+      
 
 def widget_excluir_pergunta(conn, perguntas_df: pd.DataFrame) -> None:
 
