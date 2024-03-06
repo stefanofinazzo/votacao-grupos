@@ -30,6 +30,8 @@ Na pasta supabase_db do projeto o arquivo create_db.sql possui os comandos de Po
 
 ### Streamlit Cloud
 
+INSTRUÇÕES A DESCREVER
+
 ### Secrets
 
 Para deploy, é necessário fornecer o arquivo secrets.toml para o Streamlit (mais informações [aqui](https://docs.streamlit.io/library/advanced-features/secrets-management)).
