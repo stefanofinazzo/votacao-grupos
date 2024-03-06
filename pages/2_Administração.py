@@ -387,10 +387,16 @@ def widget_limpar_urna(conn, app_config: dict) -> None:
                   confirma_limpa_urna = st.button("Limpar urna", type="primary")
 
                   if confirma_limpa_urna:
-                        
+
+                        #if pergunta_a_limpar != 'Todas':
+                        #      deletar_votos(conn, pergunta_a_limpar)
+                        #else:
+                        #      deletar_votos(conn)
+                              
                         st.success('Votos removidos com sucesso!')
                         sleep(2.5)
                         st.rerun()
+                        
                         
             else:
                   st.button("Limpar urna", type="primary", disabled=True)
@@ -398,7 +404,7 @@ def widget_limpar_urna(conn, app_config: dict) -> None:
                               
 
                   
-      deletar_votos(conn, pergunta_id: int = None)
+
 
 def widget_exclusao_dados(conn, app_config: dict) -> None:
 
