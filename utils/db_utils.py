@@ -50,14 +50,6 @@ def update_config(conn, app_config: dict) -> None:
               .eq('onerow_id', True)
               .execute()
          )
-
-def delete_perguntas_acima_limite(conn, app_config: dict) -> None:
-  
-    _, _ = (conn.table('perguntas')
-          .delete()
-          .gt('pergunta_id', app_config['numero_perguntas'])
-          .execute()
-         )
   
 def list_para_df(data_dict):
 
@@ -81,6 +73,13 @@ def delete_pergunta(conn, n_pergunta: int):
           .execute()
          )
 
+def delete_perguntas_acima_limite(conn, app_config: dict) -> None:
+  
+    _, _ = (conn.table('perguntas')
+          .delete()
+          .gt('pergunta_id', app_config['numero_perguntas'])
+          .execute()
+         )
 
 def localiza_pergunta(conn, pergunta_id: int):
 
@@ -124,6 +123,14 @@ def insert_votante(conn, nome: str, email: str, grupo: int):
                "token": token,
                "votou": False})
             .execute()
+         )
+
+def delete_usuarios_acima_grupo_limite(conn, app_config: dict) -> None:
+  
+    _, _ = (conn.table('votantes')
+          .delete()
+          .gt('grupo', app_config['numero_grupos'])
+          .execute()
          )
 
 def delete_votante(conn, email: str): 
