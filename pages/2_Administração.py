@@ -22,7 +22,10 @@ ADMIN_PASSWORD = st.secrets['admin_config']['ADMIN_PASSWORD']
 
 def lista_perguntas_no_banco(perguntas_df: pd.DataFrame):
 
-      lista_perguntas = perguntas_df['pergunta_id'].unique().tolist()
+      if not perguntas_df.empty:
+           lista_perguntas = perguntas_df['pergunta_id'].unique().tolist()
+      else:
+           lista_perguntas = None
             
       return lista_perguntas
 
