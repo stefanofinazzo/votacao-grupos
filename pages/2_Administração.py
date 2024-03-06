@@ -448,7 +448,7 @@ def widget_status_config(conn, app_config: Dict, lista_perguntas_atuais: List):
                lista_perguntas_ausentes = [pergunta_id for pergunta_id in lista_perguntas_total if pergunta_id not in lista_perguntas_atuais]
                string_perguntas_ausentes = [str(pergunta) for pergunta in lista_perguntas_ausentes]
                mensagem_perguntas_ausentes = '<b><font color="red">Perguntas não cadastradas: ' + ', '.join(string_perguntas_ausentes) + ' </font></b>'
-               st.write(mensagem_perguntas_ausentes)
+               st.markdown(mensagem_perguntas_ausentes)
       
 def widget_configurar_votacao(app_config: Dict):
 
