@@ -145,6 +145,7 @@ def widget_lista_perguntas() -> pd.DataFrame:
          perguntas_df = perguntas_df.sort_values(by='pergunta_id')
          st.dataframe(perguntas_df,
                         hide_index=True,
+                        use_container_width=True,
                         column_config={
                           "pergunta_id":  st.column_config.NumberColumn("Número"),
                           "pergunta_texto": st.column_config.TextColumn("Pergunta")
