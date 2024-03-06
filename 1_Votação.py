@@ -28,7 +28,6 @@ def widget_verifica_votante(conn):
         if submitted:
           
              votante, votante_localizado = db_utils.localiza_votante(conn, email_votante)
-             st.write(votante)
           
              if votante_localizado:
                  if token == votante['token']:
