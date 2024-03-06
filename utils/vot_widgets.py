@@ -1,5 +1,6 @@
 ############# PACOTES ##################
 from time import sleep
+from typing import List, Dict
 
 import pandas as pd
 import plotly.express as px
