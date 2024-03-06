@@ -143,7 +143,15 @@ def widget_lista_perguntas() -> pd.DataFrame:
    perguntas_df = db_utils.list_para_df(perguntas_list)
    if not perguntas_df.empty:
          perguntas_df = perguntas_df.sort_values(by='pergunta_id')
-         st.dataframe(perguntas_df)
+         st.dataframe(perguntas_df,
+                        hide_index=True,
+                        column_config={
+                          "pergunta_id":  st.column_config.NumberColumn("Número")
+                          "pergunta_texto": st.column_config.NumberColumn("Pergunta")
+                          ),
+                      },
+                     )
+
    else:
          st.markdown('#### Sem perguntas cadastradas no momento!')
          
