@@ -1,4 +1,5 @@
 ############# PACOTES ##########################
+from time import sleep
 
 import streamlit as st
 
@@ -39,7 +40,7 @@ def widget_autenticacao_admin():
 def logout_admin() -> None:
       st.session_state['admin_user'] = False
       st.success('Logout realizado')
-      sleep(1.5)
+      sleep(1)
 
 ############# PÁGINA PRINCIPAL ##################
 
