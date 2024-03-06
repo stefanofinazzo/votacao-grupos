@@ -143,7 +143,6 @@ def widget_excluir_pergunta(perguntas_df: pd.DataFrame) -> None:
             
 def widget_lista_perguntas() -> pd.DataFrame:
       
-   st.markdown('### Lista de Perguntas')
    conn = db_utils.connect_supabase()
    perguntas_list = db_utils.get_list_table(conn, table='perguntas')
    perguntas_df = db_utils.list_para_df(perguntas_list)
@@ -196,7 +195,6 @@ def widget_excluir_votante():
                   st.rerun()    
 
 def widget_lista_votantes(conn):
-      st.markdown('#### Lista de Votantes')
       
       votantes_list = db_utils.get_list_table(conn, table='votantes')
       
@@ -573,14 +571,17 @@ def mainpage():
                   case'perguntas':
                         colunas_incluir_pergunta = st.columns(2)
                         with colunas_incluir_pergunta[0]:
+                              st.markdown('#### Lista de Perguntas')
                               perguntas_df = widget_lista_perguntas()
                         with colunas_incluir_pergunta[1]:
+                              st.markdown('#### Incluir ou Excluir Perguntas')
                               widget_incluir_pergunta(app_config, perguntas_df)
                               widget_excluir_pergunta(perguntas_df)
             
                   case 'votantes':
                         colunas_incluir_votante = st.columns(2)
                         with colunas_incluir_votante[0]:
+                              st.markdown('#### Lista de Votantes')
                               widget_lista_votantes(conn)
                         with colunas_incluir_votante[1]:
                               st.markdown('#### Incluir, Alterar ou Excluir Votantes')
