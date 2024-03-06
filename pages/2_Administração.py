@@ -354,8 +354,10 @@ def widget_fechar_votacao(conn, app_config: Dict):
       with st.form("fechar_votacao"):
 
             if app_config['votacao_ativa']:
+                  st.info('Votação ativa')
                   submitted_fechar_votacao = st.form_submit_button("Fechar votação", type="primary")
             else:
+                  st.info('Votação fechada')
                   submitted_fechar_votacao = st.form_submit_button("Fechar votação", type="primary", disabled=True)
                               
             if submitted_fechar_votacao:
