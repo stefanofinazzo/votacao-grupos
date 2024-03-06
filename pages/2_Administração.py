@@ -301,43 +301,40 @@ def widget_liberar_votacao(conn, app_config: Dict):
 
       st.markdown('#### Liberar votação')
       
+      perguntas_list = db_utils.get_list_table(conn, table='perguntas')
+      perguntas_df = db_utils.list_para_df(perguntas_list)
+      lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df) 
+      lista_perguntas_atuais.sort()
+      
       with st.form("liberar_votacao"):
-
-            if not app_config['votacao_ativa']:
-                  numero_pergunta_a_liberar = st.slider('Número da pergunta a liberar', 
-                                                        1, 
-                                                        app_config['numero_perguntas'],
-                                                        app_config['pergunta_liberada'],
-                                                        disabled=False)
-                  submitted_liberar_votacao = st.form_submit_button("Liberar votação", type="primary")
-            else:
-                  numero_pergunta_a_liberar = st.slider('Número da pergunta a liberar', 
-                                                        1, 
-                                                        app_config['numero_perguntas'],
-                                                        app_config['pergunta_liberada'],
-                                                        disabled=True)
-                  submitted_liberar_votacao = st.form_submit_button("Liberar votação", type="primary", disabled=True)
-            
-            if submitted_liberar_votacao:
-                  
-                  perguntas_list = db_utils.get_list_table(conn, table='perguntas')
-                  perguntas_df = db_utils.list_para_df(perguntas_list)
-                  lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
-                  if lista_perguntas_atuais:
-                        pergunta_valida = True if (numero_pergunta_a_liberar in lista_perguntas_atuais) else False
-                              
-                        if pergunta_valida:
-                              app_config['votacao_ativa'] = True
-                              app_config['pergunta_liberada'] = numero_pergunta_a_liberar
-                              
-                              db_utils.update_config(conn, app_config)
-                              st.success('Votação liberada com sucesso!')
-                              sleep(2.5)
-                              st.rerun()
-                        else:
-                              st.error('Pergunta ' + str(numero_pergunta_a_liberar) + ' não cadastrada!')
+            if lista_perguntas_atuais:
+                  if not app_config['votacao_ativa']:
+                        numero_pergunta_a_liberar = st.selectbox('Pergunta a liberar', 
+                                                              lista_perguntas_atuais, 
+                                                              disabled=False)
+                        submitted_liberar_votacao = st.form_submit_button("Liberar votação", type="primary")
                   else:
-                        st.error('Sem perguntas cadastradas!')
+                        numero_pergunta_a_liberar = st.selectbox('Pergunta a liberar', 
+                                                              lista_perguntas_atuais,
+                                                              disabled=True)
+                        submitted_liberar_votacao = st.form_submit_button("Liberar votação", type="primary", disabled=True)
+                  
+                  if submitted_liberar_votacao:
+                        
+                              pergunta_valida = True if (numero_pergunta_a_liberar in lista_perguntas_atuais) else False
+                                    
+                              if pergunta_valida:
+                                    app_config['votacao_ativa'] = True
+                                    app_config['pergunta_liberada'] = numero_pergunta_a_liberar
+                                    
+                                    db_utils.update_config(conn, app_config)
+                                    st.success('Votação liberada com sucesso!')
+                                    sleep(2.5)
+                                    st.rerun()
+                              else:
+                                    st.error('Pergunta ' + str(numero_pergunta_a_liberar) + ' não cadastrada!')
+            else:
+                  st.error('Sem perguntas cadastradas!')
 
 def widget_fechar_votacao(conn, app_config: Dict):
 
