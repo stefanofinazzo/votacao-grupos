@@ -254,7 +254,7 @@ def widget_set_grupos(conn, app_config: Dict) -> None:
       
       with st.form("numero_grupos"):
 
-            st.warning('Atenção: as perguntas já cadastradas acima do limite serão eliminadas!',  icon="⚠️")
+            st.warning('Atenção: os votantes com grupo já cadastradas acima do limite de grupos selecionado serão removidos!',  icon="⚠️")
             
             if not app_config['votacao_ativa']:
                   numero_grupos = st.slider('Número de grupos', 1, 10, app_config['numero_grupos'])
@@ -374,9 +374,8 @@ def widget_limpar_urna(conn, app_config: Dict, lista_perguntas_atuais: List) -> 
       
       with st.container(border=True):
             
-            st.warning('Esta função permite limpa os votos da urna (de uma pergunta específica ou de todas perguntas)')
-            st.warning('Para ser utilizado se for necessário reiniciar o voto de uma pergunta ou de todas perguntas, por razões técnicas.')
-            
+            st.warning('Esta função permite limpa os votos da urna (de uma pergunta específica ou de todas perguntas)\nPara ser utilizado se for necessário reiniciar o voto de uma pergunta ou de todas perguntas, por razões técnicas.')
+
             lista_perguntas_atuais.append('Todas')
             
             if not app_config['votacao_ativa']:
