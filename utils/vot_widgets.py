@@ -94,7 +94,7 @@ def widget_incluir_pergunta(conn, app_config: Dict, perguntas_df: pd.DataFrame) 
                         submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=True)
                      
             elif app_config['votacao_ativa']:
-                  st.info('Votação liberada')
+                  st.info('Votação liberada. Inserção de perguntas possível apenas com votação interrompida')
                   st.selectbox('Número da pergunta', lista_perguntas_ausentes, disabled=True)
                   st.text_input('Nome da pergunta', disabled=True)
                   submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=True)
@@ -117,7 +117,8 @@ def widget_excluir_pergunta(conn, app_config: Dict, perguntas_df: pd.DataFrame) 
                   if not app_config['votacao_ativa']:
                         n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_atuais)
                         submitted = st.form_submit_button("Excluir Pergunta", type="primary")
-                  else:
+                  elif app_config['votacao_ativa']:
+                        st.info('Votação liberada. Exclusão de perguntas possível apenas com votação interrompida')
                         n_pergunta = st.selectbox('Número da pergunta', lista_perguntas_atuais, disabled=True)
                         submitted = st.form_submit_button("Excluir Pergunta", type="primary", disabled=True)
                         
