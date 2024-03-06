@@ -372,14 +372,14 @@ def widget_exclusao_dados(conn):
 
       colunas_botoes_exclusao = st.columns(2)
       
-      with colunas_botoes_exclusao[0] 
+      with colunas_botoes_exclusao[0]: 
             if st.button('Excluir perguntas'):
       
                   st.success('Todas perguntas excluídos com sucesso')
                   sleep(2.5)
                   st.rerun()
 
-      with colunas_botoes_exclusao[1] 
+      with colunas_botoes_exclusao[1]: 
             if st.button('Excluir votantes'):
       
                   st.success('Todos votantes excluídos com sucesso')
