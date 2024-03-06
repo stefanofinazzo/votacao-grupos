@@ -378,19 +378,22 @@ def widget_exclusao_dados(conn, app_config: dict) -> None:
             colunas_botoes_exclusao = st.columns(2)
             
             with colunas_botoes_exclusao[0]:
-                  if st.button('Excluir perguntas') and confirma_exclusao:
+                  if st.button('Excluir perguntas'):
+                        if confirma_exclusao:
+                              st.success('Todas perguntas excluídas com sucesso')
+                              sleep(2.5)
+                              st.rerun()
+                        else:
+                              st.error('Confirme a exclusão primeiro')
             
-                        st.success('Todas perguntas excluídos com sucesso')
-                        sleep(2.5)
-                        st.rerun()
-      
             with colunas_botoes_exclusao[1]: 
-                  if st.button('Excluir votantes') and confirma_exclusao:
-            
-                        st.success('Todos votantes excluídos com sucesso')
-                        sleep(2.5)
-                        st.rerun()
-
+                  if st.button('Excluir votantes'):
+                        if confirma_exclusao:
+                              st.success('Todos votantes excluídos com sucesso')
+                              sleep(2.5)
+                              st.rerun()
+                        else:
+                              st.error('Confirme a exclusão primeiro')
       else:
             confirma_exclusao = st.checkbox('Confirmar exclusão', disabled=True)
             colunas_botoes_exclusao = st.columns(2)
