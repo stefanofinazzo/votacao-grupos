@@ -470,10 +470,14 @@ def widget_status_config(conn, app_config: Dict, lista_perguntas_atuais: List):
                   lista_perguntas_ausentes = [pergunta_id for pergunta_id in lista_perguntas_total if pergunta_id not in lista_perguntas_atuais]
             else:
                   lista_perguntas_ausentes = list(range(1, app_config['numero_perguntas'] + 1))
-                  
-            string_perguntas_ausentes = [str(pergunta) for pergunta in lista_perguntas_ausentes]
-            mensagem_perguntas_ausentes = '**:red[Perguntas não cadastradas: ' + ', '.join(string_perguntas_ausentes) + ']**'
-            st.markdown(mensagem_perguntas_ausentes)
+
+            if list_perguntas_ausentes:
+                  string_perguntas_ausentes = [str(pergunta) for pergunta in lista_perguntas_ausentes]
+                  mensagem_perguntas_ausentes = '**:red[Perguntas não cadastradas: ' + ', '.join(string_perguntas_ausentes) + ']**'
+                  st.markdown(mensagem_perguntas_ausentes)
+            else:
+                  st.success('Todas perguntas cadastradas!')
+            
       
 def widget_configurar_votacao(app_config: Dict):
 
