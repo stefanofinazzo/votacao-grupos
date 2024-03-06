@@ -88,7 +88,7 @@ def widget_autenticacao_admin():
          else:
             st.error('Senha inválida')
                
-def widget_incluir_pergunta(app_config: Dict, perguntas_df: pd.DataFrame) -> None:
+def widget_incluir_pergunta(conn, app_config: Dict, perguntas_df: pd.DataFrame) -> None:
    
    with st.form("incluir_pergunta"):
          
@@ -112,13 +112,12 @@ def widget_incluir_pergunta(app_config: Dict, perguntas_df: pd.DataFrame) -> Non
                submitted = st.form_submit_button("Cadastrar pergunta", type="primary", disabled=True)
       
          if submitted:
-            conn = db_utils.connect_supabase()
             db_utils.insert_pergunta(conn, n_pergunta, nome_pergunta)
             st.success('Pergunta incluída com sucesso!')
             sleep(2)
             st.rerun()
 
-def widget_excluir_pergunta(perguntas_df: pd.DataFrame) -> None:
+def widget_excluir_pergunta(conn, perguntas_df: pd.DataFrame) -> None:
 
       st.write("Exclusão de pergunta")
       
@@ -132,7 +131,6 @@ def widget_excluir_pergunta(perguntas_df: pd.DataFrame) -> None:
                   submitted = st.form_submit_button("Excluir Pergunta", type="primary")
                   
                   if submitted:
-                     conn = db_utils.connect_supabase()
                      db_utils.delete_pergunta(conn, n_pergunta)
                      st.success('Pergunta excluída com sucesso!')
                      sleep(2)
@@ -141,9 +139,8 @@ def widget_excluir_pergunta(perguntas_df: pd.DataFrame) -> None:
       else:
             st.markdown('#### Sem perguntas cadastradas no momento!')
             
-def widget_lista_perguntas() -> pd.DataFrame:
+def widget_lista_perguntas(conn) -> pd.DataFrame:
       
-   conn = db_utils.connect_supabase()
    perguntas_list = db_utils.get_list_table(conn, table='perguntas')
    perguntas_df = db_utils.list_para_df(perguntas_list)
    if not perguntas_df.empty:
@@ -572,11 +569,11 @@ def mainpage():
                         colunas_incluir_pergunta = st.columns(2)
                         with colunas_incluir_pergunta[0]:
                               st.markdown('#### Lista de Perguntas')
-                              perguntas_df = widget_lista_perguntas()
+                              perguntas_df = widget_lista_perguntas(conn)
                         with colunas_incluir_pergunta[1]:
                               st.markdown('#### Incluir ou Excluir Perguntas')
-                              widget_incluir_pergunta(app_config, perguntas_df)
-                              widget_excluir_pergunta(perguntas_df)
+                              widget_incluir_pergunta(conn, app_config, perguntas_df)
+                              widget_excluir_pergunta(conn, perguntas_df)
             
                   case 'votantes':
                         colunas_incluir_votante = st.columns(2)
