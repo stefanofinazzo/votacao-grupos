@@ -418,6 +418,7 @@ def widget_exclusao_dados(conn, app_config: Dict) -> None:
             with colunas_botoes_exclusao[0]:
                   if st.button('Excluir perguntas'):
                         if confirma_exclusao:
+                              db_utils.delete_todas_perguntas(conn)
                               st.success('Todas perguntas excluídas com sucesso')
                               sleep(2.5)
                               st.rerun()
@@ -427,6 +428,7 @@ def widget_exclusao_dados(conn, app_config: Dict) -> None:
             with colunas_botoes_exclusao[1]: 
                   if st.button('Excluir votantes'):
                         if confirma_exclusao:
+                              db_utils.delete_todos_votantes(conn)
                               st.success('Todos votantes excluídos com sucesso')
                               sleep(2.5)
                               st.rerun()
