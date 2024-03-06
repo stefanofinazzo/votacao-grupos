@@ -165,7 +165,7 @@ def widget_incluir_votante(app_config: Dict):
             email = st.text_input('E-mail')
             grupo = st.slider('Grupo', 1, 1, app_config['numero_grupos'])
             
-            submitted = st.form_submit_button("Cadastrar votante", type="primary")
+            submitted = st.form_submit_button("Cadastrar ou alterar votante", type="primary")
       
             if submitted:
                   conn = db_utils.connect_supabase()
@@ -564,7 +564,7 @@ def mainpage():
                   with colunas_incluir_votante[0]:
                         widget_lista_votantes(conn)
                   with colunas_incluir_votante[1]:
-                        st.markdown('#### Incluir ou Excluir Votantes')
+                        st.markdown('#### Incluir, Alterar ou Excluir Votantes')
                         widget_incluir_votante(app_config)
                         widget_excluir_votante()
 
