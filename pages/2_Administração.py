@@ -382,30 +382,34 @@ def widget_limpar_urna(conn, app_config: Dict, lista_perguntas_atuais: List) -> 
             
             st.warning('Esta função permite limpa os votos da urna (de uma pergunta específica ou de todas perguntas)\nPara ser utilizado se for necessário reiniciar o voto de uma pergunta ou de todas perguntas, por razões técnicas.')
 
-            lista_perguntas_atuais.append('Todas')
+            if lista_perguntas_atuais:
+                  lista_perguntas_atuais.append('Todas')
             
-            if not app_config['votacao_ativa']:
-                  
-                  pergunta_a_limpar = st.selectbox('Pergunta com votos a serem removidos', lista_perguntas_atuais)
-                  
-                  confirma_limpa_urna = st.button("Limpar urna", type="primary")
-
-                  if confirma_limpa_urna:
-
-                        if pergunta_a_limpar != 'Todas':
-                              db_utils.deletar_votos(conn, pergunta_id=pergunta_a_limpar)
-                              st.success('Votos da pergunta ' + str(pergunta_a_limpar) + ' removidos com sucesso!')
-                        else:
-                              db_utils.deletar_votos(conn)
-                              st.success('Todos votos da urna limpos com sucesso!')
-                              
-                        sleep(2.5)
-                        st.rerun()
+                  if not app_config['votacao_ativa']:
                         
+                        pergunta_a_limpar = st.selectbox('Pergunta com votos a serem removidos', lista_perguntas_atuais)
+                        
+                        confirma_limpa_urna = st.button("Limpar urna", type="primary")
+      
+                        if confirma_limpa_urna:
+      
+                              if pergunta_a_limpar != 'Todas':
+                                    db_utils.deletar_votos(conn, pergunta_id=pergunta_a_limpar)
+                                    st.success('Votos da pergunta ' + str(pergunta_a_limpar) + ' removidos com sucesso!')
+                              else:
+                                    db_utils.deletar_votos(conn)
+                                    st.success('Todos votos da urna limpos com sucesso!')
+                                    
+                              sleep(2.5)
+                              st.rerun()
+                              
+                        
+                  else:
+                        st.button("Limpar urna", type="primary", disabled=True)
+                        st.selectbox('Pergunta com votos a serem removidos', lista_perguntas_atuais, disabled=True)
                         
             else:
-                  st.button("Limpar urna", type="primary", disabled=True)
-                  st.selectbox('Pergunta com votos a serem removidos', lista_perguntas_atuais, disabled=True)
+                  st.error('Sem perguntas cadastradas!')
                                                 
 
 
