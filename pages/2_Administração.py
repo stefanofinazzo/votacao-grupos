@@ -471,7 +471,7 @@ def widget_status_config(conn, app_config: Dict, lista_perguntas_atuais: List):
             else:
                   lista_perguntas_ausentes = list(range(1, app_config['numero_perguntas'] + 1))
 
-            if list_perguntas_ausentes:
+            if lista_perguntas_ausentes:
                   string_perguntas_ausentes = [str(pergunta) for pergunta in lista_perguntas_ausentes]
                   mensagem_perguntas_ausentes = '**:red[Perguntas não cadastradas: ' + ', '.join(string_perguntas_ausentes) + ']**'
                   st.markdown(mensagem_perguntas_ausentes)
