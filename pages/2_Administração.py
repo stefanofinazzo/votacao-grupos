@@ -234,7 +234,7 @@ def widget_resultados(conn, app_config: dict):
       
 def display_metrics(app_config: dict) -> None:
 
-      metrics = st.columns(3)
+      metrics = st.columns(4)
       
       with metrics[0]:
             st.metric('Número de grupos', app_config['numero_grupos'])
@@ -244,8 +244,10 @@ def display_metrics(app_config: dict) -> None:
             if app_config['votacao_ativa']:
                   st.metric('Votação', 'ATIVA')
             else:
-                   st.metric('Votação', 'FECHADA')
-                  
+                  st.metric('Votação', 'FECHADA')
+      with metrics[3]:
+            st.metric('Pergunta em votação', app_config['pergunta_liberada'])
+                        
 def widget_set_grupos(conn, app_config: dict) -> None: 
 
       st.markdown('#### Configuração de grupos')
