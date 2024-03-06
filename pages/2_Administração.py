@@ -366,7 +366,7 @@ def widget_reinicializar_votantes(conn, app_config: dict):
                   sleep(2.5)
                   st.rerun()
 
-def widget_exclusao_dados(conn, app_config: dict):
+def widget_exclusao_dados(conn):
 
       st.markdown('#### Excluir votantes e perguntas')
 
@@ -397,6 +397,7 @@ def widget_configurar_votacao(app_config: dict):
       with colunas_config[0]:
             widget_set_grupos(conn, app_config)
             widget_set_perguntas(conn, app_config)
+            widget_exclusao_dados(conn)
 
       with colunas_config[1]:
             widget_reinicializar_votantes(conn, app_config)
