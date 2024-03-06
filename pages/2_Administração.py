@@ -304,10 +304,12 @@ def widget_liberar_votacao(conn, app_config: Dict):
       perguntas_list = db_utils.get_list_table(conn, table='perguntas')
       perguntas_df = db_utils.list_para_df(perguntas_list)
       lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df) 
-      lista_perguntas_atuais.sort()
       
       with st.form("liberar_votacao"):
             if lista_perguntas_atuais:
+                  
+                  lista_perguntas_atuais.sort()
+                  
                   if not app_config['votacao_ativa']:
                         numero_pergunta_a_liberar = st.selectbox('Pergunta a liberar', 
                                                               lista_perguntas_atuais, 
