@@ -458,10 +458,10 @@ def widget_configurar_votacao(app_config: dict):
             widget_exclusao_dados(conn, app_config)
 
       with colunas_config[1]:
-            widget_reinicializar_votantes(conn, app_config)
-            widget_limpar_urna(conn, app_config)
             widget_liberar_votacao(conn, app_config)
             widget_fechar_votacao(conn, app_config)
+            widget_reinicializar_votantes(conn, app_config)
+            widget_limpar_urna(conn, app_config)
                  
 ############# PÁGINA PRINCIPAL #########
 
