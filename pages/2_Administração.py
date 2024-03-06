@@ -554,8 +554,8 @@ def mainpage():
                   st.button('Resultados', on_click=(lambda: alterar_tab('resultados')))
             
             with funcoes_tab[4]:
-                  st.button('Logout', on_click=(lambda: logout_admin()))
-                  st.rerun()        
+                  if st.button('Logout', on_click=(lambda: logout_admin())):
+                        st.rerun()        #o st.rerun não pode aparecer dentro de um callback, por limitação do streamlit
             
             
             match st.session_state['admin_tab']:
