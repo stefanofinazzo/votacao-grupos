@@ -325,19 +325,19 @@ def widget_liberar_votacao(conn, app_config: Dict):
                   lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
                   if lista_perguntas_atuais:
                         pergunta_valida = True if (numero_pergunta_a_liberar in lista_perguntas_atuais) else False
+                              
+                        if pergunta_valida:
+                              app_config['votacao_ativa'] = True
+                              app_config['pergunta_liberada'] = numero_pergunta_a_liberar
+                              
+                              db_utils.update_config(conn, app_config)
+                              st.success('Votação liberada com sucesso!')
+                              sleep(2.5)
+                              st.rerun()
+                        else:
+                              st.error('Pergunta ' + str(numero_pergunta_a_liberar) + ' não cadastrada!')
                   else:
                         st.error('Sem perguntas cadastradas!')
-                        
-                  if pergunta_valida:
-                        app_config['votacao_ativa'] = True
-                        app_config['pergunta_liberada'] = numero_pergunta_a_liberar
-                        
-                        db_utils.update_config(conn, app_config)
-                        st.success('Votação liberada com sucesso!')
-                        sleep(2.5)
-                        st.rerun()
-                  else:
-                        st.error('Pergunta ' + str(numero_pergunta_a_liberar) + ' não cadastrada!')
 
 def widget_fechar_votacao(conn, app_config: Dict):
 
