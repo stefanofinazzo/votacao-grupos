@@ -106,7 +106,7 @@ def widget_incluir_pergunta(conn, app_config: Dict, perguntas_df: pd.DataFrame) 
                   st.rerun()
       
 
-def widget_excluir_pergunta(conn, perguntas_df: pd.DataFrame) -> None:
+def widget_excluir_pergunta(conn, app_config: Dict, perguntas_df: pd.DataFrame) -> None:
 
       st.write("Exclusão de pergunta")
       
