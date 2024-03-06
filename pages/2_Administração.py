@@ -403,7 +403,7 @@ def widget_reinicializar_votantes(conn, app_config: Dict):
                   st.rerun()
 
 def widget_limpar_urna(conn, app_config: Dict, lista_perguntas_atuais: List) -> None:
-      st.markdown('#### Reinicializar votantes')
+      st.markdown('#### Limpar urna')
       
       with st.container(border=True):
             
