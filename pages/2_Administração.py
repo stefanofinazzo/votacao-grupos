@@ -19,6 +19,23 @@ def alterar_tab(tab_choice: str) -> None:
 
       st.session_state['admin_tab'] = tab_choice
 
+def widget_autenticacao_admin():
+   
+   with st.form("autenticar_admin"):
+      st.write("Insira a senha de administrador")
+      admin_password = st.text_input('Senha')
+      
+      submitted = st.form_submit_button("Enviar")
+      
+      if submitted:
+         if admin_password == ADMIN_PASSWORD:
+            st.session_state['admin_user'] = True
+            st.success('Bem-vindo!')
+            sleep(2.5)
+            st.rerun()
+         else:
+            st.error('Senha inválida')
+
 def logout_admin() -> None:
       st.session_state['admin_user'] = False
       st.success('Logout realizado')
@@ -31,7 +48,7 @@ def mainpage() -> None:
       st.title('Gerenciamento da Votação')
 
       if 'admin_user' not in st.session_state or not st.session_state['admin_user']:
-            vot_widgets.widget_autenticacao_admin()
+            widget_autenticacao_admin()
                
       else:
             conn = db_utils.connect_supabase()
