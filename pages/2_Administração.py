@@ -371,13 +371,13 @@ def widget_exclusao_dados(conn, app_config: dict) -> None:
       st.markdown('#### Excluir votantes e perguntas')
 
       st.error('Atenção, estas configurações EXCLUEM todos votantes ou perguntas')
-      colunas_botoes_exclusao = st.columns(2)
-
+      
       if not app_config['votacao_ativa']:
             
             confirma_exclusao = st.checkbox('Confirmar exclusão')
+            colunas_botoes_exclusao = st.columns(2)
             
-            with colunas_botoes_exclusao[0]: 
+            with colunas_botoes_exclusao[0]:
                   if st.button('Excluir perguntas') and confirma_exclusao:
             
                         st.success('Todas perguntas excluídos com sucesso')
@@ -393,6 +393,7 @@ def widget_exclusao_dados(conn, app_config: dict) -> None:
 
       else:
             confirma_exclusao = st.checkbox('Confirmar exclusão', disabled=True)
+            colunas_botoes_exclusao = st.columns(2)
             with colunas_botoes_exclusao[0]: 
                   st.button('Excluir perguntas', disabled=True)
             with colunas_botoes_exclusao[1]:
