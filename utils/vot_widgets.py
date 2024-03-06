@@ -161,13 +161,15 @@ def widget_incluir_votante(conn, app_config: Dict):
                   sleep(1)
                   st.rerun()
 
-def widget_excluir_votante(conn):
+def widget_excluir_votante(conn, app_config: Dict):
    
       with st.form("excluir_votante"):
             st.write("Exclusão de votante")
+            
             if not app_config['votacao_ativa']:
                   email = st.text_input('E-mail')
                   submitted = st.form_submit_button("Excluir votante", type="primary")
+                  
             elif app_config['votacao_ativa']:
                   st.info('Votação liberada. Inclusãp de votantes possível apenas com votação interrompida')
                   email = st.text_input('E-mail', disabled=True)
