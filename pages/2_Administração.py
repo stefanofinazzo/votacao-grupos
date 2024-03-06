@@ -430,7 +430,7 @@ def mainpage():
                         widget_incluir_votante(app_config)
                         widget_excluir_votante()
 
-            case st.session_state['admin_tab'] == 'resultados':   
+            case 'resultados':   
                   widget_resultados(conn, app_config)
 
 
