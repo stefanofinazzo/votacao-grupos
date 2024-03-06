@@ -352,6 +352,8 @@ def widget_fechar_votacao(conn, app_config: dict):
 def widget_reinicializar_votantes(conn, app_config: dict):
 
       st.markdown('#### Reinicializar votantes')
+
+      st.info('Utilize esta opção para liberar o voto de todos votantes')
       
       with st.form("reinicializar_votantes"):
 
