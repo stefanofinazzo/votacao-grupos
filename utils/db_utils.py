@@ -60,7 +60,7 @@ def list_para_df(data_dict):
 def insert_pergunta(conn, n_pergunta: int, nome_pergunta: str): 
   
   _, _ = (conn.table('perguntas')
-             .upsert({"pergunta_id": n_pergunta, 
+             .insert({"pergunta_id": n_pergunta, 
                "pergunta_texto": nome_pergunta})
             .execute()
          )
