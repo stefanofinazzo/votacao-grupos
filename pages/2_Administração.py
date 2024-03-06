@@ -251,7 +251,9 @@ def widget_set_grupos(conn, app_config: dict) -> None:
       st.markdown('#### Configuração de grupos')
       
       with st.form("numero_grupos"):
-      
+
+             st.warning('Atenção: as perguntas já cadastradas acima do limite serão eliminadas!',  icon="⚠️")
+            
             if not app_config['votacao_ativa']:
                   numero_grupos = st.slider('Número de grupos', 1, 10, app_config['numero_grupos'])
                   submitted_grupos = st.form_submit_button("Configurar", type="primary")
@@ -262,6 +264,7 @@ def widget_set_grupos(conn, app_config: dict) -> None:
             if submitted_grupos:
                   app_config['numero_grupos'] = numero_grupos
                   db_utils.update_config(conn, app_config)
+                  db_utils.delete_usuarios_acima_grupo_limite(conn, app_config) 
                   st.successs('Configuração atualizada com sucesso!')
                   sleep(2.5)
                   st.rerun()
@@ -272,7 +275,7 @@ def widget_set_perguntas(conn, app_config: dict) -> None:
       
       with st.form("numero_perguntas"):
       
-            st.warning('Atenção: as perguntas já cadastradas acima do limite serão eliminadas!')
+            st.warning('Atenção: as perguntas já cadastradas acima do limite serão eliminadas!',  icon="⚠️")
       
             if not app_config['votacao_ativa']:
                   numero_perguntas = st.slider('Número de perguntas', 1, 20, app_config['numero_perguntas'])
@@ -399,16 +402,17 @@ def mainpage():
             st.session_state['admin_tab'] = 'configuracao'
             
       with funcoes_tab[0]:
-            st.button('Gerenciar Perguntas', on_click=(lambda: alterar_tab('perguntas')))
+            st.button('Configurações', on_click=(lambda: alterar_tab('configuracao')))
 
       with funcoes_tab[1]:
-            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('votantes')))
+            st.button('Gerenciar Perguntas', on_click=(lambda: alterar_tab('perguntas')))
 
       with funcoes_tab[2]:
-            st.button('Resultados', on_click=(lambda: alterar_tab('resultados')))
-
+            st.button('Gerenciar Votantes', on_click=(lambda: alterar_tab('votantes')))
+            
       with funcoes_tab[3]:
-            st.button('Configurações', on_click=(lambda: alterar_tab('configuracao')))
+            st.button('Resultados', on_click=(lambda: alterar_tab('resultados')))
+            
 
       match st.session_state['admin_tab']:
             case 'configuracao':
