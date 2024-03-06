@@ -564,6 +564,7 @@ def mainpage():
                   with colunas_incluir_votante[0]:
                         widget_lista_votantes(conn)
                   with colunas_incluir_votante[1]:
+                        st.markdown('#### Incluir ou Excluir Votantes')
                         widget_incluir_votante(app_config)
                         widget_excluir_votante()
 
