@@ -125,7 +125,7 @@ def insert_votante(conn, nome: str, email: str, grupo: int):
   token = create_token()
   
   _, _ = (conn.table('votantes')
-             .insert({"nome": nome, 
+             .upsert({"nome": nome, 
                "email": email,
                "grupo": grupo,
                "token": token,
