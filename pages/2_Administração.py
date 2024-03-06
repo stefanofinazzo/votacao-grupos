@@ -457,8 +457,11 @@ def widget_configurar_votacao(app_config: Dict):
       conn = db_utils.connect_supabase()
       perguntas_list = db_utils.get_list_table(conn, table='perguntas')
       perguntas_df = db_utils.list_para_df(perguntas_list)
-      lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
-      lista_perguntas_atuais.sort()
+      if not perguntas_df.empty:
+            lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
+            lista_perguntas_atuais.sort()
+      else:
+            lista_perguntas_atuais = None
       
       display_metrics(app_config)
 
