@@ -305,10 +305,10 @@ def widget_liberar_votacao(conn, app_config: Dict):
       perguntas_df = db_utils.list_para_df(perguntas_list)
       lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df) 
       
-      with st.form("liberar_votacao"):
-            if lista_perguntas_atuais:
-                  
-                  lista_perguntas_atuais.sort()
+      if lista_perguntas_atuais:
+            lista_perguntas_atuais.sort()
+            
+            with st.form("liberar_votacao"):
                   
                   if not app_config['votacao_ativa']:
                         numero_pergunta_a_liberar = st.selectbox('Pergunta a liberar', 
@@ -333,10 +333,12 @@ def widget_liberar_votacao(conn, app_config: Dict):
                                     st.success('Votação liberada com sucesso!')
                                     sleep(2.5)
                                     st.rerun()
+                                    
                               else:
                                     st.error('Pergunta ' + str(numero_pergunta_a_liberar) + ' não cadastrada!')
-            else:
-                  st.error('Sem perguntas cadastradas!')
+                                    
+      if not lista_perguntas_atuais:
+            st.error('Sem perguntas cadastradas!')
 
 def widget_fechar_votacao(conn, app_config: Dict):
 
