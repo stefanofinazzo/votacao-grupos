@@ -100,7 +100,7 @@ def mainpage() -> None:
                         with colunas_incluir_votante[1]:
                               st.markdown('#### Incluir, Alterar ou Excluir Votantes')
                               vot_widgets.widget_incluir_votante(conn, app_config)
-                              vot_widgets.widget_excluir_votante(conn)
+                              vot_widgets.widget_excluir_votante(conn, app_config)
             
                   case 'resultados':   
                         vot_widgets.widget_resultados(conn, app_config)
