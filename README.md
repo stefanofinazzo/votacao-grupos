@@ -54,14 +54,6 @@ Para deploy no Streamlit Cloud, você deve atualizar os secrets conforme [as ins
 
 Limitações já identificadas:
 
-1. O aplicativo não comporta muitos usuários simultâneos. O banco de dados do Supabase, mesmo na versão gratuíta, é muito robusto. Contudo, os [limites de recursos do Streamlit Cloud](https://docs.streamlit.io/streamlit-community-cloud/manage-your-app)) são modestos. O aplicativo foi testado com sucesso com X usuários simultâneos. Caso seja necessário maior número de usuários, é necessário fazer o deploy do Streamlit em outra plataforma.
+1. Limite de usuários simultâneos. O banco de dados do Supabase, mesmo na versão gratuíta, é muito robusto e com limites bem generosos. Contudo, os [limites de recursos do Streamlit Cloud](https://docs.streamlit.io/streamlit-community-cloud/manage-your-app) são modestos, embora suficientes para grupos pequenos. O aplicativo foi testado com sucesso com X usuários simultâneos. Caso seja necessário maior número de usuários, é necessário fazer o deploy do Streamlit em outra plataforma.
 
 2. O módulo de administração é no mesmo webapp que o o módulo de votação. Caso necessário, isso é simples de ser resolvido: basta usar dois projetos, um apenas com o módulo de administração e o outro apenas com o módulo de votação, e criar dois apps no Streamlit Cloud.
- 
-## Funcionalidades futuras
-
-Para versões futuras, sugestões de funcionalidades a serem implementadas:
-
-1. Envio dos tokens por e-mail pelo administrador.
-2. Inserção de votantes e perguntas em bulk por meio do front-end (da forma atual, a interface exige a inserção pelo administrador das perguntas uma a uma).
-3. Refatorar o código para separar melhor o front-end do back-end, e reduzir o uso de recursos do Streamlit Cloud (passar parte das rotinas para o banco de dados).
