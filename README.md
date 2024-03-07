@@ -6,9 +6,9 @@ Repositório para um sistema de votação simples em Streamlit para atividades e
 
 O objetivo é ter um aplicativo de rápida implementação e baixa complexidade, deploy quase instantâneo, com ótima usabilidade, responsivo (para poder ser utilizado em celulares), fácil manutenção e customização, com ferramentas simples de controle e visualização dos resultados por um administrador, com baixíssimo custo, com viabilidade para grupos pequenos de jogadores.
 
-O uso de caso típico são em situações de jogos corporativos, em que os participantes devem votar ou responder algumas questões pré-formuladas.
+O caso de uso típico são em situações de jogos corporativos, em que os participantes devem votar ou responder algumas questões pré-formuladas.
 
-No uso de caso específico para que o aplicativo foi desenhado, a votação é para o seguinte jogo: um conjunto de $N$ grupos, com vários participantes em cada um, votam para eleger um grupo em cada rodada, em várias rodadas de perguntas, com a restrição de que cada participante não pode votar no próprio grupo em que pertence. Em cada rodada, os grupos são ranqueados em ordem de número de votos, sendo que o grupo com mais votos recebe $N+1$ pontos, o segundo grupo mais votado recebe $N$ pontos, e assim por diante, até o último grupo, que recebe 1 ponto. No fim de todas rodadas, ganha o grupo com mais pontos.
+No caso de uso específico para que o aplicativo foi desenhado, a votação é para o seguinte jogo: um conjunto de $N$ grupos, com vários participantes em cada um, votam para eleger um grupo em cada rodada, em várias rodadas de perguntas, com a restrição de que cada participante não pode votar no próprio grupo em que pertence. Em cada rodada, os grupos são ranqueados em ordem de número de votos, sendo que o grupo com mais votos recebe $N+1$ pontos, o segundo grupo mais votado recebe $N$ pontos, e assim por diante, até o último grupo, que recebe 1 ponto. No fim de todas rodadas, ganha o grupo com mais pontos.
 
 Da forma que é implementado, o custo é zero: o Streamlit Cloud e o Supabase disponibilizam soluções sem custo, com limites razoáveis (dados de mar/2024).
 
