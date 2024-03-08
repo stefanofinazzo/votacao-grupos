@@ -20,17 +20,19 @@ Não é implementado nenhum sistema de hashing, autenticação ou autorização 
 
 ### Fork no github
 
-Faça um fork deste projeto para sua conta do github. Mantenha o projeto público (necessário para disponibilização no Streamlit Cloud e acesso público).
+Faça um fork deste projeto para sua conta do github. Mantenha o projeto público (necessário para disponibilização no Streamlit Cloud e acesso público dos votantes).
 
 ### Criando o banco de dados
 
-Crie uma conta no Supabase e abra um banco de dados pessoal.
+Crie uma conta no [Supabase](https://supabase.com/) e abra um banco de dados pessoal.
 
 Na pasta supabase_db do projeto o arquivo create_db.sql possui os comandos de PostgreSQL necessários para criar o schema de tabelas utilizado no back-end.
 
+A maior parte das rotinas de acesso ao back-end estão concentradas em ./utils/db_utils.py, caso queira utilizar outro banco de dados ou utilizar seu ORM preferido.
+
 ### Streamlit Cloud
 
-INSTRUÇÕES A DESCREVER
+As instruções de deploy no Streamlit Cloud são descritas [aqui](https://docs.streamlit.io/streamlit-community-cloud/deploy-your-app).
 
 ### Secrets
 
@@ -44,8 +46,8 @@ No caso deste app, ele tem o formato:
 ADMIN_PASSWORD = "SENHA DO USUARIO ADMINISTRADOR DO APP"
 
 [connections.supabase]
-SUPABASE_URL = "URL DO DB DO STREAMLIT"
-SUPABASE_KEY = "Chave do URL do Streamlit"
+SUPABASE_URL = "URL DO DB DO SUPABASE"
+SUPABASE_KEY = "CHAVE DO URL DO SUPABASE"
 ```
 
 Para deploy no Streamlit Cloud, você deve atualizar os secrets conforme [as instruções do Streamlit](https://docs.streamlit.io/streamlit-community-cloud/deploy-your-app/secrets-management).
@@ -54,6 +56,6 @@ Para deploy no Streamlit Cloud, você deve atualizar os secrets conforme [as ins
 
 Limitações já identificadas:
 
-1. Limite de usuários simultâneos. O banco de dados do Supabase, mesmo na versão gratuíta, é muito robusto e com limites bem generosos. Contudo, os [limites de recursos do Streamlit Cloud](https://docs.streamlit.io/streamlit-community-cloud/manage-your-app) são modestos, embora suficientes para grupos pequenos. O aplicativo foi testado com sucesso com X usuários simultâneos. Caso seja necessário maior número de usuários, é necessário fazer o deploy do Streamlit em outra plataforma.
+1. Limite de usuários simultâneos. O banco de dados do Supabase, mesmo na versão gratuíta, é muito robusto e com limites bem generosos. Contudo, os [limites de recursos do Streamlit Cloud](https://docs.streamlit.io/streamlit-community-cloud/manage-your-app) são modestos, embora suficientes para grupos pequenos. O aplicativo foi testado com sucesso com X usuários simultâneos. Caso seja necessário maior número de usuários, é necessário fazer o deploy do app do Streamlit em outra plataforma.
 
 2. O módulo de administração é no mesmo webapp que o o módulo de votação. Caso necessário, isso é simples de ser resolvido: basta usar dois projetos, um apenas com o módulo de administração e o outro apenas com o módulo de votação, e criar dois apps no Streamlit Cloud.
