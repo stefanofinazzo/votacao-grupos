@@ -1,15 +1,18 @@
 Todo:
 
+- Melhorar interface de votação
+- Correções e testes nas funcionalidades de gerenciamento da votação
 - Gráfico de resultado final no tab de resultados
 - Embelezar tab de resultados
 - Incluir resultado de grupos com 0 votos (com pontos)
 - Gráficos de votos devem incluir os grupos com 0 votos
 - Verificar critério de desempate (se está computando corretamente desempates)
 - Incluir pontuação no tab de resultados
-- Refatorações gerais
 - Implementar descrição de tipagem em todas funções em todos módulos
 - Corrigir indentações e espaços
+- Documentação geral
+- Refatorações gerais
 - Testes de responsividade
 - Configurações de cores e estilo
+- Inclusão de logomarca ou figura na interface de votação?
 - Rotinas iniciais de teste
-- Documentação geral
