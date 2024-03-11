@@ -9,7 +9,7 @@ from utils import db_utils
 ########## CONFIGURAÇÃO DO STREAMLIT ################
 
 st.set_page_config(page_title='Sistema de Votação', 
-                   page_icon=:computer:, 
+                   page_icon=':computer:', 
                    layout="wide", 
                    initial_sidebar_state="collapsed", 
                    menu_items=None)
