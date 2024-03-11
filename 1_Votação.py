@@ -8,7 +8,7 @@ from utils import db_utils
 
 ########## CONFIGURAÇÃO DO STREAMLIT ################
 
-st.set_page_config(page_title='Sistema de Votação', 
+st.set_page_config(page_title='Sistema de Votação',
                    page_icon=':computer:', 
                    layout="wide", 
                    initial_sidebar_state="collapsed", 
@@ -26,19 +26,19 @@ def widget_verifica_votante(conn):
         submitted = st.form_submit_button("Entrar", type="primary")
           
         if submitted:
-          
+            
              votante, votante_localizado = db_utils.localiza_votante(conn, email_votante)
-          
+             
              if votante_localizado:
                  if token == votante['token']:
                      if not votante['votou']:
-                        st.session_state['votante_autorizado'] = True
-                        st.session_state['votante_atual'] = votante
-                        st.success('Bem-vindo!')
-                        sleep(2.5)
-                        st.rerun()
+                         st.session_state['votante_autorizado'] = True
+                         st.session_state['votante_atual'] = votante
+                         st.success('Bem-vindo!')
+                         sleep(2.5)
+                         st.rerun()
                      else:
-                        st.error('Seu voto já foi computado!')
+                         st.error('Seu voto já foi computado!')
                  else:
                      st.error('Token incorreto')
              else:
@@ -52,7 +52,6 @@ def widget_em_votacao(conn, app_config: dict) -> None:
     st.markdown('## Pergunta ' + str(pergunta_atual_id))
     st.markdown('### ' + pergunta_atual_text)
 
-    email_votante_atual = st.session_state['votante_atual']['email']
     grupo_votante_atual = st.session_state['votante_atual']['grupo']
 
     lista_grupos_passiveis_voto = list(range(1,app_config['numero_grupos']+1))
@@ -94,4 +93,3 @@ def mainpage():
 
 if __name__ == '__main__':
     mainpage()
-
