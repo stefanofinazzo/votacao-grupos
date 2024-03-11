@@ -5,6 +5,7 @@ from time import sleep
 import streamlit as st
 
 from utils import db_utils
+from utils import st_tools
 
 ########## CONFIGURAÇÃO DO STREAMLIT ################
 
@@ -70,6 +71,8 @@ def widget_em_votacao(conn, app_config: dict) -> None:
         st.rerun()
 
 def mainpage():
+    st_tools.remove_bar()
+  
     st.title('Sistema de votação')
 
     if not 'votante_autorizado' in st.session_state:
