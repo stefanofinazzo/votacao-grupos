@@ -1,6 +1,5 @@
 Todo:
 
-- Melhorar interface de votação
 - Correções e testes nas funcionalidades de gerenciamento da votação
 - Gráfico de resultado final no tab de resultados
 - Embelezar tab de resultados
@@ -9,10 +8,9 @@ Todo:
 - Verificar critério de desempate (se está computando corretamente desempates)
 - Incluir pontuação no tab de resultados
 - Implementar descrição de tipagem em todas funções em todos módulos
-- Corrigir indentações e espaços
+- Uniformizar indentações e espaços (1_Votação.py já corrigido, verificar demais)
+- Inclusão de logomarca ou figura na interface de votação?
 - Documentação geral
 - Refatorações gerais
-- Testes de responsividade
-- Configurações de cores e estilo
-- Inclusão de logomarca ou figura na interface de votação?
+- Testes de responsividade (testes preliminares ok)
 - Rotinas iniciais de teste
