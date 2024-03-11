@@ -32,11 +32,11 @@ def widget_verifica_votante(conn):
              if votante_localizado:
                  if token == votante['token']:
                      if not votante['votou']:
-												 st.session_state['votante_autorizado'] = True
-												 st.session_state['votante_atual'] = votante
-												 st.success('Bem-vindo!')
-												 sleep(2.5)
-												 st.rerun()
+                         st.session_state['votante_autorizado'] = True
+                         st.session_state['votante_atual'] = votante
+                         st.success('Bem-vindo!')
+                         sleep(2.5)
+                         st.rerun()
                      else:
 	                       st.error('Seu voto já foi computado!')
                  else:
