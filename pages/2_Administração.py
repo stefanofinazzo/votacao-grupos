@@ -4,6 +4,7 @@ from time import sleep
 import streamlit as st
 
 from utils import db_utils
+from utils import st_tools
 from utils import vot_widgets
 
 ############# VARIÁVEIS GLOBAIS #################
@@ -46,6 +47,8 @@ def logout_admin() -> None:
 
 def mainpage() -> None:      
 
+      st_tools.remove_bar()
+      
       st.title('Gerenciamento da Votação')
 
       if 'admin_user' not in st.session_state or not st.session_state['admin_user']:
