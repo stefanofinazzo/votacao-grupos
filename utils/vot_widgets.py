@@ -40,6 +40,17 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 
       st.plotly_chart(fig, use_container_width=True)
 
+def inclui_votos_zerados(pergunta_df: pd.DataFrame, total_grupos: int) -> pd.DataFrame:
+      
+      votos_perguntas_com_zeros_df = votos_pergunta_df.copy()
+      
+      for grupo_atual in range(total_grupos):
+            filtro_grupo_atual = votos_pergunta_df['voto'] == grupo_atual
+            votos_grupo_atual_df = votos_pergunta_df[filtro_grupo_atual]
+            if votos_grupo_atual_df.empty:
+                  st.write('Grupo ' + str(grupo_atual))  
+
+      
 def calcula_pontuacao_pergunta(votos_pergunta_df: pd.DataFrame, total_grupos: int) -> pd.DataFrame:
 
       ranking_pergunta_df = votos_pergunta_df.copy()
@@ -249,6 +260,7 @@ def widget_resultados(conn, app_config: Dict):
                         with colunas_resultados[0]:
                               ranking_pergunta_df = calcula_pontuacao_pergunta(votos_pergunta_df, numero_grupos)
                               st.dataframe(ranking_pergunta_df)
+                              inclui_votos_zerados(votos_pergunta_df, numero_grupos)
                               
                         with colunas_resultados[1]:
                               votos_bar_plot(votos_pergunta_df)
