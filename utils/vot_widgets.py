@@ -69,7 +69,7 @@ def ranking_bar_plot(pontuacao_final_df: pd.DataFrame,
                 xaxis = dict(
                     tickmode = 'linear',
                     tick0 = 0,
-                    dtick = 1
+                    tickformat = ',d'
                 )
             )
       
