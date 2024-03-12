@@ -309,11 +309,10 @@ def widget_resultados(conn, app_config: Dict):
                   
                   perguntas_com_votos = votos_df['pergunta_id'].unique().tolist()
                   pontuacao_df = pd.DataFrame()
-                  
+
+                  st.markdown('### Resultado por pergunta')
                   for pergunta_id in perguntas_com_votos:
 
-                        st.markdown('### Resultado por pergunta')
-                        
                         st.markdown('##### Pergunta ' + str(pergunta_id))
                         
                         colunas_resultados = st.columns(2)
