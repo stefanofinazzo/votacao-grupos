@@ -346,7 +346,7 @@ def widget_resultados(conn, app_config: Dict):
                                 },
                               )
                   
-                  ranking_bar_plot(pontuacao_final_df, container) 
+                  ranking_bar_plot(pontuacao_final_df, container_pontuacao_final ) 
                               
             else:
                   st.markdown('#### Urna vazia!')
