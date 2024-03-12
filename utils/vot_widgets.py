@@ -51,7 +51,7 @@ def inclui_votos_zerados(votos_pergunta_df: pd.DataFrame, total_grupos: int, per
             if votos_grupo_atual_df.empty:
                   new_row = pd.DataFrame({'n_votos': 0, 
                                           'voto': str(grupo_atual),
-                                         }
+                                         })
                   votos_perguntas_com_zeros_df = pd.concat([votos_perguntas_com_zeros_df, new_row])
 
       return votos_perguntas_com_zeros_df
