@@ -1,11 +1,13 @@
 ############# PACOTES ##################
 from time import sleep
-from typing import List, Dict
+from typing import List, Dict, Union
 
 import pandas as pd
 import plotly.express as px
 
 import streamlit as st
+
+from streamlit.delta_generator import DeltaGenerator
 
 from . import db_utils
 
@@ -20,7 +22,7 @@ def lista_perguntas_no_banco(perguntas_df: pd.DataFrame):
             
       return lista_perguntas
 
-def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
+def votos_bar_plot(votos_pergunta_df: pd.DataFrame) -> None:
 
       fig = px.bar(votos_pergunta_df,
                    y='voto',
@@ -44,9 +46,37 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
                 )
             )
       
-      fig.show()
-
       st.plotly_chart(fig, use_container_width=True)
+
+def ranking_bar_plot(pontuacao_final_df: pd.DataFrame, container: Union[None, DeltaGenerator] = None) -> None:
+      
+      fig = px.bar(pontuacao_final_df,
+                   y='grupo',
+                   x='pontuacao',
+                   labels={
+                     "grupo": "Grupo",
+                     "pontuacao": "Pontuação",
+                       },
+                  )
+
+      fig.update_layout(
+                yaxis = dict(
+                    tickmode = 'linear',
+                    tick0 = 1,
+                    dtick = 1
+                ),
+                xaxis = dict(
+                    tickmode = 'linear',
+                    tick0 = 0,
+                    dtick = 1
+                )
+            )
+      
+      if container:
+            container.plotly_chart(fig, use_container_width=True)
+      else:
+            st.plotly_chart(fig, use_container_width=True)
+      
 
 def calcula_votos_para_pergunta(votos_df: pd.DataFrame, 
                                 pergunta_id: int, 
@@ -315,6 +345,8 @@ def widget_resultados(conn, app_config: Dict):
                                 "pontuacao": st.column_config.TextColumn("Pontuação")
                                 },
                               )
+                  
+                  ranking_bar_plot(pontuacao_final_df, container) 
                               
             else:
                   st.markdown('#### Urna vazia!')
