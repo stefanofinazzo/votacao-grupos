@@ -37,7 +37,7 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame) -> None:
                 yaxis = dict(
                     tickmode = 'linear',
                     tick0 = 1,
-                    dtick = 1
+                    dtick = 1,
                     autorange='reversed'
                 ),
                 xaxis = dict(
