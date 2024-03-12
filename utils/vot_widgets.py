@@ -260,6 +260,7 @@ def widget_resultados(conn, app_config: Dict):
                         with colunas_resultados[0]:
                               ranking_pergunta_df = calcula_pontuacao_pergunta(votos_pergunta_df, numero_grupos)
                               st.dataframe(ranking_pergunta_df)
+                              st.dataframe(votos_pergunta_df)
                               inclui_votos_zerados(votos_pergunta_df, numero_grupos)
                               
                         with colunas_resultados[1]:
