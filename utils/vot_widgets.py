@@ -48,7 +48,9 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame) -> None:
       
       st.plotly_chart(fig, use_container_width=True)
 
-def ranking_bar_plot(pontuacao_final_df: pd.DataFrame, container: Union[None, DeltaGenerator] = None) -> None:
+def ranking_bar_plot(pontuacao_final_df: pd.DataFrame, 
+                     container: Union[None, DeltaGenerator] = None,
+                     coluna: Union[None, DeltaGenerator]) -> None:
       
       fig = px.bar(pontuacao_final_df,
                    y='grupo',
@@ -73,7 +75,11 @@ def ranking_bar_plot(pontuacao_final_df: pd.DataFrame, container: Union[None, De
             )
       
       if container:
-            container.plotly_chart(fig, use_container_width=True)
+            if colunas:
+                  with coluna:
+                        container.plotly_chart(fig, use_container_width=True)
+            else:
+                  container.plotly_chart(fig, use_container_width=True)
       else:
             st.plotly_chart(fig, use_container_width=True)
       
@@ -351,9 +357,7 @@ def widget_resultados(conn, app_config: Dict):
                                       },
                                     )
                         
-                  with colunas_resultado_final[1]:
-                        
-                        ranking_bar_plot(pontuacao_final_df, container_pontuacao_final) 
+                  ranking_bar_plot(pontuacao_final_df, container_pontuacao_final, colunas_resultado_final[1]) 
                               
             else:
                   st.markdown('#### Urna vazia!')
