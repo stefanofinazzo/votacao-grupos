@@ -40,7 +40,7 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 
       st.plotly_chart(fig, use_container_width=True)
 
-def inclui_votos_zerados(pergunta_df: pd.DataFrame, total_grupos: int) -> pd.DataFrame:
+def inclui_votos_zerados(votos_pergunta_df: pd.DataFrame, total_grupos: int) -> pd.DataFrame:
       
       votos_perguntas_com_zeros_df = votos_pergunta_df.copy()
       
