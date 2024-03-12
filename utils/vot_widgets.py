@@ -48,6 +48,18 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 
       st.plotly_chart(fig, use_container_width=True)
 
+def calcula_votos_para_pergunta(votos_df: pd.DataFrame, 
+                                pergunta_id: int, 
+                                numero_grupos: int):
+      
+      filtro_pergunta = votos_df['pergunta_id'] == pergunta_id
+      votos_pergunta_df = votos_df[filtro_pergunta]
+      votos_pergunta_df = votos_pergunta_df.reset_index(drop=True)
+      votos_pergunta_df = votos_pergunta_df[['voto', 'n_votos']]
+      votos_pergunta_df = inclui_votos_zerados(votos_pergunta_df, numero_grupos)
+
+      return votos_pergunta_df
+
 def inclui_votos_zerados(votos_pergunta_df: pd.DataFrame, total_grupos: int) -> pd.DataFrame:
       
       votos_perguntas_com_zeros_df = votos_pergunta_df.copy()
@@ -55,7 +67,7 @@ def inclui_votos_zerados(votos_pergunta_df: pd.DataFrame, total_grupos: int) -> 
       for grupo_atual in range(1, total_grupos+1):
             filtro_grupo_atual = votos_pergunta_df['voto'] == str(grupo_atual)      #o grupo recebeu algum voto?
             votos_grupo_atual_df = votos_pergunta_df[filtro_grupo_atual]
-            st.dataframe(votos_grupo_atual_df)
+            
             if votos_grupo_atual_df.empty:
                   new_row = pd.DataFrame({'n_votos': [0], 
                                           'voto': [str(grupo_atual)],
@@ -267,14 +279,22 @@ def widget_resultados(conn, app_config: Dict):
                         
                         colunas_resultados = st.columns(2)
                         
-                        filtro_pergunta = votos_df['pergunta_id'] == pergunta
-                        votos_pergunta_df = votos_df[filtro_pergunta]
-                        votos_pergunta_df = votos_pergunta_df[['voto', 'n_votos']]
-                        votos_pergunta_df = inclui_votos_zerados(votos_pergunta_df, numero_grupos)
+                        votos_pergunta_df = calcula_votos_para_pergunta(votos_df, 
+                                                                        pergunta_id, 
+                                                                        numero_grupos)
                         
                         with colunas_resultados[0]:
                               ranking_pergunta_df = calcula_pontuacao_pergunta(votos_pergunta_df, numero_grupos)
-                              st.dataframe(ranking_pergunta_df)
+                              st.dataframe(ranking_pergunta_df,
+                                           hide_index=True,
+                                           use_container_width=True,
+                                           column_config={
+                                                  "ranking":  st.column_config.NumberColumn("Ranking"),
+                                                  "grupo": st.column_config.NumberColumn("Grupo"),
+                                                  "n_votos": st.column_config.TextColumn("Votos"),
+                                                  "pontuacao": st.column_config.TextColumn("Pontuação"),
+                                                  },
+                                                )
                               
                         with colunas_resultados[1]:
                               votos_bar_plot(votos_pergunta_df)
