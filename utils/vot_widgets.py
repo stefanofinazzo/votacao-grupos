@@ -38,6 +38,7 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame) -> None:
                     tickmode = 'linear',
                     tick0 = 1,
                     dtick = 1
+                    autorange='reversed'
                 ),
                 xaxis = dict(
                     tickmode = 'linear',
@@ -64,7 +65,8 @@ def ranking_bar_plot(pontuacao_final_df: pd.DataFrame,
                 yaxis = dict(
                     tickmode = 'linear',
                     tick0 = 1,
-                    dtick = 1
+                    dtick = 1,
+                    autorange='reversed'  
                 ),
                 xaxis = dict(
                     tickmode = 'linear',
