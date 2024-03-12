@@ -296,7 +296,7 @@ def widget_resultados(conn, app_config: Dict):
       
             if not votos_df.empty:
 
-                  st.markdown('##### Resultado Final')
+                  st.markdown('### Resultado Final')
 
                   colunas_resultado_final = st.columns(2)
                   with colunas_resultado_final[0]:
@@ -311,7 +311,9 @@ def widget_resultados(conn, app_config: Dict):
                   pontuacao_df = pd.DataFrame()
                   
                   for pergunta_id in perguntas_com_votos:
-      
+
+                        st.markdown('### Resultado por pergunta')
+                        
                         st.markdown('##### Pergunta ' + str(pergunta_id))
                         
                         colunas_resultados = st.columns(2)
