@@ -50,7 +50,7 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame) -> None:
 
 def ranking_bar_plot(pontuacao_final_df: pd.DataFrame, 
                      container: Union[None, DeltaGenerator] = None,
-                     coluna: Union[None, DeltaGenerator]) -> None:
+                     coluna: Union[None, DeltaGenerator] = None) -> None:
       
       fig = px.bar(pontuacao_final_df,
                    y='grupo',
