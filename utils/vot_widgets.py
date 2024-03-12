@@ -22,7 +22,15 @@ def lista_perguntas_no_banco(perguntas_df: pd.DataFrame):
 
 def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 
-      fig = px.bar(votos_pergunta_df, y='voto', x='n_votos')
+      fig = px.bar(votos_pergunta_df,
+                   y='voto',
+                   x='n_votos',
+                   labels={
+                     "voto": "Grupo",
+                     "n_votos": "Votos",
+                       },
+                  )
+      
       fig.update_layout(
                 yaxis = dict(
                     tickmode = 'linear',
