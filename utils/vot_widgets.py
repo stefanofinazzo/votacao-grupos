@@ -22,7 +22,7 @@ def lista_perguntas_no_banco(perguntas_df: pd.DataFrame):
 
 def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
 
-      fig = px.bar(votos_pergunta_df, x='voto', y='n_votos')
+      fig = px.bar(votos_pergunta_df, y='voto', x='n_votos')
       fig.show()
 
       st.plotly_chart(fig, use_container_width=True)
