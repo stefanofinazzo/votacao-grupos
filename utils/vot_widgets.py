@@ -44,8 +44,8 @@ def inclui_votos_zerados(votos_pergunta_df: pd.DataFrame, total_grupos: int) -> 
       
       votos_perguntas_com_zeros_df = votos_pergunta_df.copy()
       
-      for grupo_atual in range(total_grupos):
-            filtro_grupo_atual = votos_pergunta_df['voto'] == grupo_atual
+      for grupo_atual in range(1, total_grupos+1):
+            filtro_grupo_atual = votos_pergunta_df['voto'] == str(grupo_atual)      #o grupo recebeu algum voto?
             votos_grupo_atual_df = votos_pergunta_df[filtro_grupo_atual]
             st.dataframe(votos_grupo_atual_df)
             if votos_grupo_atual_df.empty:
