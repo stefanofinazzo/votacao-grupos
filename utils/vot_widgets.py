@@ -28,6 +28,11 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame):
                     tickmode = 'linear',
                     tick0 = 1,
                     dtick = 1
+                ),
+                xaxis = dict(
+                    tickmode = 'linear',
+                    tick0 = 0,
+                    dtick = 1
                 )
             )
       
