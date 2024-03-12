@@ -75,7 +75,7 @@ def ranking_bar_plot(pontuacao_final_df: pd.DataFrame,
             )
       
       if container:
-            if colunas:
+            if coluna:
                   with coluna:
                         container.plotly_chart(fig, use_container_width=True)
             else:
