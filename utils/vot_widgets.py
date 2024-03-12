@@ -49,8 +49,7 @@ def votos_bar_plot(votos_pergunta_df: pd.DataFrame) -> None:
       st.plotly_chart(fig, use_container_width=True)
 
 def ranking_bar_plot(pontuacao_final_df: pd.DataFrame, 
-                     container: Union[None, DeltaGenerator] = None,
-                     colunas: Union[None, List[DeltaGenerator]] = None) -> None:
+                     container: Union[None, DeltaGenerator] = None) -> None:
       
       fig = px.bar(pontuacao_final_df,
                    y='grupo',
@@ -75,11 +74,7 @@ def ranking_bar_plot(pontuacao_final_df: pd.DataFrame,
             )
       
       if container:
-            if colunas:
-                  with colunas[1]:
-                        container.plotly_chart(fig, use_container_width=True)
-            else:
-                  container.plotly_chart(fig, use_container_width=True)
+            container.plotly_chart(fig, use_container_width=True)
       else:
             st.plotly_chart(fig, use_container_width=True)
       
@@ -300,9 +295,15 @@ def widget_resultados(conn, app_config: Dict):
             numero_grupos = app_config['numero_grupos']
       
             if not votos_df.empty:
-      
-                  container_pontuacao_final = st.container(border=True)
-                  container_pontuacao_final.markdown('##### Resultado Final')
+
+                  st.markdown('##### Resultado Final')
+
+                  colunas_resultado_final = st.columns(2)
+                  with container_pontuacao_final[0]:
+                        container_pontuacao_final = st.container(border=False)
+
+                  with container_pontuacao_final[1]:
+                        container_pontuacao_final_fig = st.container(border=False)
                   
                   colunas_resultados = st.columns(2)
                   
@@ -341,23 +342,19 @@ def widget_resultados(conn, app_config: Dict):
                               pontuacao_df = pd.concat([pontuacao_df, ranking_pergunta_df])
 
                   pontuacao_final_df = pontuacao_final(pontuacao_df)
-
-                  colunas_resultado_final = st.columns(2)
-
-                  with colunas_resultado_final[0]:
                         
-                        container_pontuacao_final.dataframe(pontuacao_final_df,
-                              hide_index=True,
-                              use_container_width=True,
-                              column_order=['ranking', 'grupo', 'pontuacao'],
-                              column_config={
-                                      "ranking":  st.column_config.NumberColumn("Ranking"),
-                                      "grupo": st.column_config.NumberColumn("Grupo"),
-                                      "pontuacao": st.column_config.TextColumn("Pontuação")
-                                      },
-                                    )
+                  container_pontuacao_final.dataframe(pontuacao_final_df,
+                        hide_index=True,
+                        use_container_width=True,
+                        column_order=['ranking', 'grupo', 'pontuacao'],
+                        column_config={
+                                "ranking":  st.column_config.NumberColumn("Ranking"),
+                                "grupo": st.column_config.NumberColumn("Grupo"),
+                                "pontuacao": st.column_config.TextColumn("Pontuação")
+                                },
+                              )
                         
-                  ranking_bar_plot(pontuacao_final_df, container_pontuacao_final, colunas_resultado_final) 
+                  ranking_bar_plot(pontuacao_final_df, container_pontuacao_final_fig) 
                               
             else:
                   st.markdown('#### Urna vazia!')
