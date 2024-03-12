@@ -308,6 +308,7 @@ def widget_resultados(conn, app_config: Dict):
                   container_pontuacao_final.dataframe(pontuacao_final_df,
                         hide_index=True,
                         use_container_width=True,
+                        column_order=['ranking', 'grupo', 'pontuacao'],
                         column_config={
                                 "ranking":  st.column_config.NumberColumn("Ranking"),
                                 "grupo": st.column_config.NumberColumn("Grupo"),
