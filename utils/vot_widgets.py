@@ -299,10 +299,10 @@ def widget_resultados(conn, app_config: Dict):
                   st.markdown('##### Resultado Final')
 
                   colunas_resultado_final = st.columns(2)
-                  with container_pontuacao_final[0]:
+                  with colunas_resultado_final[0]:
                         container_pontuacao_final = st.container(border=False)
 
-                  with container_pontuacao_final[1]:
+                  with colunas_resultado_final[1]:
                         container_pontuacao_final_fig = st.container(border=False)
                   
                   colunas_resultados = st.columns(2)
