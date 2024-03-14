@@ -4,5 +4,4 @@ Todo:
 - Inclusão de logomarca ou figura na interface de votação?
 - Documentação geral
 - Refatorações gerais
-- Testes de responsividade (testes preliminares ok)
 - Rotinas iniciais de teste
