@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 ################ PACOTES ############################
 
 from time import sleep
