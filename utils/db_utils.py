@@ -2,9 +2,6 @@
 
 ################ PACOTES #################
 
-import string
-import secrets
-
 from typing import List, Dict, Tuple
 
 import pandas as pd
@@ -12,31 +9,7 @@ import pandas as pd
 import streamlit as st
 from st_supabase_connection import SupabaseConnection
 
-############### VARIÁVEIS GLOBAIS ########
-
-ALPHABET = string.ascii_letters
-
 ############## FUNÇÕES ###################
-
-def create_token(digits: int = 4) -> str:
-    """
-    Cria um token aleatório, com apenas letras do alfabeto maiúsculas.
-
-    Parameters
-    ----------
-    digits : int, optional
-        Número de caráteres no token. The default is 4.
-
-    Returns
-    -------
-    token : str
-        Token gerado.
-
-    """
-  
-    token = ''.join(secrets.choice(ALPHABET) for i in range(digits)).upper()
-     
-    return token
 
 @st.cache_resource
 def connect_supabase() -> SupabaseConnection:
@@ -279,7 +252,7 @@ def localiza_votante(conn: SupabaseConnection, email: str) -> Tuple[Dict, bool]:
     
     return votante, localizado
   
-def insert_votante(conn: SupabaseConnection, nome: str, email: str, grupo: int) -> None: 
+def insert_votante(conn: SupabaseConnection, nome: str, email: str, grupo: int, token: str) -> None: 
     """
     Insere um votante no banco de dados.
 
@@ -293,9 +266,9 @@ def insert_votante(conn: SupabaseConnection, nome: str, email: str, grupo: int) 
         E-mail do votante (chave primária de identificação)
     grupo : int
         Grupo do votante.
+    token: str
+        Token de autenticação do votante.
     """
-
-    token = create_token()
     
     _, _ = (conn.table('votantes')
                .upsert({"nome": nome, 
