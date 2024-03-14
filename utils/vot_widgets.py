@@ -420,11 +420,11 @@ def widget_incluir_votante(conn: SupabaseConnection,
               nome = st.text_input('Nome')
               email = st.text_input('E-mail')
               grupo = st.slider('Grupo', 1, 1, app_config['numero_grupos'])
-              token_manual = email = st.text_input('Token', 
-                                                   value=None,
-                                                   max_chars=4,
-                                                   placeholder='Token a inserir manualmente. Se mantido em branco, um token será gerado automaticamente.',
-                                                   )
+              token_manual = st.text_input('Token', 
+                                               value=None,
+                                               max_chars=4,
+                                               placeholder='Token a inserir manualmente. Se mantido em branco, um token será gerado automaticamente.',
+                                               )
               
               submitted = st.form_submit_button("Cadastrar ou alterar votante", type="primary")
               
@@ -433,11 +433,11 @@ def widget_incluir_votante(conn: SupabaseConnection,
               nome = st.text_input('Nome', disabled=True)
               email = st.text_input('E-mail', disabled=True)
               grupo = st.slider('Grupo', 1, 1, app_config['numero_grupos'], disabled=True)
-              token_manual = email = st.text_input('Token', 
-                                                   value=None,
-                                                   max_chars=4,
-                                                   placeholder='Token a inserir manualmente. Se mantido em branco, um token será gerado automaticamente.',
-                                                   )
+              token_manual = st.text_input('Token', 
+                                               value=None,
+                                               max_chars=4,
+                                               placeholder='Token a inserir manualmente. Se mantido em branco, um token será gerado automaticamente.',
+                                               )
               
               submitted = st.form_submit_button("Cadastrar ou alterar votante", type="primary",disabled=True)
               
