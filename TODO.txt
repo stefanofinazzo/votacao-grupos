@@ -1,7 +1,6 @@
 Todo:
 
 - Implementar descrição de tipagem em todas funções em todos módulos
-- Uniformizar indentações e espaços (1_Votação.py, 2_Administração.py, db_utils.py já corrigidos, verificar demais)
 - Inclusão de logomarca ou figura na interface de votação?
 - Documentação geral
 - Refatorações gerais
