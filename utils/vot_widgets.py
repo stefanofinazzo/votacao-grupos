@@ -358,6 +358,7 @@ def widget_excluir_pergunta(conn: SupabaseConnection,
                 submitted = st.form_submit_button("Excluir Pergunta", type="primary", disabled=True)
                 
             if submitted:
+                db_utils.deletar_votos(conn, n_pergunta)
                 db_utils.delete_pergunta(conn, n_pergunta)
                 st.success('Pergunta excluída com sucesso!')
                 sleep(1)
