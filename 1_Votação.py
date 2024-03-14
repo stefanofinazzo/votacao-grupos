@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
-
 ################ PACOTES ############################
 
 from time import sleep
 
 import streamlit as st
+
+from st_supabase_connection import SupabaseConnection
 
 from utils import db_utils
 from utils import st_tools
@@ -19,7 +19,27 @@ st.set_page_config(page_title='Sistema de Votação',
 
 ################### WIDGETS #########################
 
-def widget_verifica_votante(conn):
+def widget_verifica_votante(conn: SupabaseConnection) -> None:
+    """
+    Widget para autenticar o votante.
+    
+    Cabe notar que não é realizado, neste aplicativo, nenhum procedimento
+    de autenticação além da verificação se o votante está no banco,
+    e se o token é o token registrado no banco de dados.
+    
+    Os tokens são armazenados como plaintext no banco, não é realizado
+    hash nem no banco nem no front-end.
+    
+    Na proposta do aplicativo, isso é adequado, pois seu uso é
+    para meros jogos corporativos. Contudo, aplicações com outros
+    requisitos de segurança devem prever métodos de autenticação e
+    autorização propriamente ditos.
+
+    Parameters
+    ----------
+    conn : SupabaseConnection
+        SupabaseConnection.
+    """
   
     with st.form("auth_votante_form"):
                             
@@ -47,7 +67,18 @@ def widget_verifica_votante(conn):
              else:
                  st.error('E-mail não cadastrado')
 
-def widget_em_votacao(conn, app_config: dict) -> None:
+def widget_em_votacao(conn: SupabaseConnection,
+                      app_config: dict) -> None:
+    """
+    Widget de votação no aplicativo.
+
+    Parameters
+    ----------
+    conn : SupabaseConnection
+        Conexão ao banco de dados.
+    app_config : dict
+        Configuração do app.
+    """
 
     pergunta_atual_id = app_config['pergunta_liberada']
     pergunta_atual_text = db_utils.localiza_pergunta(conn, pergunta_atual_id)['pergunta_texto']
@@ -72,7 +103,11 @@ def widget_em_votacao(conn, app_config: dict) -> None:
         sleep(2.5)
         st.rerun()
 
-def mainpage():
+def mainpage() -> None:
+    """
+    Página principal.
+    """
+    
     st_tools.remove_bar()
   
     st.title('Sistema de votação')
