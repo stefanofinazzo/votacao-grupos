@@ -53,8 +53,8 @@ def widget_autenticacao_admin():
                st.success('Bem-vindo!')
                sleep(2.5)
                st.rerun()
-       else:
-           st.error('Senha inválida')
+           else:
+               st.error('Senha inválida')
 
 def logout_admin() -> None:
     """
