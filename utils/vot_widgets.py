@@ -347,6 +347,7 @@ def widget_excluir_pergunta(conn: SupabaseConnection,
        
         with st.form("excluir_pergunta"):
             st.write("Exclusão de pergunta")
+            st.warning("Atenção: a exclusão de uma pergunta com votos irá remover os votos da pergunta da urna!")
             lista_perguntas_atuais = lista_perguntas_no_banco(perguntas_df)
             
             if not app_config['votacao_ativa']:
