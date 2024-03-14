@@ -1,6 +1,11 @@
+# -*- coding: utf-8 -*-
+
 import streamlit as st
 
-def remove_bar():
+def remove_bar() -> None:
+    """
+    Função que elimina a rainbow bar superior do streamlit.
+    """
   
     hide_decoration_bar_style = """
         <style>
