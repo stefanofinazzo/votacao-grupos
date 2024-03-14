@@ -1,7 +1,0 @@
-Todo:
-
-- Implementar descrição de tipagem em todas funções em todos módulos
-- Inclusão de logomarca ou figura na interface de votação?
-- Documentação geral
-- Refatorações gerais
-- Rotinas iniciais de teste
