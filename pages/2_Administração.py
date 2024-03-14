@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Mar 12 17:41:13 2024
-
-@author: 338630180108
-"""
 
 ############# PACOTES ##########################
 from time import sleep
@@ -25,10 +20,26 @@ ADMIN_PASSWORD = st.secrets['admin_config']['ADMIN_PASSWORD']
 ############# FUNÇÕES E WIDGETS AUXILIARES ######
 
 def alterar_tab(tab_choice: str) -> None:
+    """
+    Callback para alteração de tab na página de administração.
 
-      st.session_state['admin_tab'] = tab_choice
+    Parameters
+    ----------
+    tab_choice : str
+        Chave da tab escolhida.
+    """
+
+    st.session_state['admin_tab'] = tab_choice
 
 def widget_autenticacao_admin():
+    """
+    Widget para a autenticação do admin.
+    
+    Lembramos que, como para o módulo de votação,
+    não há preocupação com autenticação ou autorização do acesso,
+    e os tokens não têm hashing, devido ao uso do aplicativo
+    em situações com requisitos nulos de segurança.
+    """
    
     with st.form("autenticar_admin"):
        st.write("Insira a senha de administrador")
@@ -46,13 +57,20 @@ def widget_autenticacao_admin():
            st.error('Senha inválida')
 
 def logout_admin() -> None:
-      st.session_state['admin_user'] = False
-      st.success('Logout realizado')
-      sleep(1)
+    """
+    Callback para realizar o logout do admin.
+    """
+    
+    st.session_state['admin_user'] = False
+    st.success('Logout realizado')
+    sleep(1)
 
 ############# PÁGINA PRINCIPAL ##################
 
 def mainpage() -> None:      
+    """
+    Página principal do módulo de administração.
+    """
     
     st_tools.remove_bar()
     
