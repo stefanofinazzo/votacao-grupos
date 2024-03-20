@@ -12,7 +12,7 @@ No caso de uso específico para que o aplicativo foi desenhado, a votação é p
 
 Da forma que é implementado, o custo é zero: o Streamlit Cloud e o Supabase disponibilizam soluções sem custo, com limites razoáveis (dados de mar/2024).
 
-O gargalo na implementação são os recursos do Streamlit Cloud em seu free tier (em mar/2024, são estes os [limites de recursos do Streamlit Cloud](https://docs.streamlit.io/streamlit-community-cloud/manage-your-app)). Contudo, por ser um aplicativo muito simples, deve suportar algumas dezenas de usuários simultâneos, o que é adequado para o uso de caso típico.
+O gargalo na implementação são os recursos do Streamlit Cloud em seu free tier (em mar/2024, são estes os [limites de recursos do Streamlit Cloud](https://docs.streamlit.io/streamlit-community-cloud/manage-your-app)). Contudo, por ser um aplicativo muito simples, deve suportar algumas dezenas de usuários simultâneos, o que é adequado para o uso de caso projetado.
 
 Não é implementado nenhum sistema de hashing, autenticação ou autorização no app. O aplicativo, da forma que será disponibilizado, é viável apenas para casos em que não há preocupação com segurança dos dados ou resultados da votação.
 
