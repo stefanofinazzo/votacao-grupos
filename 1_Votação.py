@@ -1,4 +1,4 @@
-################ PACOTES ############################
+################ PACOTES #############################
 
 from time import sleep
 
@@ -9,7 +9,7 @@ from st_supabase_connection import SupabaseConnection
 from utils import db_utils
 from utils import st_tools
 
-########## CONFIGURAÇÃO DO STREAMLIT ################
+########## CONFIGURAÇÃO DO STREAMLIT #################
 
 st.set_page_config(page_title='Sistema de Votação',
                    page_icon=':computer:', 
